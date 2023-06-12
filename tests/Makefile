@@ -20,8 +20,6 @@ top_srcdir := $(shell cd .. ; pwd)
 
 RDF_TOOLKIT_JAR := $(top_srcdir)/dependencies/UCO/lib/rdf-toolkit.jar
 
-profile_ttls := $(wildcard $(top_srcdir)/ontology/uco-*.ttl)
-
 shape_ttls := $(wildcard $(top_srcdir)/shapes/sh-*.ttl)
 
 all: \
@@ -38,7 +36,7 @@ all: \
 	touch $@
 
 .pytest.done.log: \
-  $(profile_ttls) \
+  $(shape_ttls) \
   exemplars.ttl \
   test_exemplar_coverage.py
 	source $(top_srcdir)/venv/bin/activate \
@@ -59,22 +57,12 @@ monolithic.ttl: \
   $(RDF_TOOLKIT_JAR) \
   $(top_srcdir)/.venv.done.log \
   $(top_srcdir)/dependencies/imports-transitive.ttl \
-  $(profile_ttls) \
   $(shape_ttls)
-	$(MAKE) \
-	  --directory $(top_srcdir)/dependencies/UCO \
-	  .venv.done.log
-	$(MAKE) \
-	  --directory $(top_srcdir)/dependencies/UCO/tests \
-	  uco_monolithic.ttl
 	source $(top_srcdir)/venv/bin/activate \
 	  && rdfpipe \
 	    --output-format turtle \
-	    $(top_srcdir)/dependencies/UCO/dependencies/collections-ontology/collections.owl \
-	    $(top_srcdir)/dependencies/UCO/dependencies/error/docs/current/error.ttl \
-	    $(top_srcdir)/dependencies/UCO/tests/uco_monolithic.ttl \
+	    $(top_srcdir)/dependencies/UCO/ontology/owl/owl.ttl \
 	    $(top_srcdir)/dependencies/imports-transitive.ttl \
-	    $(profile_ttls) \
 	    $(shape_ttls) \
 	    > _$@
 	source $(top_srcdir)/venv/bin/activate \

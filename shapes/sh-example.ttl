@@ -1,62 +1,21 @@
-# imports: http://example.org/ontology/uco-example
+# imports: http://example.org/ontology/example/0.0.1
+# imports: https://ontology.unifiedcyberontology.org/owl/1.2.0
 
+@prefix ex: <http://example.org/ontology/example/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix sh-example: <http://example.org/shapes/example/> .
-@prefix sh-owl-abox: <http://example.org/shapes/owl-abox/> .
+@prefix uco-owl: <https://ontology.unifiedcyberontology.org/owl/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://example.org/shapes/example>
 	a owl:Ontology ;
-	rdfs:comment "This shapes file should be filled in for at least mapped classes and properties when the upstream ontology does not provide SHACL shapes."@en ;
-	owl:imports <http://example.org/ontology/uco-example> ;
-	.
-
-sh-owl-abox:disjoint-constraint
-	a sh:SPARQLConstraint ;
-	rdfs:comment
-		"This constraint is given an IRI for the cosmetic benefit of compacting SHACL validation results."@en ,
-		"This constraint was intentionally not written to review subclass hierarchies (e.g. by querying for 'nClassA' being a subclass, possibly transitively, of 'nClassNotA,' using 'a/rdfs:subClassOf*'.  RDFS inferencing may be required to have this shape fully review a graph.  RDFS inferencing is not encoded as a requirement, though it is possible to do so with 'sh:entailment' (see SHACL Specification Section 1.5)."@en
+	rdfs:comment "This shapes file should be filled in for at classes and properties of interest when the upstream ontology does not provide SHACL shapes."@en ;
+	owl:imports
+		ex:0.0.1 ,
+		uco-owl:1.2.0
 		;
-	rdfs:seeAlso
-		<http://www.w3.org/ns/entailment/RDFS> ,
-		sh:entailment ,
-		<https://www.w3.org/TR/shacl/#shacl-rdfs>
-		;
-	sh:message "Focus node is a member of two classes that are disjoint with one another: the value node, and {?nNotValue}."@en ;
-	sh:select """
-		PREFIX owl: <http://www.w3.org/2002/07/owl#>
-		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-		SELECT $this ?value ?nNotValue
-		WHERE {
-			$this
-				a
-					?value ,
-					?nNotValue
-					;
-				.
-			{
-				?nNotValue owl:disjointWith ?value .
-			}
-			UNION
-			{
-				?nDisjointedness
-					a owl:AllDisjointClasses ;
-					owl:members/rdf:rest*/rdf:first ?value ;
-					owl:members/rdf:rest+/rdf:first ?nNotValue ;
-					.
-				FILTER ( ?value != ?nNotValue )
-			}
-		}
-	""" ;
-	.
-
-sh-owl-abox:disjoint-shape
-	a sh:NodeShape ;
-	rdfs:comment "This shape is planned to migrate to another repository."@en ;
-	sh:sparql sh-owl-abox:disjoint-constraint ;
-	sh:targetClass owl:Thing ;
 	.
 

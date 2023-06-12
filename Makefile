@@ -20,19 +20,16 @@ PYTHON3 ?= python3
 
 all: \
   .venv-pre-commit/var/.pre-commit-built.log \
-  all-ontology \
   all-shapes
 
 .PHONY: \
   all-dependencies \
-  all-ontology \
   all-shapes \
   check-dependencies \
   check-mypy \
-  check-ontology \
   check-shapes \
   check-supply-chain \
-  check-supply-chain-cdo-profile \
+  check-supply-chain-cdo-shapes \
   check-supply-chain-pre-commit \
   check-supply-chain-submodules
 
@@ -99,11 +96,6 @@ all-dependencies: \
 	$(MAKE) \
 	  --directory dependencies
 
-all-ontology: \
-  all-dependencies
-	$(MAKE) \
-	  --directory ontology
-
 all-shapes: \
   all-dependencies
 	$(MAKE) \
@@ -113,7 +105,6 @@ check: \
   .venv-pre-commit/var/.pre-commit-built.log \
   check-mypy \
   check-dependencies \
-  check-ontology \
   check-shapes
 	$(MAKE) \
 	  --directory tests \
@@ -134,12 +125,6 @@ check-mypy: \
 	    --strict \
 	    .
 
-check-ontology: \
-  all-ontology
-	$(MAKE) \
-	  --directory ontology \
-	  check
-
 check-shapes: \
   all-shapes
 	$(MAKE) \
@@ -149,17 +134,17 @@ check-shapes: \
 # This target's dependencies potentially modify the working directory's
 # Git state, so it is intentionally not a dependency of check.
 check-supply-chain: \
-  check-supply-chain-cdo-profile \
+  check-supply-chain-cdo-shapes \
   check-mypy \
   check-supply-chain-pre-commit \
   check-supply-chain-submodules
 
-check-supply-chain-cdo-profile:
+check-supply-chain-cdo-shapes:
 	git remote get-url \
 	  _CHECK_SUPPLY_CHAIN_upstream \
 	  || git remote add \
 	    _CHECK_SUPPLY_CHAIN_upstream \
-	    https://github.com/ucoProject/UCO-Profile-Example.git
+	    https://github.com/Cyber-Domain-Ontology/CDO-Shapes-Example.git
 	git fetch \
 	  _CHECK_SUPPLY_CHAIN_upstream
 	@echo "DEBUG:Makefile:$$(git merge-base _CHECK_SUPPLY_CHAIN_upstream/base HEAD) (merge-base)" >&2
@@ -194,9 +179,6 @@ clean:
 	  clean
 	@$(MAKE) \
 	  --directory shapes \
-	  clean
-	@$(MAKE) \
-	  --directory ontology \
 	  clean
 	@$(MAKE) \
 	  --directory dependencies \

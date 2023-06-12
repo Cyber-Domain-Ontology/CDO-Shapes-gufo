@@ -19,10 +19,10 @@ import logging
 from pathlib import Path
 from typing import Optional, Set
 
-from rdflib import RDF, RDFS, Graph, URIRef
+from rdflib import SH, Graph, URIRef
+from rdflib.query import ResultRow
 
-NS_RDF = RDF
-NS_RDFS = RDFS
+NS_SH = SH
 
 srcdir = Path(__file__).parent
 top_srcdir = srcdir.parent
@@ -30,37 +30,36 @@ top_srcdir = srcdir.parent
 
 def test_exemplar_coverage() -> None:
     """
-    This test confirms that for each class C in the profile ontology (or
-    ontologies) designated a subclass of some C', and each property P
-    designated a subproperty of some P', C (/P) is used in the exemplars
+    This test confirms that for each review-subject class C and property
+    P in this repository's shapes graph C (/P) is used in the exemplars
     graph.
     """
     exemplar_graph = Graph()
-    profile_graph = Graph()
+    shapes_graph = Graph()
     combined_graph = Graph()
 
-    for filepath in (top_srcdir / "ontology").iterdir():
+    for filepath in (top_srcdir / "shapes").iterdir():
         if filepath.name.startswith("."):
             # Skip quality control test artifacts.
             continue
         if filepath.name.endswith(".ttl"):
-            logging.debug("Loading profile graph %r.", filepath)
-            profile_graph.parse(filepath)
-    logging.debug("len(profile_graph) = %d.", len(profile_graph))
+            logging.debug("Loading shapes graph %r.", filepath)
+            shapes_graph.parse(filepath)
+    logging.debug("len(shapes_graph) = %d.", len(shapes_graph))
 
     exemplar_filepath = srcdir / "exemplars.ttl"
     logging.debug("Loading exemplars graph %r.", exemplar_filepath)
     exemplar_graph.parse(exemplar_filepath)
     logging.debug("len(exemplar_graph) = %d.", len(exemplar_graph))
 
-    combined_graph = exemplar_graph + profile_graph
+    combined_graph = exemplar_graph + shapes_graph
 
     classes_mapped: Set[URIRef] = set()
     classes_with_exemplars: Set[URIRef] = set()
 
-    for triple in profile_graph.triples((None, NS_RDFS.subClassOf, None)):
-        assert isinstance(triple[0], URIRef)
-        classes_mapped.add(triple[0])
+    for n_object in shapes_graph.objects(None, NS_SH.targetClass):
+        assert isinstance(n_object, URIRef)
+        classes_mapped.add(n_object)
 
     result: Optional[bool]
 
@@ -94,9 +93,33 @@ ASK {
     properties_mapped: Set[URIRef] = set()
     properties_with_exemplars: Set[URIRef] = set()
 
-    for triple in profile_graph.triples((None, NS_RDFS.subPropertyOf, None)):
-        assert isinstance(triple[0], URIRef)
-        properties_mapped.add(triple[0])
+    for n_sh_predicate_with_predicate_object in {
+        NS_SH.inversePath,
+        NS_SH.path,
+        NS_SH.targetObjectsOf,
+        NS_SH.targetSubjectsOf,
+        NS_SH.zeroOrMorePath,
+    }:
+        for n_object in shapes_graph.objects(
+            None, n_sh_predicate_with_predicate_object
+        ):
+            if isinstance(n_object, URIRef):
+                properties_mapped.add(n_object)
+    for alternative_path_result in shapes_graph.query(
+        """\
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+SELECT ?nPredicate
+WHERE {
+  ?nShThing sh:alternativePath ?nAlternativePathList .
+  ?nAlternativePathList rdf:rest*/rdf:first ?nPredicate .
+  FILTER isURI(?nPredicate)
+}
+"""
+    ):
+        assert isinstance(alternative_path_result, ResultRow)
+        assert isinstance(alternative_path_result[0], URIRef)
+        properties_mapped.add(alternative_path_result[0])
 
     property_query = """\
 ASK {
