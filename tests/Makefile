@@ -18,7 +18,9 @@ SHELL := /bin/bash
 
 top_srcdir := $(shell cd .. ; pwd)
 
-RDF_TOOLKIT_JAR := $(top_srcdir)/dependencies/UCO/lib/rdf-toolkit.jar
+uco_srcdir := $(top_srcdir)/dependencies/UCO
+
+RDF_TOOLKIT_JAR := $(uco_srcdir)/lib/rdf-toolkit.jar
 
 shape_ttls := $(wildcard $(top_srcdir)/shapes/sh-*.ttl)
 
@@ -61,12 +63,12 @@ monolithic.ttl: \
 	source $(top_srcdir)/venv/bin/activate \
 	  && rdfpipe \
 	    --output-format turtle \
-	    $(top_srcdir)/dependencies/UCO/ontology/owl/owl.ttl \
 	    $(top_srcdir)/dependencies/imports-transitive.ttl \
 	    $(shape_ttls) \
+	    $(uco_srcdir)/ontology/owl/owl.ttl \
 	    > _$@
 	source $(top_srcdir)/venv/bin/activate \
 	  && pyshacl \
-	    --shacl $(top_srcdir)/dependencies/UCO/ontology/owl/owl.ttl \
+	    --shacl $(uco_srcdir)/ontology/owl/owl.ttl \
 	    _$@
 	mv _$@ $@
