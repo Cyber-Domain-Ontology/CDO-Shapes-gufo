@@ -30,6 +30,7 @@ all: \
   monolithic.ttl
 	source $(top_srcdir)/venv/bin/activate \
 	  && pyshacl \
+	    --metashacl \
 	    --ont-graph monolithic.ttl \
 	    --shacl monolithic.ttl \
 	    exemplars.ttl
