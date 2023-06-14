@@ -54,44 +54,10 @@ def test_exemplar_coverage() -> None:
 
     combined_graph = exemplar_graph + shapes_graph
 
-    classes_mapped: Set[URIRef] = set()
-    classes_with_exemplars: Set[URIRef] = set()
-
-    for n_object in shapes_graph.objects(None, NS_SH.targetClass):
-        assert isinstance(n_object, URIRef)
-        classes_mapped.add(n_object)
-
-    result: Optional[bool]
-
-    class_query = """\
-ASK {
-  ?nIndividual a/rdfs:subClassOf* ?nClass .
-}
-"""
-    for class_mapped in sorted(classes_mapped):
-        result = None
-        for class_result in combined_graph.query(
-            class_query, initBindings={"nClass": class_mapped}
-        ):
-            assert isinstance(class_result, bool)
-            result = class_result
-        if result is True:
-            classes_with_exemplars.add(class_mapped)
-        else:
-            logging.debug("class_mapped = %r.", class_mapped)
-            logging.debug("result = %r.", result)
-
-    try:
-        assert classes_mapped <= classes_with_exemplars
-    except AssertionError:
-        logging.info("These mapped classes have no exemplar instances:")
-        undemonstrated_classes = classes_mapped - classes_with_exemplars
-        for undemonstrated_class in sorted(undemonstrated_classes):
-            logging.info("* %s", str(undemonstrated_class))
-        raise
-
     properties_mapped: Set[URIRef] = set()
     properties_with_exemplars: Set[URIRef] = set()
+
+    result: Optional[bool]
 
     for n_sh_predicate_with_predicate_object in {
         NS_SH.inversePath,
@@ -144,4 +110,38 @@ ASK {
         undemonstrated_properties = properties_mapped - properties_with_exemplars
         for undemonstrated_property in sorted(undemonstrated_properties):
             logging.info("* %s", str(undemonstrated_property))
+        raise
+
+    classes_mapped: Set[URIRef] = set()
+    classes_with_exemplars: Set[URIRef] = set()
+
+    for n_object in shapes_graph.objects(None, NS_SH.targetClass):
+        assert isinstance(n_object, URIRef)
+        classes_mapped.add(n_object)
+
+    class_query = """\
+ASK {
+  ?nIndividual a/rdfs:subClassOf* ?nClass .
+}
+"""
+    for class_mapped in sorted(classes_mapped):
+        result = None
+        for class_result in combined_graph.query(
+            class_query, initBindings={"nClass": class_mapped}
+        ):
+            assert isinstance(class_result, bool)
+            result = class_result
+        if result is True:
+            classes_with_exemplars.add(class_mapped)
+        else:
+            logging.debug("class_mapped = %r.", class_mapped)
+            logging.debug("result = %r.", result)
+
+    try:
+        assert classes_mapped <= classes_with_exemplars
+    except AssertionError:
+        logging.info("These mapped classes have no exemplar instances:")
+        undemonstrated_classes = classes_mapped - classes_with_exemplars
+        for undemonstrated_class in sorted(undemonstrated_classes):
+            logging.info("* %s", str(undemonstrated_class))
         raise
