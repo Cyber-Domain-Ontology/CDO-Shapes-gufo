@@ -38,8 +38,8 @@ all: \
 	touch $@
 
 .pytest.done.log: \
-  $(shape_ttls) \
   exemplars.ttl \
+  monolithic.ttl \
   test_exemplar_coverage.py
 	source $(top_srcdir)/venv/bin/activate \
 	  && pytest \
