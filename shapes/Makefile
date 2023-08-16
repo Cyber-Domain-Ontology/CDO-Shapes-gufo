@@ -55,11 +55,11 @@ catalog-v001.xml: \
   $(top_srcdir)/.venv.done.log \
   $(top_srcdir)/etc/domain_directories.tsv \
   $(top_srcdir)/etc/dependency_files.tsv \
-  $(uco_srcdir)/ontology/uco/master/catalog-v001.xml \
-  $(uco_srcdir)/src/create-catalog-v001.xml.py
+  $(top_srcdir)/src/create-catalog-v001.xml.py \
+  $(uco_srcdir)/ontology/uco/master/catalog-v001.xml
 	rm -f _$@
 	source $(top_srcdir)/venv/bin/activate \
-	  && python3 $(uco_srcdir)/src/create-catalog-v001.xml.py \
+	  && python3 $(top_srcdir)/src/create-catalog-v001.xml.py \
 	    --catalog-xml $(uco_srcdir)/ontology/uco/master/catalog-v001.xml \
 	    _$@ \
 	    $(top_srcdir)/etc/domain_directories.tsv \
