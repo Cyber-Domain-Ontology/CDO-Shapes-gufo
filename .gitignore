@@ -1,6 +1,8 @@
 *.jar
 *.swp
 .*.done.log
+.DS_Store
 .check-*.ttl
 .venv-pre-commit
+__pycache__
 venv
