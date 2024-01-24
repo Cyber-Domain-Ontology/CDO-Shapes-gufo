@@ -1,5 +1,5 @@
 # imports: http://example.org/ontology/example/0.0.1
-# imports: https://ontology.unifiedcyberontology.org/owl/1.2.0
+# imports: https://ontology.unifiedcyberontology.org/owl/1.3.0
 
 @prefix ex: <http://example.org/ontology/example/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -15,7 +15,7 @@
 	rdfs:comment "This shapes file should be filled in for at classes and properties of interest when the upstream ontology does not provide SHACL shapes."@en ;
 	owl:imports
 		ex:0.0.1 ,
-		uco-owl:1.2.0
+		uco-owl:1.3.0
 		;
 	.
 
