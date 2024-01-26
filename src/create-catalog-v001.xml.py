@@ -145,9 +145,9 @@ def main() -> None:
             raise FileNotFoundError(domain_directory_str)
         if not domain_directory.is_dir():
             raise NotADirectoryError(domain_directory_str)
-        ontology_string_prefix_to_domain_directory[
-            ontology_string_prefix
-        ] = domain_directory
+        ontology_string_prefix_to_domain_directory[ontology_string_prefix] = (
+            domain_directory
+        )
     logging.debug(
         "ontology_string_prefix_to_domain_directory = %r.",
         ontology_string_prefix_to_domain_directory,
@@ -256,9 +256,9 @@ def main() -> None:
                 )
                 logging.info('child.attrib["uri"] = %r.', child.attrib["uri"])
                 raise ValueError("Referenced ontology file path is not regular file.")
-            n_ontology_reference_to_backing_file[
-                n_ontology_reference
-            ] = backing_ontology_path.resolve()
+            n_ontology_reference_to_backing_file[n_ontology_reference] = (
+                backing_ontology_path.resolve()
+            )
             _load_graph(backing_ontology_path)
 
     logging.debug("len(imports_graph) = %d.", len(imports_graph))
@@ -283,9 +283,9 @@ def main() -> None:
                 ontology_reference_backing_file_abspath, focus_graph_srcdir_abspath
             )
         )
-        n_imported_iri_to_relative_backing_path[
-            n_ontology_reference
-        ] = ontology_reference_backing_file_relpath
+        n_imported_iri_to_relative_backing_path[n_ontology_reference] = (
+            ontology_reference_backing_file_relpath
+        )
         n_imported_iris: Set[URIRef] = set()
         for result in imports_graph.query(
             """\
