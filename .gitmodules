@@ -2,3 +2,7 @@
 	path = dependencies/UCO
 	url = https://github.com/ucoProject/UCO.git
 	branch = master
+[submodule "dependencies/gufo"]
+	path = dependencies/gufo
+	url = https://github.com/nemo-ufes/gufo.git
+	branch = master
