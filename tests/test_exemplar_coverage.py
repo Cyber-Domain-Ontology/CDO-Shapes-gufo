@@ -106,14 +106,11 @@ ASK {
         if result is True:
             properties_with_exemplars.add(property_mapped)
 
-    try:
-        assert properties_mapped <= properties_with_exemplars
-    except AssertionError:
+    if properties_mapped > properties_with_exemplars:
         logging.info("These mapped properties have no exemplar instances:")
         undemonstrated_properties = properties_mapped - properties_with_exemplars
         for undemonstrated_property in sorted(undemonstrated_properties):
             logging.info("* %s", str(undemonstrated_property))
-        raise
 
     classes_mapped: Set[URIRef] = set()
     classes_with_exemplars: Set[URIRef] = set()
@@ -140,11 +137,13 @@ ASK {
             logging.debug("class_mapped = %r.", class_mapped)
             logging.debug("result = %r.", result)
 
-    try:
-        assert classes_mapped <= classes_with_exemplars
-    except AssertionError:
+    if classes_mapped > classes_with_exemplars:
         logging.info("These mapped classes have no exemplar instances:")
         undemonstrated_classes = classes_mapped - classes_with_exemplars
         for undemonstrated_class in sorted(undemonstrated_classes):
             logging.info("* %s", str(undemonstrated_class))
-        raise
+
+    assert (
+        properties_mapped <= properties_with_exemplars
+        and classes_mapped <= classes_with_exemplars
+    )
