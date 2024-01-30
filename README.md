@@ -1,8 +1,8 @@
-# CDO Shapes: Example
+# CDO Shapes: gUFO
 
 ![Repository Status](https://img.shields.io/badge/-exploratory-informational)
 
-This repository provides [SHACL](https://www.w3.org/TR/shacl/) shapes to review usage of [Example](http://example.org/ontology).
+This repository provides [SHACL](https://www.w3.org/TR/shacl/) shapes to review usage of the [(gentle) Unified Foundational Ontology](https://github.com/nemo-ufes/gufo) (gUFO).
 
 The CDO Shapes development rationale and design is [here](https://cyberdomainontology.org/ontology/development/#shapes).
 

@@ -1,20 +1,21 @@
-# imports: http://example.org/shapes/example
+# imports: http://purl.org/nemo/gufo#/1.0.0
 
-@prefix ex: <http://example.org/ontology/example/> .
 @prefix drafting: <http://example.org/ontology/drafting/> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
 @prefix kb: <http://example.org/kb/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <http://example.org/kb>
 	a owl:Ontology ;
 	rdfs:comment "This knowledge base instantiates each of the shape-reviewed classes and properties, so SHACL shapes can be exercised for the reviewed ontology."@en ;
-	owl:imports <http://example.org/shapes/example> ;
+	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
 	.
 
-kb:Thing-76f5befa-f5e1-4b2c-8d7b-ea7cf18ecca6
-	a ex:Thing ;
+kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
+	a gufo:Object ;
 	.
 

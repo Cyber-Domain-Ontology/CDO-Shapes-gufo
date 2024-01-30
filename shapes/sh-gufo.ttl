@@ -1,0 +1,1607 @@
+# imports: http://purl.org/nemo/gufo#/1.0.0
+
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sh-gufo: <http://example.org/shapes/sh-gufo/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/shapes/gufo>
+	a owl:Ontology ;
+	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
+	.
+
+sh-gufo:AbstractIndividual-disjointWith-ConcreteIndividual-shape
+	a sh:NodeShape ;
+	sh:message "gufo:AbstractIndividual and gufo:ConcreteIndividual are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:ConcreteIndividual ;
+	] ;
+	sh:targetClass gufo:AbstractIndividual ;
+	.
+
+sh-gufo:AbstractIndividual-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:AbstractIndividual-disjointWith-ConcreteIndividual-shape ;
+	.
+
+sh-gufo:AbstractIndividualType-disjointWith-ConcreteIndividualType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:AbstractIndividualType and gufo:ConcreteIndividualType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:ConcreteIndividualType ;
+	] ;
+	sh:targetClass gufo:AbstractIndividualType ;
+	.
+
+sh-gufo:AbstractIndividualType-disjointWith-RelationshipType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:AbstractIndividualType and gufo:RelationshipType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:RelationshipType ;
+	] ;
+	sh:targetClass gufo:AbstractIndividualType ;
+	.
+
+sh-gufo:AbstractIndividualType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso
+		sh-gufo:AbstractIndividualType-disjointWith-ConcreteIndividualType-shape ,
+		sh-gufo:AbstractIndividualType-disjointWith-RelationshipType-shape
+		;
+	.
+
+sh-gufo:AntiRigidType-disjointWith-SemiRigidType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:AntiRigidType and gufo:SemiRigidType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:SemiRigidType ;
+	] ;
+	sh:targetClass gufo:AntiRigidType ;
+	.
+
+sh-gufo:AntiRigidType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:AntiRigidType-disjointWith-SemiRigidType-shape ;
+	.
+
+sh-gufo:Aspect-disjointWith-Object-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Aspect and gufo:Object are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Object ;
+	] ;
+	sh:targetClass gufo:Aspect ;
+	.
+
+sh-gufo:Aspect-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:Aspect ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:ExtrinsicAspect ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:IntrinsicAspect ;
+		]
+	) ;
+	.
+
+sh-gufo:Collection-disjointWith-FunctionalComplex-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Collection and gufo:FunctionalComplex are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:FunctionalComplex ;
+	] ;
+	sh:targetClass gufo:Collection ;
+	.
+
+sh-gufo:Collection-disjointWith-Quantity-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Collection and gufo:Quantity are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Quantity ;
+	] ;
+	sh:targetClass gufo:Collection ;
+	.
+
+sh-gufo:Collection-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:Collection ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:FixedCollection ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:VariableCollection ;
+		]
+	) ;
+	.
+
+sh-gufo:ComparativeRelationshipType-disjointWith-MaterialRelationshipType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:ComparativeRelationshipType and gufo:MaterialRelationshipType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:MaterialRelationshipType ;
+	] ;
+	sh:targetClass gufo:ComparativeRelationshipType ;
+	.
+
+sh-gufo:ComparativeRelationshipType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:ComparativeRelationshipType-disjointWith-MaterialRelationshipType-shape ;
+	.
+
+sh-gufo:ConcreteIndividual-shape
+	a sh:NodeShape ;
+	rdfs:comment "rdfs:seeAlso links other shapes that review this class."@en ;
+	rdfs:seeAlso sh-gufo:AbstractIndividual-disjointWith-ConcreteIndividual-shape ;
+	sh:targetClass gufo:ConcreteIndividual ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Endurant ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Event ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Situation ;
+		]
+	) ;
+	.
+
+sh-gufo:ConcreteIndividualType-disjointWith-RelationshipType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:ConcreteIndividualType and gufo:RelationshipType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:RelationshipType ;
+	] ;
+	sh:targetClass gufo:ConcreteIndividualType ;
+	.
+
+sh-gufo:ConcreteIndividualType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso
+		sh-gufo:AbstractIndividualType-disjointWith-ConcreteIndividualType-shape ,
+		sh-gufo:ConcreteIndividualType-disjointWith-RelationshipType-shape
+		;
+	.
+
+sh-gufo:Endurant-disjointWith-Event-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Endurant and gufo:Event are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Event ;
+	] ;
+	sh:targetClass gufo:Endurant ;
+	.
+
+sh-gufo:Endurant-disjointWith-Situation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Endurant and gufo:Situation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Situation ;
+	] ;
+	sh:targetClass gufo:Endurant ;
+	.
+
+sh-gufo:Endurant-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:Endurant ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Aspect ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Object ;
+		]
+	) ;
+	.
+
+sh-gufo:EndurantType-disjointWith-EventType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:EndurantType and gufo:EventType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:EventType ;
+	] ;
+	sh:targetClass gufo:EndurantType ;
+	.
+
+sh-gufo:EndurantType-disjointWith-SituationType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:EndurantType and gufo:SituationType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:SituationType ;
+	] ;
+	sh:targetClass gufo:EndurantType ;
+	.
+
+sh-gufo:EndurantType-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:EndurantType ;
+	sh:xone
+		(
+			[
+				a sh:NodeShape ;
+				sh:class gufo:NonRigidType ;
+			]
+			[
+				a sh:NodeShape ;
+				sh:class gufo:RigidType ;
+			]
+		) ,
+		(
+			[
+				a sh:NodeShape ;
+				sh:class gufo:NonSortal ;
+			]
+			[
+				a sh:NodeShape ;
+				sh:class gufo:Sortal ;
+			]
+		)
+		;
+	.
+
+sh-gufo:Event-disjointWith-Situation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Event and gufo:Situation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Situation ;
+	] ;
+	sh:targetClass gufo:Event ;
+	.
+
+sh-gufo:Event-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Event-disjointWith-Situation-shape ;
+	.
+
+sh-gufo:EventType-disjointWith-SituationType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:EventType and gufo:SituationType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:SituationType ;
+	] ;
+	sh:targetClass gufo:EventType ;
+	.
+
+sh-gufo:EventType-shape
+	a sh:NodeShape ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:hasValue gufo:Event ;
+		sh:path [
+			sh:oneOrMorePath rdfs:subClassOf ;
+		] ;
+	] ;
+	sh:targetClass gufo:EventType ;
+	.
+
+sh-gufo:ExtrinsicAspect-disjointWith-IntrinsicAspect-shape
+	a sh:NodeShape ;
+	sh:message "gufo:ExtrinsicAspect and gufo:IntrinsicAspect are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:IntrinsicAspect ;
+	] ;
+	sh:targetClass gufo:ExtrinsicAspect ;
+	.
+
+sh-gufo:ExtrinsicAspect-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:ExtrinsicAspect ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:ExtrinsicMode ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Relator ;
+		]
+	) ;
+	.
+
+sh-gufo:ExtrinsicMode-disjointWith-Relator-shape
+	a sh:NodeShape ;
+	sh:message "gufo:ExtrinsicMode and gufo:Relator are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Relator ;
+	] ;
+	sh:targetClass gufo:ExtrinsicMode ;
+	.
+
+sh-gufo:ExtrinsicMode-shape
+	a sh:NodeShape ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:path gufo:inheresIn ;
+		sh:qualifiedMaxCount "1"^^xsd:integer ;
+		sh:qualifiedValueShape [
+			a sh:NodeShape ;
+			sh:class gufo:ConcreteIndividual ;
+		] ;
+	] ;
+	sh:targetClass gufo:ExtrinsicMode ;
+	.
+
+sh-gufo:FixedCollection-disjointWith-VariableCollection-shape
+	a sh:NodeShape ;
+	sh:message "gufo:FixedCollection and gufo:VariableCollection are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:VariableCollection ;
+	] ;
+	sh:targetClass gufo:FixedCollection ;
+	.
+
+sh-gufo:FixedCollection-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:FixedCollection-disjointWith-VariableCollection-shape ;
+	.
+
+sh-gufo:FunctionalComplex-disjointWith-Quantity-shape
+	a sh:NodeShape ;
+	sh:message "gufo:FunctionalComplex and gufo:Quantity are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Quantity ;
+	] ;
+	sh:targetClass gufo:FunctionalComplex ;
+	.
+
+sh-gufo:FunctionalComplex-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:FunctionalComplex-disjointWith-Quantity-shape ;
+	.
+
+sh-gufo:Individual-disjointWith-Type-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Individual and gufo:Type are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Type ;
+	] ;
+	sh:targetClass gufo:Individual ;
+	.
+
+sh-gufo:Individual-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:Individual ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:AbstractIndividual ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:ConcreteIndividual ;
+		]
+	) ;
+	.
+
+sh-gufo:IntrinsicAspect-shape
+	a sh:NodeShape ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:path gufo:inheresIn ;
+		sh:qualifiedMaxCount "1"^^xsd:integer ;
+		sh:qualifiedValueShape [
+			a sh:NodeShape ;
+			sh:class gufo:ConcreteIndividual ;
+		] ;
+	] ;
+	sh:targetClass gufo:IntrinsicAspect ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:IntrinsicMode ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:Quality ;
+		]
+	) ;
+	.
+
+sh-gufo:IntrinsicMode-disjointWith-Quality-shape
+	a sh:NodeShape ;
+	sh:message "gufo:IntrinsicMode and gufo:Quality are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Quality ;
+	] ;
+	sh:targetClass gufo:IntrinsicMode ;
+	.
+
+sh-gufo:IntrinsicMode-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:IntrinsicMode-disjointWith-Quality-shape ;
+	.
+
+sh-gufo:Kind-disjointWith-SubKind-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Kind and gufo:SubKind are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:SubKind ;
+	] ;
+	sh:targetClass gufo:Kind ;
+	.
+
+sh-gufo:Kind-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Kind-disjointWith-SubKind-shape ;
+	.
+
+sh-gufo:MaterialRelationshipType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:ComparativeRelationshipType-disjointWith-MaterialRelationshipType-shape ;
+	.
+
+sh-gufo:NonRigidType-disjointWith-RigidType-shape
+	a sh:NodeShape ;
+	sh:message "gufo:NonRigidType and gufo:RigidType are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:RigidType ;
+	] ;
+	sh:targetClass gufo:NonRigidType ;
+	.
+
+sh-gufo:NonRigidType-shape
+	a sh:NodeShape ;
+	sh:targetClass gufo:NonRigidType ;
+	sh:xone (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:AntiRigidType ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:SemiRigidType ;
+		]
+	) ;
+	.
+
+sh-gufo:NonSortal-disjointWith-Sortal-shape
+	a sh:NodeShape ;
+	sh:message "gufo:NonSortal and gufo:Sortal are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Sortal ;
+	] ;
+	sh:targetClass gufo:NonSortal ;
+	.
+
+sh-gufo:NonSortal-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:NonSortal-disjointWith-Sortal-shape ;
+	.
+
+sh-gufo:Phase-disjointWith-Role-shape
+	a sh:NodeShape ;
+	sh:message "gufo:Phase and gufo:Role are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:Role ;
+	] ;
+	sh:targetClass gufo:Phase ;
+	.
+
+sh-gufo:Phase-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Phase-disjointWith-Role-shape ;
+	.
+
+sh-gufo:PhaseMixin-disjointWith-RoleMixin-shape
+	a sh:NodeShape ;
+	sh:message "gufo:PhaseMixin and gufo:RoleMixin are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:RoleMixin ;
+	] ;
+	sh:targetClass gufo:PhaseMixin ;
+	.
+
+sh-gufo:PhaseMixin-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:PhaseMixin-disjointWith-RoleMixin-shape ;
+	.
+
+sh-gufo:Quality-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:IntrinsicMode-disjointWith-Quality-shape ;
+	.
+
+sh-gufo:QualityValueAttributionSituation-disjointWith-TemporaryConstitutionSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:QualityValueAttributionSituation and gufo:TemporaryConstitutionSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryConstitutionSituation ;
+	] ;
+	sh:targetClass gufo:QualityValueAttributionSituation ;
+	.
+
+sh-gufo:QualityValueAttributionSituation-disjointWith-TemporaryInstantiationSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:QualityValueAttributionSituation and gufo:TemporaryInstantiationSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryInstantiationSituation ;
+	] ;
+	sh:targetClass gufo:QualityValueAttributionSituation ;
+	.
+
+sh-gufo:QualityValueAttributionSituation-disjointWith-TemporaryParthoodSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:QualityValueAttributionSituation and gufo:TemporaryParthoodSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryParthoodSituation ;
+	] ;
+	sh:targetClass gufo:QualityValueAttributionSituation ;
+	.
+
+sh-gufo:QualityValueAttributionSituation-disjointWith-TemporaryRelationshipSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:QualityValueAttributionSituation and gufo:TemporaryRelationshipSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryRelationshipSituation ;
+	] ;
+	sh:targetClass gufo:QualityValueAttributionSituation ;
+	.
+
+sh-gufo:QualityValueAttributionSituation-shape
+	a sh:NodeShape ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path gufo:concernsReifiedQualityValue ;
+				sh:qualifiedMaxCount "1"^^xsd:integer ;
+				sh:qualifiedValueShape [
+					a sh:NodeShape ;
+					sh:class gufo:QualityValue ;
+				] ;
+			] ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:property [
+				a sh:PropertyShape ;
+				sh:maxCount "1"^^xsd:integer ;
+				sh:path gufo:concernsQualityValue ;
+			] ;
+		]
+	) ;
+	sh:property
+		[
+			a sh:PropertyShape ;
+			sh:path gufo:concernsQualityType ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:EndurantType ;
+			] ;
+		] ,
+		[
+			a sh:PropertyShape ;
+			sh:path [
+				sh:inversePath gufo:standsInQualifiedAttribution ;
+			] ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:Endurant ;
+			] ;
+		]
+		;
+	sh:targetClass gufo:QualityValueAttributionSituation ;
+	.
+
+sh-gufo:Quantity-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:FunctionalComplex-disjointWith-Quantity-shape ;
+	.
+
+sh-gufo:RelationshipType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso
+		sh-gufo:AbstractIndividualType-disjointWith-RelationshipType-shape ,
+		sh-gufo:ConcreteIndividualType-disjointWith-RelationshipType-shape
+		;
+	.
+
+sh-gufo:Role-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Phase-disjointWith-Role-shape ;
+	.
+
+sh-gufo:RoleMixin-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:PhaseMixin-disjointWith-RoleMixin-shape ;
+	.
+
+sh-gufo:SemiRigidType-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:AntiRigidType-disjointWith-SemiRigidType-shape ;
+	.
+
+sh-gufo:Situation-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Event-disjointWith-Situation-shape ;
+	.
+
+sh-gufo:Sortal-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:NonSortal-disjointWith-Sortal-shape ;
+	.
+
+sh-gufo:SubKind-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Kind-disjointWith-SubKind-shape ;
+	.
+
+sh-gufo:TemporaryConstitutionSituation-disjointWith-TemporaryInstantiationSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:TemporaryConstitutionSituation and gufo:TemporaryInstantiationSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryInstantiationSituation ;
+	] ;
+	sh:targetClass gufo:TemporaryConstitutionSituation ;
+	.
+
+sh-gufo:TemporaryConstitutionSituation-disjointWith-TemporaryRelationshipSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:TemporaryConstitutionSituation and gufo:TemporaryRelationshipSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryRelationshipSituation ;
+	] ;
+	sh:targetClass gufo:TemporaryConstitutionSituation ;
+	.
+
+sh-gufo:TemporaryConstitutionSituation-shape
+	a sh:NodeShape ;
+	sh:property
+		[
+			a sh:PropertyShape ;
+			sh:path gufo:concernsConstitutedEndurant ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:Object ;
+			] ;
+		] ,
+		[
+			a sh:PropertyShape ;
+			sh:path [
+				sh:inversePath gufo:standsInQualifiedConstitution ;
+			] ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:Object ;
+			] ;
+		]
+		;
+	sh:targetClass gufo:TemporaryConstitutionSituation ;
+	.
+
+sh-gufo:TemporaryInstantiationSituation-disjointWith-TemporaryParthoodSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:TemporaryInstantiationSituation and gufo:TemporaryParthoodSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryParthoodSituation ;
+	] ;
+	sh:targetClass gufo:TemporaryInstantiationSituation ;
+	.
+
+sh-gufo:TemporaryInstantiationSituation-disjointWith-TemporaryRelationshipSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:TemporaryInstantiationSituation and gufo:TemporaryRelationshipSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryRelationshipSituation ;
+	] ;
+	sh:targetClass gufo:TemporaryInstantiationSituation ;
+	.
+
+sh-gufo:TemporaryInstantiationSituation-shape
+	a sh:NodeShape ;
+	sh:property
+		[
+			a sh:PropertyShape ;
+			sh:path gufo:concernsNonRigidType ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:NonRigidType ;
+			] ;
+		] ,
+		[
+			a sh:PropertyShape ;
+			sh:path [
+				sh:inversePath gufo:standsInQualifiedInstantiation ;
+			] ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:Endurant ;
+			] ;
+		]
+		;
+	sh:targetClass gufo:TemporaryInstantiationSituation ;
+	.
+
+sh-gufo:TemporaryParthoodSituation-disjointWith-TemporaryRelationshipSituation-shape
+	a sh:NodeShape ;
+	sh:message "gufo:TemporaryParthoodSituation and gufo:TemporaryRelationshipSituation are disjoint classes."@en ;
+	sh:not [
+		a sh:NodeShape ;
+		sh:class gufo:TemporaryRelationshipSituation ;
+	] ;
+	sh:targetClass gufo:TemporaryParthoodSituation ;
+	.
+
+sh-gufo:TemporaryParthoodSituation-shape
+	a sh:NodeShape ;
+	sh:property
+		[
+			a sh:PropertyShape ;
+			sh:path gufo:concernsTemporaryWhole ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:Endurant ;
+			] ;
+		] ,
+		[
+			a sh:PropertyShape ;
+			sh:path [
+				sh:inversePath gufo:standsInQualifiedParthood ;
+			] ;
+			sh:qualifiedMaxCount "1"^^xsd:integer ;
+			sh:qualifiedValueShape [
+				a sh:NodeShape ;
+				sh:class gufo:Endurant ;
+			] ;
+		]
+		;
+	sh:targetClass gufo:TemporaryParthoodSituation ;
+	.
+
+sh-gufo:Type-shape
+	a sh:NodeShape ;
+	sh:class owl:Class ;
+	sh:targetClass gufo:Type ;
+	.
+
+sh-gufo:VariableCollection-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:FixedCollection-disjointWith-VariableCollection-shape ;
+	.
+
+sh-gufo:broughtAbout-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Situation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:broughtAbout ;
+	.
+
+sh-gufo:broughtAbout-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:targetSubjectsOf gufo:broughtAbout ;
+	.
+
+sh-gufo:categorizes-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Type ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:categorizes ;
+	.
+
+sh-gufo:categorizes-subjects-shape
+	a sh:NodeShape ;
+	sh:and (
+		[
+			a sh:NodeShape ;
+			sh:not [
+				a sh:NodeShape ;
+				sh:class gufo:AbstractIndividualType ;
+			] ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:not [
+				a sh:NodeShape ;
+				sh:class gufo:ConcreteIndividualType ;
+			] ;
+		]
+	) ;
+	sh:class gufo:Type ;
+	sh:targetSubjectsOf gufo:categorizes ;
+	.
+
+sh-gufo:concernsConstitutedEndurant-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsConstitutedEndurant ;
+	.
+
+sh-gufo:concernsConstitutedEndurant-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryConstitutionSituation ;
+	sh:targetSubjectsOf gufo:concernsConstitutedEndurant ;
+	.
+
+sh-gufo:concernsNonRigidType-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:NonRigidType ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsNonRigidType ;
+	.
+
+sh-gufo:concernsNonRigidType-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryInstantiationSituation ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:concernsNonRigidType ;
+	] ;
+	sh:targetSubjectsOf gufo:concernsNonRigidType ;
+	.
+
+sh-gufo:concernsQualityType-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:EndurantType ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsQualityType ;
+	.
+
+sh-gufo:concernsQualityType-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValueAttributionSituation ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:concernsQualityType ;
+	] ;
+	sh:targetSubjectsOf gufo:concernsQualityType ;
+	.
+
+sh-gufo:concernsQualityValue-objects-shape
+	a sh:NodeShape ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:concernsQualityValue ;
+	.
+
+sh-gufo:concernsQualityValue-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValueAttributionSituation ;
+	sh:targetSubjectsOf gufo:concernsQualityValue ;
+	.
+
+sh-gufo:concernsReifiedQualityValue-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValue ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsReifiedQualityValue ;
+	.
+
+sh-gufo:concernsReifiedQualityValue-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValueAttributionSituation ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:concernsReifiedQualityValue ;
+	] ;
+	sh:targetSubjectsOf gufo:concernsReifiedQualityValue ;
+	.
+
+sh-gufo:concernsRelatedEndurant-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsRelatedEndurant ;
+	.
+
+sh-gufo:concernsRelatedEndurant-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryRelationshipSituation ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:concernsRelatedEndurant ;
+	] ;
+	sh:targetSubjectsOf gufo:concernsRelatedEndurant ;
+	.
+
+sh-gufo:concernsRelationshipType-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:RelationshipType ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsRelationshipType ;
+	.
+
+sh-gufo:concernsRelationshipType-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryRelationshipSituation ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:concernsRelationshipType ;
+	] ;
+	sh:targetSubjectsOf gufo:concernsRelationshipType ;
+	.
+
+sh-gufo:concernsTemporaryWhole-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:concernsTemporaryWhole ;
+	.
+
+sh-gufo:concernsTemporaryWhole-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryParthoodSituation ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:concernsTemporaryWhole ;
+	] ;
+	sh:targetSubjectsOf gufo:concernsTemporaryWhole ;
+	.
+
+sh-gufo:constitutes-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:constitutes ;
+	.
+
+sh-gufo:constitutes-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:targetSubjectsOf gufo:constitutes ;
+	.
+
+sh-gufo:contributedToTrigger-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:contributedToTrigger ;
+	.
+
+sh-gufo:contributedToTrigger-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Situation ;
+	sh:targetSubjectsOf gufo:contributedToTrigger ;
+	.
+
+sh-gufo:externallyDependsOn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:externallyDependsOn ;
+	.
+
+sh-gufo:externallyDependsOn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ExtrinsicMode ;
+	sh:targetSubjectsOf gufo:externallyDependsOn ;
+	.
+
+sh-gufo:hasAssociatedQualityValueType-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:AbstractIndividualType ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:hasAssociatedQualityValueType ;
+	.
+
+sh-gufo:hasAssociatedQualityValueType-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:EndurantType ;
+	sh:targetSubjectsOf gufo:hasAssociatedQualityValueType ;
+	.
+
+sh-gufo:hasBeginPoint-objects-shape
+	a sh:NodeShape ;
+	sh:class time:Instant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:hasBeginPoint ;
+	.
+
+sh-gufo:hasBeginPoint-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:targetSubjectsOf gufo:hasBeginPoint ;
+	.
+
+sh-gufo:hasBeginPointInXSDDate-objects-shape
+	a sh:NodeShape ;
+	sh:datatype xsd:date ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:hasBeginPointInXSDDate ;
+	.
+
+sh-gufo:hasBeginPointInXSDDate-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:hasBeginPointInXSDDate ;
+	] ;
+	sh:targetSubjectsOf gufo:hasBeginPointInXSDDate ;
+	.
+
+sh-gufo:hasBeginPointInXSDDateTimeStamp-objects-shape
+	a sh:NodeShape ;
+	sh:datatype xsd:dateTimeStamp ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:hasBeginPointInXSDDateTimeStamp ;
+	.
+
+sh-gufo:hasBeginPointInXSDDateTimeStamp-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:hasBeginPointInXSDDateTimeStamp ;
+	] ;
+	sh:targetSubjectsOf gufo:hasBeginPointInXSDDateTimeStamp ;
+	.
+
+sh-gufo:hasEndPoint-objects-shape
+	a sh:NodeShape ;
+	sh:class time:Instant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:hasEndPoint ;
+	.
+
+sh-gufo:hasEndPoint-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:targetSubjectsOf gufo:hasEndPoint ;
+	.
+
+sh-gufo:hasEndPointInXSDDate-objects-shape
+	a sh:NodeShape ;
+	sh:datatype xsd:date ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:hasEndPointInXSDDate ;
+	.
+
+sh-gufo:hasEndPointInXSDDate-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:hasEndPointInXSDDate ;
+	] ;
+	sh:targetSubjectsOf gufo:hasEndPointInXSDDate ;
+	.
+
+sh-gufo:hasEndPointInXSDDateTimeStamp-objects-shape
+	a sh:NodeShape ;
+	sh:datatype xsd:dateTimeStamp ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:hasEndPointInXSDDateTimeStamp ;
+	.
+
+sh-gufo:hasEndPointInXSDDateTimeStamp-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:hasEndPointInXSDDateTimeStamp ;
+	] ;
+	sh:targetSubjectsOf gufo:hasEndPointInXSDDateTimeStamp ;
+	.
+
+sh-gufo:hasQualityValue-objects-shape
+	a sh:NodeShape ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:hasQualityValue ;
+	.
+
+sh-gufo:hasQualityValue-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:targetSubjectsOf gufo:hasQualityValue ;
+	.
+
+sh-gufo:hasReifiedQualityValue-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValue ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:hasReifiedQualityValue ;
+	.
+
+sh-gufo:hasReifiedQualityValue-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:targetSubjectsOf gufo:hasReifiedQualityValue ;
+	.
+
+sh-gufo:hasValueComponent-objects-shape
+	a sh:NodeShape ;
+	sh:nodeKind sh:Literal ;
+	sh:targetObjectsOf gufo:hasValueComponent ;
+	.
+
+sh-gufo:hasValueComponent-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValue ;
+	sh:targetSubjectsOf gufo:hasValueComponent ;
+	.
+
+sh-gufo:historicallyDependsOn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:historicallyDependsOn ;
+	.
+
+sh-gufo:historicallyDependsOn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:targetSubjectsOf gufo:historicallyDependsOn ;
+	.
+
+sh-gufo:inheresIn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:ConcreteIndividual ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:inheresIn ;
+	.
+
+sh-gufo:inheresIn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Aspect ;
+	sh:property [
+		a sh:PropertyShape ;
+		sh:maxCount "1"^^xsd:integer ;
+		sh:path gufo:inheresIn ;
+	] ;
+	sh:targetSubjectsOf gufo:inheresIn ;
+	.
+
+sh-gufo:isAspectProperPartOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Aspect ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isAspectProperPartOf ;
+	.
+
+sh-gufo:isAspectProperPartOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Aspect ;
+	sh:targetSubjectsOf gufo:isAspectProperPartOf ;
+	.
+
+sh-gufo:isCollectionMemberOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Collection ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isCollectionMemberOf ;
+	.
+
+sh-gufo:isCollectionMemberOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Object ;
+	sh:targetSubjectsOf gufo:isCollectionMemberOf ;
+	.
+
+sh-gufo:isComponentOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:FunctionalComplex ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isComponentOf ;
+	.
+
+sh-gufo:isComponentOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Object ;
+	sh:targetSubjectsOf gufo:isComponentOf ;
+	.
+
+sh-gufo:isDerivedFrom-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:EndurantType ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isDerivedFrom ;
+	.
+
+sh-gufo:isEventProperPartOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isEventProperPartOf ;
+	.
+
+sh-gufo:isEventProperPartOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:targetSubjectsOf gufo:isEventProperPartOf ;
+	.
+
+sh-gufo:isObjectProperPartOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Object ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isObjectProperPartOf ;
+	.
+
+sh-gufo:isObjectProperPartOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Object ;
+	sh:targetSubjectsOf gufo:isObjectProperPartOf ;
+	.
+
+sh-gufo:isProperPartOf-objects-shape
+	a sh:NodeShape ;
+	sh:class owl:Thing ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isProperPartOf ;
+	.
+
+sh-gufo:isProperPartOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class owl:Thing ;
+	sh:targetSubjectsOf gufo:isProperPartOf ;
+	.
+
+sh-gufo:isSituationProperPartOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Situation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isSituationProperPartOf ;
+	.
+
+sh-gufo:isSituationProperPartOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Situation ;
+	sh:targetSubjectsOf gufo:isSituationProperPartOf ;
+	.
+
+sh-gufo:isSubCollectionOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Collection ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isSubCollectionOf ;
+	.
+
+sh-gufo:isSubCollectionOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Collection ;
+	sh:targetSubjectsOf gufo:isSubCollectionOf ;
+	.
+
+sh-gufo:isSubQuantityOf-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Quantity ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:isSubQuantityOf ;
+	.
+
+sh-gufo:isSubQuantityOf-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Quantity ;
+	sh:targetSubjectsOf gufo:isSubQuantityOf ;
+	.
+
+sh-gufo:manifestedIn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:manifestedIn ;
+	.
+
+sh-gufo:manifestedIn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Aspect ;
+	sh:targetSubjectsOf gufo:manifestedIn ;
+	.
+
+sh-gufo:mediates-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:mediates ;
+	.
+
+sh-gufo:mediates-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Relator ;
+	sh:targetSubjectsOf gufo:mediates ;
+	.
+
+sh-gufo:participatedIn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:participatedIn ;
+	.
+
+sh-gufo:participatedIn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Object ;
+	sh:targetSubjectsOf gufo:participatedIn ;
+	.
+
+sh-gufo:partitions-objects-shape
+	a sh:NodeShape ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:partitions ;
+	.
+
+sh-gufo:partitions-subjects-shape
+	a sh:NodeShape ;
+	sh:and (
+		[
+			a sh:NodeShape ;
+			sh:not [
+				a sh:NodeShape ;
+				sh:class gufo:AbstractIndividualType ;
+			] ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:not [
+				a sh:NodeShape ;
+				sh:class gufo:ConcreteIndividualType ;
+			] ;
+		]
+	) ;
+	sh:class gufo:Type ;
+	sh:targetSubjectsOf gufo:partitions ;
+	.
+
+sh-gufo:standsIn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Situation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:standsIn ;
+	.
+
+sh-gufo:standsIn-subjects-shape
+	a sh:NodeShape ;
+	sh:class owl:Thing ;
+	sh:targetSubjectsOf gufo:standsIn ;
+	.
+
+sh-gufo:standsInQualifiedAttribution-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:QualityValueAttributionSituation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:standsInQualifiedAttribution ;
+	.
+
+sh-gufo:standsInQualifiedAttribution-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:standsInQualifiedAttribution ;
+	.
+
+sh-gufo:standsInQualifiedConstitution-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryConstitutionSituation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:standsInQualifiedConstitution ;
+	.
+
+sh-gufo:standsInQualifiedConstitution-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:standsInQualifiedConstitution ;
+	.
+
+sh-gufo:standsInQualifiedInstantiation-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryInstantiationSituation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:standsInQualifiedInstantiation ;
+	.
+
+sh-gufo:standsInQualifiedInstantiation-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:standsInQualifiedInstantiation ;
+	.
+
+sh-gufo:standsInQualifiedParthood-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryParthoodSituation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:standsInQualifiedParthood ;
+	.
+
+sh-gufo:standsInQualifiedParthood-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:standsInQualifiedParthood ;
+	.
+
+sh-gufo:standsInQualifiedRelationship-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:TemporaryRelationshipSituation ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:standsInQualifiedRelationship ;
+	.
+
+sh-gufo:standsInQualifiedRelationship-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:standsInQualifiedRelationship ;
+	.
+
+sh-gufo:wasCreatedIn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:wasCreatedIn ;
+	.
+
+sh-gufo:wasCreatedIn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:wasCreatedIn ;
+	.
+
+sh-gufo:wasTerminatedIn-objects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Event ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:targetObjectsOf gufo:wasTerminatedIn ;
+	.
+
+sh-gufo:wasTerminatedIn-subjects-shape
+	a sh:NodeShape ;
+	sh:class gufo:Endurant ;
+	sh:targetSubjectsOf gufo:wasTerminatedIn ;
+	.
+
+gufo:VariableCollection
+	rdfs:seeAlso gufo:TemporaryParthoodSituation ;
+	.
+
