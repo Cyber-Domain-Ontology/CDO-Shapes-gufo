@@ -156,13 +156,36 @@ check-supply-chain-cdo-shapes:
 	  "x$$(git rev-parse _CHECK_SUPPLY_CHAIN_upstream/base)" \
 	  || (echo "ERROR:Makefile:The current branch is behind the upstream 'base' branch.  Please merge the upstream 'base' commit into the current branch." >&2 ; exit 1)
 
+# Update pre-commit configuration and use the updated config file to
+# review code.  Only have Make exit if 'pre-commit run' modifies files.
 check-supply-chain-pre-commit: \
   .venv-pre-commit/var/.pre-commit-built.log
 	source .venv-pre-commit/bin/activate \
 	  && pre-commit autoupdate
 	git diff \
 	  --exit-code \
-	  .pre-commit-config.yaml
+	  .pre-commit-config.yaml \
+	  || ( \
+	      source .venv-pre-commit/bin/activate \
+	        && pre-commit run \
+	          --all-files \
+	          --config .pre-commit-config.yaml \
+	    ) \
+	    || git diff \
+	      --stat \
+	      --exit-code \
+	      || ( \
+	          echo \
+	            "WARNING:Makefile:pre-commit configuration can be updated.  It appears the updated would change file formatting." \
+	            >&2 \
+	            ; exit 1 \
+                )
+	@git diff \
+	  --exit-code \
+	  .pre-commit-config.yaml \
+	  || echo \
+	    "INFO:Makefile:pre-commit configuration can be updated.  It appears the update would not change file formatting." \
+	    >&2
 
 check-supply-chain-submodules: \
   .git_submodule_init.done.log
