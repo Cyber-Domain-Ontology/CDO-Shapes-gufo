@@ -57,6 +57,19 @@ def test_exemplar_coverage() -> None:
 
     combined_graph = exemplar_graph + tbox_graph
 
+    concepts_excused: Set[URIRef] = set()
+    concepts_excused_filepath = srcdir / "concepts_excused.txt"
+    logging.debug("Loading excused-concepts set %r.", concepts_excused_filepath)
+    with concepts_excused_filepath.open("r") as concepts_excused_fh:
+        for line in concepts_excused_fh:
+            cleaned_line = line.strip()
+            if cleaned_line == "":
+                continue
+            if cleaned_line.startswith("#"):
+                continue
+            concepts_excused.add(URIRef(cleaned_line))
+    logging.debug("len(concepts_excused) = %d.", len(concepts_excused))
+
     properties_mapped: Set[URIRef] = set()
     properties_with_exemplars: Set[URIRef] = set()
 
@@ -106,9 +119,11 @@ ASK {
         if result is True:
             properties_with_exemplars.add(property_mapped)
 
-    if properties_mapped > properties_with_exemplars:
+    if properties_mapped > (properties_with_exemplars | concepts_excused):
         logging.info("These mapped properties have no exemplar instances:")
-        undemonstrated_properties = properties_mapped - properties_with_exemplars
+        undemonstrated_properties = (
+            properties_mapped - properties_with_exemplars - concepts_excused
+        )
         for undemonstrated_property in sorted(undemonstrated_properties):
             logging.info("* %s", str(undemonstrated_property))
 
@@ -137,13 +152,14 @@ ASK {
             logging.debug("class_mapped = %r.", class_mapped)
             logging.debug("result = %r.", result)
 
-    if classes_mapped > classes_with_exemplars:
+    if classes_mapped > (classes_with_exemplars | concepts_excused):
         logging.info("These mapped classes have no exemplar instances:")
-        undemonstrated_classes = classes_mapped - classes_with_exemplars
+        undemonstrated_classes = (
+            classes_mapped - classes_with_exemplars - concepts_excused
+        )
         for undemonstrated_class in sorted(undemonstrated_classes):
             logging.info("* %s", str(undemonstrated_class))
 
-    assert (
-        properties_mapped <= properties_with_exemplars
-        and classes_mapped <= classes_with_exemplars
-    )
+    assert properties_mapped <= (
+        properties_with_exemplars | concepts_excused
+    ) and classes_mapped <= (classes_with_exemplars | concepts_excused)
