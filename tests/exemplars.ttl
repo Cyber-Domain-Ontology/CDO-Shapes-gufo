@@ -14,7 +14,7 @@
 	owl:imports <http://example.org/shapes/sh-example> ;
 	.
 
-kb:Thing-76f5befa-f5e1-4b2c-8d7b-ea7cf18ecca6
-	a ex:Thing ;
+kb:Object-76f5befa-f5e1-4b2c-8d7b-ea7cf18ecca6
+	a ex:Object ;
 	.
 
