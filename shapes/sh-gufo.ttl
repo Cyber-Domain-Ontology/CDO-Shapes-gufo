@@ -9,7 +9,7 @@
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://example.org/shapes/gufo>
+<http://example.org/shapes/sh-gufo>
 	a owl:Ontology ;
 	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
 	.

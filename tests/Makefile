@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-# Portions of this file contributed by NIST are governed by the following
-# statement:
+# Portions of this file contributed by NIST are governed by the
+# following statement:
 #
 # This software was developed at the National Institute of Standards
 # and Technology by employees of the Federal Government in the course
@@ -23,8 +23,7 @@ uco_srcdir := $(top_srcdir)/dependencies/UCO
 shape_ttls := $(wildcard $(top_srcdir)/shapes/sh-*.ttl)
 
 all: \
-  exemplars-expanded.ttl \
-  monolithic.ttl
+  exemplars-expanded.ttl
 
 .pyshacl.done.log: \
   exemplars-expanded.ttl \
@@ -54,15 +53,17 @@ check: \
 clean:
 	@rm -f \
 	  .*.done.log \
+	  exemplars-entailment.ttl \
+	  exemplars-expanded.ttl \
 	  monolithic.ttl
 
 exemplars-entailment.ttl: \
   $(top_srcdir)/.venv.done.log \
-  entail.py \
+  $(top_srcdir)/src/entail.py \
   exemplars.ttl \
   monolithic.ttl
 	source $(top_srcdir)/venv/bin/activate \
-	  && python3 entail.py \
+	  && python3 $(top_srcdir)/src/entail.py \
 	    _$@ \
 	    exemplars.ttl \
 	    monolithic.ttl

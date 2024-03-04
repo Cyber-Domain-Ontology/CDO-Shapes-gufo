@@ -1,2 +1,2 @@
 http://purl.org/nemo/gufo#	${top_srcdir}/dependencies/gufo.ttl
-http://example.org/shapes/gufo	${top_srcdir}/shapes/sh-gufo.ttl
+http://example.org/shapes/sh-gufo	${top_srcdir}/shapes/sh-gufo.ttl
