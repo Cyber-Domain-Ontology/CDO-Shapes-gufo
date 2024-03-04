@@ -1,0 +1,7 @@
+# Use this file to store IRIs of classes or properties that should be
+# excused from demonstration with exemplar triples.
+# Each line of this file should store one expanded IRI, e.g.:
+#
+# http://example.org/ontology/example/DeletedClass
+#
+# Lines with a leading '#' character are ignored.

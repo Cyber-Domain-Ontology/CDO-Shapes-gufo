@@ -38,6 +38,7 @@ all: \
 	touch $@
 
 .pytest.done.log: \
+  concepts_excused.txt \
   exemplars.ttl \
   monolithic.ttl \
   test_exemplar_coverage.py
