@@ -11,7 +11,7 @@
 <http://example.org/kb>
 	a owl:Ontology ;
 	rdfs:comment "This knowledge base instantiates each of the shape-reviewed classes and properties, so SHACL shapes can be exercised for the reviewed ontology."@en ;
-	owl:imports <http://example.org/shapes/example> ;
+	owl:imports <http://example.org/shapes/sh-example> ;
 	.
 
 kb:Thing-76f5befa-f5e1-4b2c-8d7b-ea7cf18ecca6

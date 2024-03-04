@@ -6,11 +6,11 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix sh-example: <http://example.org/shapes/example/> .
+@prefix sh-example: <http://example.org/shapes/sh-example/> .
 @prefix uco-owl: <https://ontology.unifiedcyberontology.org/owl/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://example.org/shapes/example>
+<http://example.org/shapes/sh-example>
 	a owl:Ontology ;
 	rdfs:comment "This shapes file should be filled in for classes and properties of interest when the upstream ontology does not provide SHACL shapes."@en ;
 	owl:imports

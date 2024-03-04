@@ -1,2 +1,2 @@
 http://example.org/ontology/example/0.0.1	${top_srcdir}/dependencies/example.ttl
-http://example.org/shapes/example	${top_srcdir}/shapes/sh-example.ttl
+http://example.org/shapes/sh-example	${top_srcdir}/shapes/sh-example.ttl
