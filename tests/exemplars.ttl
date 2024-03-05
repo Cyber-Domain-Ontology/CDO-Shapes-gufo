@@ -19,3 +19,16 @@ kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
 	a gufo:Object ;
 	.
 
+kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:Quality ;
+	.
+
+kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
+	a gufo:QualityValueAttributionSituation ;
+	gufo:concernsQualityType kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551 ;
+	.
+
