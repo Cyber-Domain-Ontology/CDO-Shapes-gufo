@@ -496,11 +496,28 @@ sh-gufo:Kind-disjointWith-SubKind-shape
 
 sh-gufo:Kind-shape
 	a sh:NodeShape ;
-	rdfs:comment
-		"This shape is a reference placeholder."@en ,
-		"rdfs:seeAlso links other shapes that review this class."@en
-		;
+	rdfs:comment "rdfs:seeAlso links other shapes that review this class."@en ;
 	rdfs:seeAlso sh-gufo:Kind-disjointWith-SubKind-shape ;
+	sh:sparql sh-gufo:Kind-subclassOf-Kind-constraint ;
+	sh:targetClass gufo:Kind ;
+	.
+
+sh-gufo:Kind-subclassOf-Kind-constraint
+	a sh:SPARQLConstraint ;
+	sh:message "A gufo:Kind may not subclass another gufo:Kind."@en ;
+	sh:select """
+		PREFIX gufo: <http://purl.org/nemo/gufo#>
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		SELECT $this ?value
+		WHERE {
+			$this
+				rdfs:subClassOf+ ?value ;
+				.
+			?value
+				a gufo:Kind ;
+				.
+		}
+	""" ;
 	.
 
 sh-gufo:MaterialRelationshipType-shape

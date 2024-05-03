@@ -1,0 +1,47 @@
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix kb: <http://example.org/kb/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	.
+
+kb:Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:comment "This is expected to trigger a validation error for being a direct subclass of another Kind."@en ;
+	rdfs:subClassOf kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535
+	.
+
+kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	.
+
+kb:Kind-93c29c13-6535-4242-b375-3cdf6a154c43
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:comment "This is expected to trigger a validation error for being an indirect subclass of another Kind."@en ;
+	rdfs:subClassOf kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd ;
+	.
+
+kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd
+	a
+		gufo:SubKind ,
+		owl:Class
+		;
+	rdfs:subClassOf kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7 ;
+	.
+

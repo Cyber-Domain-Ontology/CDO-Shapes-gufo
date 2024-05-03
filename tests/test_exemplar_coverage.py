@@ -16,9 +16,9 @@
 
 import logging
 from pathlib import Path
-from typing import Optional, Set
+from typing import Optional, Set, Tuple
 
-from rdflib import SH, Graph, URIRef
+from rdflib import SH, Graph, Namespace, URIRef
 from rdflib.query import ResultRow
 
 NS_SH = SH
@@ -165,3 +165,42 @@ ASK {
     # assert properties_mapped <= (
     #     properties_with_exemplars | concepts_excused
     # ) and classes_mapped <= (classes_with_exemplars | concepts_excused)
+
+
+def test_exemplar_xfail_validation() -> None:
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+
+    ns_kb = Namespace("http://example.org/kb/")
+
+    pairs: Set[Tuple[URIRef, URIRef]] = set()
+    for result in validation_graph.query(
+        """\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSubClass ?nClass
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceConstraint sh-gufo:Kind-subclassOf-Kind-constraint ;
+    sh:focusNode ?nSubClass ;
+    sh:value ?nClass ;
+    .
+}
+"""
+    ):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        assert isinstance(result[1], URIRef)
+        pairs.add((result[0], result[1]))
+
+    assert pairs == {
+        (
+            ns_kb["Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b"],
+            ns_kb["Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535"],
+        ),
+        (
+            ns_kb["Kind-93c29c13-6535-4242-b375-3cdf6a154c43"],
+            ns_kb["Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7"],
+        ),
+    }
