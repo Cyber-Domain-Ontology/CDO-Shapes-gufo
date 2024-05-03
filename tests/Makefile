@@ -20,6 +20,8 @@ top_srcdir := $(shell cd .. ; pwd)
 
 uco_srcdir := $(top_srcdir)/dependencies/UCO
 
+RDF_TOOLKIT_JAR := $(uco_srcdir)/lib/rdf-toolkit.jar
+
 shape_ttls := $(wildcard $(top_srcdir)/shapes/sh-*.ttl)
 
 all: \
@@ -38,6 +40,7 @@ all: \
 
 .pytest.done.log: \
   concepts_excused.txt \
+  exemplars_XFAIL_validation.ttl \
   exemplars.ttl \
   monolithic.ttl \
   test_exemplar_coverage.py
@@ -56,6 +59,29 @@ clean:
 	  exemplars-entailment.ttl \
 	  exemplars-expanded.ttl \
 	  monolithic.ttl
+
+exemplars_XFAIL_validation.ttl: \
+  $(RDF_TOOLKIT_JAR) \
+  exemplars_XFAIL.ttl \
+  monolithic.ttl
+	source $(top_srcdir)/venv/bin/activate \
+	  && pyshacl \
+	    --format turtle \
+	    --metashacl \
+	    --ont-graph monolithic.ttl \
+	    --shacl monolithic.ttl \
+	    exemplars_XFAIL.ttl \
+	    > __$@ \
+	    ; rc=$$? ; test 1 -eq $$rc
+	test -s __$@
+	java -jar $(RDF_TOOLKIT_JAR) \
+	  --inline-blank-nodes \
+	  --source __$@ \
+	  --source-format turtle \
+	  --target _$@ \
+	  --target-format turtle
+	rm __$@
+	mv _$@ $@
 
 exemplars-entailment.ttl: \
   $(top_srcdir)/.venv.done.log \
