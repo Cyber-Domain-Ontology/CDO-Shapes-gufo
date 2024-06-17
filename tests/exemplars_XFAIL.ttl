@@ -17,8 +17,8 @@ kb:Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b
 		gufo:Kind ,
 		owl:Class
 		;
+	rdfs:subClassOf kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535 ;
 	rdfs:comment "This is expected to trigger a validation error for being a direct subclass of another Kind."@en ;
-	rdfs:subClassOf kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535
 	.
 
 kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7
@@ -33,8 +33,8 @@ kb:Kind-93c29c13-6535-4242-b375-3cdf6a154c43
 		gufo:Kind ,
 		owl:Class
 		;
-	rdfs:comment "This is expected to trigger a validation error for being an indirect subclass of another Kind."@en ;
 	rdfs:subClassOf kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd ;
+	rdfs:comment "This is expected to trigger a validation error for being an indirect subclass of another Kind."@en ;
 	.
 
 kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd
