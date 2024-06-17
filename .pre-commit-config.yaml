@@ -12,3 +12,9 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
+  - repo: https://github.com/casework/rdf-toolkit-action
+    rev: 2.0.3
+    hooks:
+      - id: rdf-toolkit-normalizer
+        args:
+          - --autofix

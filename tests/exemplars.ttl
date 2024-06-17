@@ -1,7 +1,7 @@
-# imports: http://example.org/shapes/example
+# imports: http://example.org/shapes/sh-example
 
-@prefix ex: <http://example.org/ontology/example/> .
 @prefix drafting: <http://example.org/ontology/drafting/> .
+@prefix ex: <http://example.org/ontology/example/> .
 @prefix kb: <http://example.org/kb/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
