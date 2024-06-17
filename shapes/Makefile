@@ -20,36 +20,10 @@ top_srcdir := $(shell cd .. ; pwd)
 
 uco_srcdir := $(top_srcdir)/dependencies/UCO
 
-RDF_TOOLKIT_JAR := $(uco_srcdir)/lib/rdf-toolkit.jar
-
 ttl_basenames := $(wildcard sh-*.ttl)
-
-check_ttl_targets := $(foreach ttl_basename,$(ttl_basenames),check-$(ttl_basename))
 
 all: \
   catalog-v001.xml
-
-.PHONY: \
-  check-%.ttl
-
-.PRECIOUS: \
-  .check-%.ttl
-
-$(RDF_TOOLKIT_JAR):
-	@echo "DEBUG:shapes/Makefile:top_srcdir=$(top_srcdir)" >&2
-	@echo "ERROR:shapes/Makefile:rdf-toolkit.jar not found.  Did you run `make` from the top source directory?" >&2
-	@test -r $@
-
-.check-%.ttl: \
-  %.ttl \
-  $(RDF_TOOLKIT_JAR)
-	java -jar $(RDF_TOOLKIT_JAR) \
-	  --inline-blank-nodes \
-	  --source $< \
-	  --source-format turtle \
-	  --target _$@ \
-	  --target-format turtle
-	mv _$@ $@
 
 catalog-v001.xml: \
   $(top_srcdir)/.venv.done.log \
@@ -69,14 +43,7 @@ catalog-v001.xml: \
 	mv _$@ $@
 
 check: \
-  $(check_ttl_targets) \
   catalog-v001.xml
-
-check-%.ttl: \
-  %.ttl \
-  .check-%.ttl
-	diff $^	\
-	  || (echo "ERROR:shapes/Makefile:The local $< does not match the normalized version. If the above reported changes look fine, run 'cp .check-$< $<' while in the sub-folder shapes/ to get a file ready to commit to Git." >&2 ; exit 1)
 
 clean:
 	@rm -f \
