@@ -720,14 +720,13 @@ sh-gufo:Quantity-shape
 
 sh-gufo:RelationshipType-shape
 	a sh:NodeShape ;
-	rdfs:comment
-		"This shape is a reference placeholder."@en ,
-		"rdfs:seeAlso links other shapes that review this class."@en
-		;
+	rdfs:comment "rdfs:seeAlso links other shapes that review this class."@en ;
 	rdfs:seeAlso
 		sh-gufo:AbstractIndividualType-disjointWith-RelationshipType-shape ,
 		sh-gufo:ConcreteIndividualType-disjointWith-RelationshipType-shape
 		;
+	sh:class owl:ObjectProperty ;
+	sh:targetClass gufo:RelationshipType ;
 	.
 
 sh-gufo:Role-shape
@@ -917,7 +916,16 @@ sh-gufo:TemporaryParthoodSituation-shape
 
 sh-gufo:Type-shape
 	a sh:NodeShape ;
-	sh:class owl:Class ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:class owl:Class ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:node sh-gufo:RelationshipType-shape ;
+		]
+	) ;
 	sh:targetClass gufo:Type ;
 	.
 
