@@ -15,6 +15,20 @@
 	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
 	.
 
+kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
+	a
+		owl:ObjectProperty ,
+		gufo:ComparativeRelationshipType
+		;
+	.
+
+kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
+	a
+		owl:ObjectProperty ,
+		gufo:MaterialRelationshipType
+		;
+	.
+
 kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
 	a gufo:Object ;
 	.
