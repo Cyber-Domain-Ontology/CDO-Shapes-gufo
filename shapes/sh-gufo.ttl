@@ -165,7 +165,10 @@ sh-gufo:ComparativeRelationshipType-shape
 
 sh-gufo:ConcreteIndividual-shape
 	a sh:NodeShape ;
-	rdfs:comment "rdfs:seeAlso links other shapes that review this class."@en ;
+	rdfs:comment
+		"By resolving the disjoint unions, a strict review that requires some non-disjoint-union subclass be instantiated means that any instance of a ConcreteIndvidual must be a member of exactly one of these classes: ExtrinsicMode, Relator, IntrinsicMode, Quality, Object, Event, or Situation."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
 	rdfs:seeAlso sh-gufo:AbstractIndividual-disjointWith-ConcreteIndividual-shape ;
 	sh:targetClass gufo:ConcreteIndividual ;
 	sh:xone (
