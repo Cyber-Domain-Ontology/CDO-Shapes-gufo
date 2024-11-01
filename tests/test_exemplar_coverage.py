@@ -167,7 +167,37 @@ ASK {
     # ) and classes_mapped <= (classes_with_exemplars | concepts_excused)
 
 
-def test_exemplar_xfail_validation() -> None:
+def test_exemplar_xfail_validation_enduranttype() -> None:
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+
+    ns_kb = Namespace("http://example.org/kb/")
+
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query(
+        """\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nEndurantType
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:EndurantType-shape ;
+    sh:focusNode ?nEndurantType ;
+    .
+}
+"""
+    ):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+
+    assert n_focus_nodes == {
+        ns_kb["EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663"],
+    }
+
+
+def test_exemplar_xfail_validation_kind_subclassof_kind() -> None:
     validation_graph = Graph()
     validation_graph.parse("exemplars_XFAIL_validation.ttl")
 
