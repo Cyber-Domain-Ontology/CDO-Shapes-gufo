@@ -11,6 +11,24 @@
 	sh:result
 		[
 			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663> ;
+			sh:resultMessage "Node kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663 must conform to exactly one shape in ([ rdf:type sh:NodeShape ; sh:class gufo:NonRigidType ] , [ rdf:type sh:NodeShape ; sh:class gufo:RigidType ]) and ([ rdf:type sh:NodeShape ; sh:class gufo:NonSortal ] , [ rdf:type sh:NodeShape ; sh:class gufo:Sortal ])" ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+			sh:sourceShape sh-gufo:EndurantType-shape ;
+			sh:value <http://example.org/kb/EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663> ;
+			sh:resultMessage "Node kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663 must conform to exactly one shape in ([ rdf:type sh:NodeShape ; sh:class gufo:NonRigidType ] , [ rdf:type sh:NodeShape ; sh:class gufo:RigidType ]) and ([ rdf:type sh:NodeShape ; sh:class gufo:NonSortal ] , [ rdf:type sh:NodeShape ; sh:class gufo:Sortal ])" ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+			sh:sourceShape sh-gufo:EndurantType-shape ;
+			sh:value <http://example.org/kb/EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663> ;
+		] ,
+		[
+			a sh:ValidationResult ;
 			sh:focusNode <http://example.org/kb/Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b> ;
 			sh:resultMessage "A gufo:Kind may not subclass another gufo:Kind." ;
 			sh:resultSeverity sh:Violation ;
