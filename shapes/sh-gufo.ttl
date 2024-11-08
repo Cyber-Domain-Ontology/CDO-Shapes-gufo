@@ -209,6 +209,25 @@ sh-gufo:ConcreteIndividualType-shape
 		;
 	.
 
+sh-gufo:Endurant-Kind-shape
+	a sh:PropertyShape ;
+	rdfs:isDefinedBy gufo:Kind ;
+	rdfs:seeAlso sh-gufo:Kind-subclassOf-Kind-constraint ;
+	sh:description "This shape is part of implementing the specification (from gufo:Kind) 'Every gufo:Endurant instantiates one and only one gufo:Kind.'"@en ;
+	sh:message "Every gufo:Endurant must instantiate at least one gufo:Kind."@en ;
+	sh:path (
+		rdf:type
+		[
+			sh:zeroOrMorePath rdfs:subClassOf ;
+		]
+	) ;
+	sh:qualifiedMinCount "1"^^xsd:integer ;
+	sh:qualifiedValueShape [
+		a sh:NodeShape ;
+		sh:class gufo:Kind ;
+	] ;
+	.
+
 sh-gufo:Endurant-disjointWith-Event-shape
 	a sh:NodeShape ;
 	sh:message "gufo:Endurant and gufo:Event are disjoint classes."@en ;
@@ -231,6 +250,7 @@ sh-gufo:Endurant-disjointWith-Situation-shape
 
 sh-gufo:Endurant-shape
 	a sh:NodeShape ;
+	sh:property sh-gufo:Endurant-Kind-shape ;
 	sh:targetClass gufo:Endurant ;
 	sh:xone (
 		[
@@ -507,6 +527,9 @@ sh-gufo:Kind-shape
 
 sh-gufo:Kind-subclassOf-Kind-constraint
 	a sh:SPARQLConstraint ;
+	rdfs:isDefinedBy gufo:Kind ;
+	rdfs:seeAlso sh-gufo:Endurant-Kind-shape ;
+	sh:description "This constraint is part of implementing the specification (from gufo:Kind) 'Every gufo:Endurant instantiates one and only one gufo:Kind.'"@en ;
 	sh:message "A gufo:Kind may not subclass another gufo:Kind."@en ;
 	sh:select """
 		PREFIX gufo: <http://purl.org/nemo/gufo#>
