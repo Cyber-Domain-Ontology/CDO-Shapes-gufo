@@ -22,6 +22,15 @@ kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 		;
 	.
 
+kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
+	a gufo:Event ;
+	gufo:hasBeginPoint kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c ;
+	.
+
+kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
+	a time:Instant ;
+	.
+
 kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
 	a
 		owl:ObjectProperty ,
