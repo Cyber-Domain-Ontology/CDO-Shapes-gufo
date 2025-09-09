@@ -173,6 +173,10 @@ kb:Event-1adfd366-767b-408b-a78e-1bc914fe926c
 	a gufo:Event ;
 	.
 
+kb:Event-26cf76ef-1d05-4706-a1fb-15b05592cb20
+	a gufo:Event ;
+	.
+
 kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 	a gufo:Event ;
 	gufo:broughtAbout kb:Situation-7405a4b4-022f-4189-aa77-2152d2ddeadb ;
@@ -234,6 +238,11 @@ kb:Object-6497e6f6-1e15-407b-a030-777e79fe1c61
 
 kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
 	a gufo:Object ;
+	.
+
+kb:Object-fcfdcab7-ca11-46d1-bea1-231a3d76b1b4
+	a gufo:Object ;
+	gufo:participatedIn kb:Event-26cf76ef-1d05-4706-a1fb-15b05592cb20 ;
 	.
 
 kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
