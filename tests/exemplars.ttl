@@ -238,6 +238,14 @@ kb:Event-daaf8c17-6c64-4bab-b8e5-faa5760e17fc
 	gufo:isEventProperPartOf kb:Event-1adfd366-767b-408b-a78e-1bc914fe926c ;
 	.
 
+kb:EventType-c29faf02-c9c9-4fd0-8c20-fedf153a9de3
+	a
+		gufo:EventType ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:Event ;
+	.
+
 kb:ExtrinsicMode-01964f52-6337-4703-80d2-5903d7635901
 	a gufo:ExtrinsicMode ;
 	gufo:externallyDependsOn kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af ;
