@@ -160,11 +160,9 @@ ASK {
         for undemonstrated_class in sorted(undemonstrated_classes):
             logging.info("* %s", str(undemonstrated_class))
 
-    # TODO - Full shapes-coverage requirement is temporarily not
-    # required for this repository.
-    # assert properties_mapped <= (
-    #     properties_with_exemplars | concepts_excused
-    # ) and classes_mapped <= (classes_with_exemplars | concepts_excused)
+    assert properties_mapped <= (
+        properties_with_exemplars | concepts_excused
+    ) and classes_mapped <= (classes_with_exemplars | concepts_excused)
 
 
 def test_exemplar_xfail_validation_enduranttype() -> None:
