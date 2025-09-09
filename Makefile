@@ -172,11 +172,11 @@ check-supply-chain-pre-commit: \
 	          --config .pre-commit-config.yaml \
 	    ) \
 	    || git diff \
-	      --stat \
 	      --exit-code \
+	      --stat \
 	      || ( \
 	          echo \
-	            "WARNING:Makefile:pre-commit configuration can be updated.  It appears the updated would change file formatting." \
+	            "WARNING:Makefile:pre-commit configuration can be updated.  It appears the update would change file formatting." \
 	            >&2 \
 	            ; exit 1 \
                 )
