@@ -92,6 +92,13 @@ kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
 	gufo:concernsQualityType kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551 ;
 	.
 
+kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31
+	a
+		owl:ObjectProperty ,
+		gufo:RelationshipType
+		;
+	.
+
 kb:Situation-7405a4b4-022f-4189-aa77-2152d2ddeadb
 	a gufo:Situation ;
 	.
@@ -109,6 +116,11 @@ kb:TemporaryInstantiationSituation-41702321-9550-458b-9438-f48d28d7e0c8
 kb:TemporaryRelationshipSituation-2a64c96d-9629-4c29-9d63-e6f69cdbdabd
 	a gufo:TemporaryRelationshipSituation ;
 	gufo:concernsRelatedEndurant kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b ;
+	.
+
+kb:TemporaryRelationshipSituation-f874b7a3-5add-49f4-895c-9fbe42b40095
+	a gufo:TemporaryRelationshipSituation ;
+	gufo:concernsRelationshipType kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31 ;
 	.
 
 kb:Type-15690ddc-002a-48e6-8e2f-e0fafaf5bb3a
