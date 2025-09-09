@@ -150,6 +150,10 @@ kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b
 	a gufo:Object ;
 	.
 
+kb:Endurant-a6c542b6-0831-4ff2-a5e3-325c43075417
+	a gufo:Object ;
+	.
+
 kb:EndurantType-1e1f2313-7cbb-47ae-bdd0-bc4a4a5a654e
 	a
 		gufo:Category ,
@@ -282,6 +286,11 @@ kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31
 		owl:ObjectProperty ,
 		gufo:RelationshipType
 		;
+	.
+
+kb:Relator-14b55f33-20c6-4ecc-a2d0-fb5eca0d36fa
+	a gufo:Relator ;
+	gufo:mediates kb:Endurant-a6c542b6-0831-4ff2-a5e3-325c43075417 ;
 	.
 
 kb:Situation-3bbd50e7-7b60-41ae-8f03-ee8fb89123c3
