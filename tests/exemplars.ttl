@@ -257,6 +257,15 @@ kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31
 		;
 	.
 
+kb:Situation-3bbd50e7-7b60-41ae-8f03-ee8fb89123c3
+	a gufo:Situation ;
+	.
+
+kb:Situation-67908a64-9f27-4e71-8cf3-2082ba834c3c
+	a gufo:Situation ;
+	gufo:isSituationProperPartOf kb:Situation-3bbd50e7-7b60-41ae-8f03-ee8fb89123c3 ;
+	.
+
 kb:Situation-7405a4b4-022f-4189-aa77-2152d2ddeadb
 	a gufo:Situation ;
 	.
