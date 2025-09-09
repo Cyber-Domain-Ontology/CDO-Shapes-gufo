@@ -30,6 +30,15 @@ kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
 	gufo:hasBeginPoint kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c ;
 	.
 
+kb:ConcreteIndividual-e35fa5a9-538d-4e23-b944-e2d6a6a1d2d0
+	a gufo:Event ;
+	gufo:constitutes kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119 ;
+	.
+
+kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119
+	a gufo:Object ;
+	.
+
 kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28
 	a gufo:Object ;
 	.
