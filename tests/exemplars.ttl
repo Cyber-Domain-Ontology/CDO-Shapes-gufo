@@ -25,6 +25,15 @@ kb:AbstractIndividualType-73fdd434-b356-4b08-8ad6-e112a8727e61
 		;
 	.
 
+kb:Aspect-1635039c-e6ed-4c79-9f79-301b087b96b3
+	a gufo:ExtrinsicMode ;
+	.
+
+kb:Aspect-1ccbc309-4595-4d75-9e13-f399bf3172a4
+	a gufo:IntrinsicMode ;
+	gufo:isAspectProperPartOf kb:Aspect-1635039c-e6ed-4c79-9f79-301b087b96b3 ;
+	.
+
 kb:Aspect-c6c0dc61-2ced-498d-821c-443761c87de0
 	a gufo:ExtrinsicMode ;
 	gufo:inheresIn kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f ;
