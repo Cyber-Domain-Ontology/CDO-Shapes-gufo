@@ -162,6 +162,11 @@ kb:Endurant-30842dd2-146e-4720-81eb-ff8f655058a5
 	gufo:standsInQualifiedAttribution kb:QualityValueAttributionSituation-71781915-ac36-4264-83f4-3a89df7de700 ;
 	.
 
+kb:Endurant-370e7a1c-7bfd-475b-83e9-d046b26978d7
+	a gufo:Object ;
+	gufo:wasCreatedIn kb:Event-be5f6859-6485-4410-9578-bd07b25bff89 ;
+	.
+
 kb:Endurant-4053ed7d-05c9-44ce-869f-2745d84a40ce
 	a gufo:Object ;
 	.
@@ -208,6 +213,10 @@ kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 	.
 
 kb:Event-9efcc624-51c3-48db-a1c2-a1da083e9724
+	a gufo:Event ;
+	.
+
+kb:Event-be5f6859-6485-4410-9578-bd07b25bff89
 	a gufo:Event ;
 	.
 
