@@ -142,6 +142,11 @@ kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af
 	a gufo:Object ;
 	.
 
+kb:Endurant-29775539-5fe1-4755-b228-841aab508e27
+	a gufo:Object ;
+	gufo:standsInQualifiedConstitution kb:TemporaryConstitutionSituation-932e7a34-1d58-4e8b-8265-9f8f62bb0c34 ;
+	.
+
 kb:Endurant-30842dd2-146e-4720-81eb-ff8f655058a5
 	a gufo:Object ;
 	gufo:standsInQualifiedAttribution kb:QualityValueAttributionSituation-71781915-ac36-4264-83f4-3a89df7de700 ;
@@ -332,6 +337,10 @@ kb:Situation-7c239b29-b6bf-4eae-a0e5-7d34b8d27562
 kb:TemporaryConstitutionSituation-490fa048-fc2a-4434-8376-80579af09d88
 	a gufo:TemporaryConstitutionSituation ;
 	gufo:concernsConstitutedEndurant kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28 ;
+	.
+
+kb:TemporaryConstitutionSituation-932e7a34-1d58-4e8b-8265-9f8f62bb0c34
+	a gufo:TemporaryConstitutionSituation ;
 	.
 
 kb:TemporaryInstantiationSituation-41702321-9550-458b-9438-f48d28d7e0c8
