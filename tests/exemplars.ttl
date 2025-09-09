@@ -47,6 +47,11 @@ kb:ConcreteIndividual-53666515-6220-4cfc-ab4a-920847cd7c3d
 	gufo:hasEndPoint kb:Instant-2dce59b8-5539-4ed6-abf3-e0fcc3483b69 ;
 	.
 
+kb:ConcreteIndividual-a1f49b38-b33d-4c03-a0a4-e11cd321a3aa
+	a gufo:Event ;
+	gufo:hasEndPointInXSDDate "2000-01-01"^^xsd:date ;
+	.
+
 kb:ConcreteIndividual-e35fa5a9-538d-4e23-b944-e2d6a6a1d2d0
 	a gufo:Event ;
 	gufo:constitutes kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119 ;
