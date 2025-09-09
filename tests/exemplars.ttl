@@ -138,6 +138,11 @@ kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28
 	a gufo:Object ;
 	.
 
+kb:Endurant-11ff0009-4e31-4bb8-816a-a72f6d7394c8
+	a gufo:Object ;
+	gufo:standsInQualifiedInstantiation kb:TemporaryInstantiationSituation-d50f30d2-d042-4003-9b81-5878e348bbc6 ;
+	.
+
 kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af
 	a gufo:Object ;
 	.
@@ -346,6 +351,10 @@ kb:TemporaryConstitutionSituation-932e7a34-1d58-4e8b-8265-9f8f62bb0c34
 kb:TemporaryInstantiationSituation-41702321-9550-458b-9438-f48d28d7e0c8
 	a gufo:TemporaryInstantiationSituation ;
 	gufo:concernsNonRigidType kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308 ;
+	.
+
+kb:TemporaryInstantiationSituation-d50f30d2-d042-4003-9b81-5878e348bbc6
+	a gufo:TemporaryInstantiationSituation ;
 	.
 
 kb:TemporaryParthoodSituation-4292a36e-659c-4644-a197-a0e84dfb2394
