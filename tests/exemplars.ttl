@@ -259,6 +259,15 @@ kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
 	gufo:concernsQualityType kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551 ;
 	.
 
+kb:Quantity-2f4b9948-85a6-4592-b81b-b604d073a29c
+	a gufo:Quantity ;
+	gufo:isSubQuantityOf kb:Quantity-4f72cf14-2dd5-4680-bb9c-b92e398e2394 ;
+	.
+
+kb:Quantity-4f72cf14-2dd5-4680-bb9c-b92e398e2394
+	a gufo:Quantity ;
+	.
+
 kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31
 	a
 		owl:ObjectProperty ,
