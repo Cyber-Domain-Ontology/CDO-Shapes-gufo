@@ -50,6 +50,13 @@ kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
 		;
 	.
 
+kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308
+	a
+		gufo:Phase ,
+		owl:Class
+		;
+	.
+
 kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
 	a gufo:Object ;
 	.
@@ -74,6 +81,11 @@ kb:Situation-7405a4b4-022f-4189-aa77-2152d2ddeadb
 kb:TemporaryConstitutionSituation-490fa048-fc2a-4434-8376-80579af09d88
 	a gufo:TemporaryConstitutionSituation ;
 	gufo:concernsConstitutedEndurant kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28 ;
+	.
+
+kb:TemporaryInstantiationSituation-41702321-9550-458b-9438-f48d28d7e0c8
+	a gufo:TemporaryInstantiationSituation ;
+	gufo:concernsNonRigidType kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308 ;
 	.
 
 kb:Type-15690ddc-002a-48e6-8e2f-e0fafaf5bb3a
