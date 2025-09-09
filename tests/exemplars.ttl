@@ -171,6 +171,11 @@ kb:Endurant-4053ed7d-05c9-44ce-869f-2745d84a40ce
 	a gufo:Object ;
 	.
 
+kb:Endurant-6640ba7b-fd7b-43ff-9334-81d9895372dc
+	a gufo:Object ;
+	gufo:wasTerminatedIn kb:Event-a9888561-5dcc-4c22-bec5-0a584839729d ;
+	.
+
 kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b
 	a gufo:Object ;
 	.
@@ -213,6 +218,10 @@ kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 	.
 
 kb:Event-9efcc624-51c3-48db-a1c2-a1da083e9724
+	a gufo:Event ;
+	.
+
+kb:Event-a9888561-5dcc-4c22-bec5-0a584839729d
 	a gufo:Event ;
 	.
 
