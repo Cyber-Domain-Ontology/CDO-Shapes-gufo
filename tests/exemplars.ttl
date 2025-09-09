@@ -50,6 +50,14 @@ kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 		;
 	.
 
+kb:ComparativeRelationshipType-e8a29bec-3a1c-4d1d-ae2b-10545a631d8f
+	a
+		owl:ObjectProperty ,
+		gufo:ComparativeRelationshipType
+		;
+	gufo:isDerivedFrom kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65 ;
+	.
+
 kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f
 	a gufo:Object ;
 	.
@@ -134,6 +142,13 @@ kb:EndurantType-1e1f2313-7cbb-47ae-bdd0-bc4a4a5a654e
 		owl:Class
 		;
 	gufo:hasAssociatedQualityValueType kb:AbstractIndividualType-73fdd434-b356-4b08-8ad6-e112a8727e61 ;
+	.
+
+kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65
+	a
+		gufo:Category ,
+		owl:Class
+		;
 	.
 
 kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
