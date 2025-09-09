@@ -11,7 +11,10 @@
 
 <http://example.org/kb>
 	a owl:Ontology ;
-	rdfs:comment "This knowledge base instantiates each of the shape-reviewed classes and properties, so SHACL shapes can be exercised for the reviewed ontology."@en ;
+	rdfs:comment
+		"Individuals that are instantiated to test properties have two type indications.  One is the type asserted with rdf:type.  The other is a class indicated in the individual IRI, preceding the UUID portion.  The class indication in the IRI is the class required by the domain or range of the property the individual is demonstrating.  The reason the rdf:type assertion may differ is that a domain or range may only tie to a class that is defined as a disjoint union, i.e., it indicates exactly one of its direct subclasses would be expected to also be asserted.  These test cases enforce the selection by using sh:xone to review occurrences of owl:disjointUnionOf.  Selections, where made, are merely one option and not necessarily fully enumerated across all of the available options."@en ,
+		"This knowledge base instantiates each of the shape-reviewed classes and properties, so SHACL shapes can be exercised for the reviewed ontology."@en
+		;
 	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
 	.
 
