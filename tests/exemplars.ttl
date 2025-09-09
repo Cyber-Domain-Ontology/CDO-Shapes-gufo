@@ -296,6 +296,13 @@ kb:Object-fcfdcab7-ca11-46d1-bea1-231a3d76b1b4
 	gufo:participatedIn kb:Event-26cf76ef-1d05-4706-a1fb-15b05592cb20 ;
 	.
 
+kb:PhaseMixin-03d49c52-6093-4261-94c6-8d360b5031a8
+	a
+		gufo:PhaseMixin ,
+		owl:Class
+		;
+	.
+
 kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
 	a
 		gufo:Kind ,
