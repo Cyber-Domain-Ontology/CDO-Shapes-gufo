@@ -150,6 +150,10 @@ kb:ExtrinsicMode-01964f52-6337-4703-80d2-5903d7635901
 	gufo:externallyDependsOn kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af ;
 	.
 
+kb:FunctionalComplex-2fbb1138-4210-4d33-99fa-1ca10cdbab0e
+	a gufo:FunctionalComplex ;
+	.
+
 kb:Instant-2dce59b8-5539-4ed6-abf3-e0fcc3483b69
 	a time:Instant ;
 	.
@@ -170,6 +174,11 @@ kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308
 		gufo:Phase ,
 		owl:Class
 		;
+	.
+
+kb:Object-17709d22-ba11-415c-b1e8-304967bc4f93
+	a gufo:Object ;
+	gufo:isComponentOf kb:FunctionalComplex-2fbb1138-4210-4d33-99fa-1ca10cdbab0e ;
 	.
 
 kb:Object-6497e6f6-1e15-407b-a030-777e79fe1c61
