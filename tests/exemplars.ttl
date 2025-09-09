@@ -151,6 +151,10 @@ kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65
 		;
 	.
 
+kb:Event-1adfd366-767b-408b-a78e-1bc914fe926c
+	a gufo:Event ;
+	.
+
 kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 	a gufo:Event ;
 	gufo:broughtAbout kb:Situation-7405a4b4-022f-4189-aa77-2152d2ddeadb ;
@@ -158,6 +162,11 @@ kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 
 kb:Event-9efcc624-51c3-48db-a1c2-a1da083e9724
 	a gufo:Event ;
+	.
+
+kb:Event-daaf8c17-6c64-4bab-b8e5-faa5760e17fc
+	a gufo:Event ;
+	gufo:isEventProperPartOf kb:Event-1adfd366-767b-408b-a78e-1bc914fe926c ;
 	.
 
 kb:ExtrinsicMode-01964f52-6337-4703-80d2-5903d7635901
