@@ -5,6 +5,14 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+kb:Category-e730b272-5ee3-4a2d-aba5-5a6f440ac657
+	a
+		gufo:Category ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:Object ;
+	.
+
 kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663
 	a
 		gufo:EndurantType ,
@@ -43,6 +51,24 @@ kb:Kind-93c29c13-6535-4242-b375-3cdf6a154c43
 		;
 	rdfs:subClassOf kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd ;
 	rdfs:comment "This is expected to trigger a validation error for being an indirect subclass of another Kind."@en ;
+	.
+
+kb:Object-4ca9e2f9-1203-49dc-aa1b-994d2470a2f6
+	a kb:Category-e730b272-5ee3-4a2d-aba5-5a6f440ac657 ;
+	rdfs:comment "This is expected to trigger a validation error for not instantiating a gufo:Kind."@en ;
+	.
+
+kb:Object-ddf2b627-ba97-4728-91c7-5d26e77b2c3e
+	a kb:SubKind-2dd9577a-0e2a-45f2-a023-c959cd6148cd ;
+	rdfs:comment "This is expected to trigger a validation error for not instantiating a gufo:Kind."@en ;
+	.
+
+kb:SubKind-2dd9577a-0e2a-45f2-a023-c959cd6148cd
+	a
+		gufo:SubKind ,
+		owl:Class
+		;
+	rdfs:subClassOf kb:Category-e730b272-5ee3-4a2d-aba5-5a6f440ac657 ;
 	.
 
 kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd

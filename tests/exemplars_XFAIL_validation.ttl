@@ -46,6 +46,34 @@
 			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
 			sh:sourceShape sh-gufo:Kind-shape ;
 			sh:value <http://example.org/kb/Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Object-4ca9e2f9-1203-49dc-aa1b-994d2470a2f6> ;
+			sh:resultMessage "Every gufo:Endurant must instantiate at least one gufo:Kind."@en ;
+			sh:resultPath (
+				rdf:type
+				[
+					sh:zeroOrMorePath rdfs:subClassOf ;
+				]
+			) ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:QualifiedMinCountConstraintComponent ;
+			sh:sourceShape sh-gufo:Endurant-Kind-shape ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Object-ddf2b627-ba97-4728-91c7-5d26e77b2c3e> ;
+			sh:resultMessage "Every gufo:Endurant must instantiate at least one gufo:Kind."@en ;
+			sh:resultPath (
+				rdf:type
+				[
+					sh:zeroOrMorePath rdfs:subClassOf ;
+				]
+			) ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:QualifiedMinCountConstraintComponent ;
+			sh:sourceShape sh-gufo:Endurant-Kind-shape ;
 		]
 		;
 	.

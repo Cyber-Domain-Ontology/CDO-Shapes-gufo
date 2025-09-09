@@ -197,6 +197,38 @@ WHERE {
     }
 
 
+def test_exemplar_xfail_validation_endurant_instantiates_kind() -> None:
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+
+    ns_kb = Namespace("http://example.org/kb/")
+
+    expected: Set[URIRef] = {
+        ns_kb["Object-4ca9e2f9-1203-49dc-aa1b-994d2470a2f6"],
+        ns_kb["Object-ddf2b627-ba97-4728-91c7-5d26e77b2c3e"],
+    }
+    computed: Set[URIRef] = set()
+    for result in validation_graph.query(
+        """\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nEndurant
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:Endurant-Kind-shape ;
+    sh:focusNode ?nEndurant ;
+    .
+}
+"""
+    ):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        computed.add(result[0])
+
+    assert expected == computed
+
+
 def test_exemplar_xfail_validation_kind_subclassof_kind() -> None:
     validation_graph = Graph()
     validation_graph.parse("exemplars_XFAIL_validation.ttl")
