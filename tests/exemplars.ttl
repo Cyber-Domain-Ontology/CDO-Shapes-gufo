@@ -18,6 +18,13 @@
 	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
 	.
 
+kb:AbstractIndividualType-73fdd434-b356-4b08-8ad6-e112a8727e61
+	a
+		gufo:AbstractIndividualType ,
+		owl:Class
+		;
+	.
+
 kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 	a
 		owl:ObjectProperty ,
@@ -53,6 +60,14 @@ kb:Endurant-4053ed7d-05c9-44ce-869f-2745d84a40ce
 
 kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b
 	a gufo:Object ;
+	.
+
+kb:EndurantType-1e1f2313-7cbb-47ae-bdd0-bc4a4a5a654e
+	a
+		gufo:Category ,
+		owl:Class
+		;
+	gufo:hasAssociatedQualityValueType kb:AbstractIndividualType-73fdd434-b356-4b08-8ad6-e112a8727e61 ;
 	.
 
 kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
