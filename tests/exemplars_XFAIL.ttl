@@ -3,6 +3,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh-gufo: <http://example.org/shapes/sh-gufo/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663
@@ -11,6 +12,15 @@ kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663
 		owl:Class
 		;
 	rdfs:comment "This is expected to trigger a validation error for not satisfying the disjoint-union, exactly-one clauses in EndurantType review."@en ;
+	.
+
+kb:Individual-fd03b81f-9218-4f9e-9557-540452ff662a
+	a
+		kb:Type-652360a4-d15c-4eb7-8d06-8b037a25e133 ,
+		kb:Type-9759ebdc-ccaa-46f9-a947-a3489b36775e
+		;
+	rdfs:comment "This is expected to trigger a validation error for being a member of two classes that are instances of a partitioning power-class."@en ;
+	rdfs:seeAlso sh-gufo:partitions-subjects-constraint ;
 	.
 
 kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535
@@ -51,5 +61,56 @@ kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd
 		owl:Class
 		;
 	rdfs:subClassOf kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7 ;
+	.
+
+kb:Type-652360a4-d15c-4eb7-8d06-8b037a25e133
+	a
+		kb:Type-c85c8494-eb03-4834-bb04-4272866c5d8d ,
+		owl:Class
+		;
+	rdfs:subClassOf kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d ;
+	rdfs:label "Lion (gUFO documentation example)"@en ;
+	rdfs:seeAlso
+		sh-gufo:partitions-subjects-constraint ,
+		<https://nemo-ufes.github.io/gufo/#highordertypes>
+		;
+	.
+
+kb:Type-9759ebdc-ccaa-46f9-a947-a3489b36775e
+	a
+		kb:Type-c85c8494-eb03-4834-bb04-4272866c5d8d ,
+		owl:Class
+		;
+	rdfs:subClassOf kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d ;
+	rdfs:label "Hyena (gUFO documentation example)"@en ;
+	rdfs:seeAlso
+		sh-gufo:partitions-subjects-constraint ,
+		<https://nemo-ufes.github.io/gufo/#highordertypes>
+		;
+	.
+
+kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d
+	a
+		gufo:Type ,
+		owl:Class
+		;
+	rdfs:label "Animal (gUFO documentation example)"@en ;
+	rdfs:seeAlso
+		sh-gufo:partitions-subjects-constraint ,
+		<https://nemo-ufes.github.io/gufo/#highordertypes>
+		;
+	.
+
+kb:Type-c85c8494-eb03-4834-bb04-4272866c5d8d
+	a
+		gufo:Type ,
+		owl:Class
+		;
+	rdfs:label "Animal Species (gUFO documentation example)"@en ;
+	gufo:partitions kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d0 ;
+	rdfs:seeAlso
+		sh-gufo:partitions-subjects-constraint ,
+		<https://nemo-ufes.github.io/gufo/#highordertypes>
+		;
 	.
 

@@ -1503,6 +1503,32 @@ sh-gufo:partitions-objects-shape
 	sh:targetObjectsOf gufo:partitions ;
 	.
 
+sh-gufo:partitions-subjects-constraint
+	a sh:SPARQLConstraint ;
+	sh:message "Focus node is a higher-order class whose instances partition some class into disjoint classes; but, an individual was found that is an instance of multiple instances of the higher-order class.  The individual is {?nIndividual}, member of {?nTypeInstance1} and {?nTypeInstance2}."@en ;
+	sh:select """
+PREFIX gufo: <http://purl.org/nemo/gufo#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT $this ?nTypeInstance1 ?nTypeInstance2 ?nIndividual
+WHERE {
+	?nTypeInstance1
+		a $this ;
+		.
+	?nTypeInstance2
+		a $this ;
+		.
+	?nIndividual
+		a
+			?nTypeInstance1 ,
+			?nTypeInstance2
+			;
+		.
+	# Use STR and < to remove results from redundant bindings.
+	FILTER ( STR(?nTypeInstance1) < STR(?nTypeInstance2) )
+}
+""" ;
+	.
+
 sh-gufo:partitions-subjects-shape
 	a sh:NodeShape ;
 	sh:and (
@@ -1522,6 +1548,7 @@ sh-gufo:partitions-subjects-shape
 		]
 	) ;
 	sh:class gufo:Type ;
+	sh:sparql sh-gufo:partitions-subjects-constraint ;
 	sh:targetSubjectsOf gufo:partitions ;
 	.
 
