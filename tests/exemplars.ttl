@@ -39,6 +39,10 @@ kb:Aspect-c6c0dc61-2ced-498d-821c-443761c87de0
 	gufo:inheresIn kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f ;
 	.
 
+kb:Collection-e710b93d-b229-43c6-8522-c608d3462d2f
+	a gufo:FixedCollection ;
+	.
+
 kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 	a
 		owl:ObjectProperty ,
@@ -166,6 +170,11 @@ kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308
 		gufo:Phase ,
 		owl:Class
 		;
+	.
+
+kb:Object-6497e6f6-1e15-407b-a030-777e79fe1c61
+	a gufo:Object ;
+	gufo:isCollectionMemberOf kb:Collection-e710b93d-b229-43c6-8522-c608d3462d2f ;
 	.
 
 kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
