@@ -142,6 +142,11 @@ kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af
 	a gufo:Object ;
 	.
 
+kb:Endurant-30842dd2-146e-4720-81eb-ff8f655058a5
+	a gufo:Object ;
+	gufo:standsInQualifiedAttribution kb:QualityValueAttributionSituation-71781915-ac36-4264-83f4-3a89df7de700 ;
+	.
+
 kb:Endurant-4053ed7d-05c9-44ce-869f-2745d84a40ce
 	a gufo:Object ;
 	.
@@ -269,6 +274,10 @@ kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8
 kb:QualityValueAttributionSituation-20fec4d2-6e44-49ed-94aa-799845277a8c
 	a gufo:QualityValueAttributionSituation ;
 	gufo:concernsQualityValue "" ;
+	.
+
+kb:QualityValueAttributionSituation-71781915-ac36-4264-83f4-3a89df7de700
+	a gufo:QualityValueAttributionSituation ;
 	.
 
 kb:QualityValueAttributionSituation-87d3fdff-f584-43f9-9339-974d46cc3187
