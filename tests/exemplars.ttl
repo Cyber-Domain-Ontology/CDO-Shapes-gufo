@@ -69,6 +69,11 @@ kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
 	rdfs:subClassOf gufo:Quality ;
 	.
 
+kb:QualityValueAttributionSituation-20fec4d2-6e44-49ed-94aa-799845277a8c
+	a gufo:QualityValueAttributionSituation ;
+	gufo:concernsQualityValue "" ;
+	.
+
 kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
 	a gufo:QualityValueAttributionSituation ;
 	gufo:concernsQualityType kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551 ;
