@@ -1380,6 +1380,22 @@ sh-gufo:isDerivedFrom-objects-shape
 	sh:targetObjectsOf gufo:isDerivedFrom ;
 	.
 
+sh-gufo:isDerivedFrom-subjects-shape
+	a sh:NodeShape ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:ComparativeRelationshipType ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:MaterialRelationshipType ;
+		]
+	) ;
+	sh:targetSubjectsOf gufo:isDerivedFrom ;
+	.
+
 sh-gufo:isEventProperPartOf-objects-shape
 	a sh:NodeShape ;
 	sh:class gufo:Event ;

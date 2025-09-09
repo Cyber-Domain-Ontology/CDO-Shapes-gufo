@@ -22,9 +22,24 @@ kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 		;
 	.
 
+kb:ComparativeRelationshipType-e8a29bec-3a1c-4d1d-ae2b-10545a631d8f
+	a
+		owl:ObjectProperty ,
+		gufo:ComparativeRelationshipType
+		;
+	gufo:isDerivedFrom kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65 ;
+	.
+
 kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
 	a gufo:Event ;
 	gufo:hasBeginPoint kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c ;
+	.
+
+kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65
+	a
+		gufo:Category ,
+		owl:Class
+		;
 	.
 
 kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
