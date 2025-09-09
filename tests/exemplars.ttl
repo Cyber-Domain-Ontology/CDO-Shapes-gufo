@@ -42,6 +42,11 @@ kb:ConcreteIndividual-460d44e6-d2b5-4701-af75-f32f62bff341
 	gufo:hasEndPointInXSDDateTimeStamp "2020-01-02T03:04:56Z"^^xsd:dateTimeStamp ;
 	.
 
+kb:ConcreteIndividual-4bf64e40-b037-4d50-9074-677e37e53091
+	a gufo:Object ;
+	gufo:hasReifiedQualityValue kb:QualityValue-10d2fa1c-8fe6-4e0a-a59f-b6c4b33918ce ;
+	.
+
 kb:ConcreteIndividual-4d7e602c-15a2-47ce-aef7-6a3e345fa1f0
 	a gufo:Event ;
 	gufo:hasQualityValue "" ;
@@ -146,6 +151,10 @@ kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
 		owl:Class
 		;
 	rdfs:subClassOf gufo:Quality ;
+	.
+
+kb:QualityValue-10d2fa1c-8fe6-4e0a-a59f-b6c4b33918ce
+	a gufo:QualityValue ;
 	.
 
 kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8
