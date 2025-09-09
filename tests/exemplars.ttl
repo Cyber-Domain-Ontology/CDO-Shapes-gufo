@@ -43,6 +43,10 @@ kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28
 	a gufo:Object ;
 	.
 
+kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af
+	a gufo:Object ;
+	.
+
 kb:Endurant-4053ed7d-05c9-44ce-869f-2745d84a40ce
 	a gufo:Object ;
 	.
@@ -58,6 +62,11 @@ kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 
 kb:Event-9efcc624-51c3-48db-a1c2-a1da083e9724
 	a gufo:Event ;
+	.
+
+kb:ExtrinsicMode-01964f52-6337-4703-80d2-5903d7635901
+	a gufo:ExtrinsicMode ;
+	gufo:externallyDependsOn kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af ;
 	.
 
 kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
