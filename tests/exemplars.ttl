@@ -39,6 +39,15 @@ kb:Aspect-c6c0dc61-2ced-498d-821c-443761c87de0
 	gufo:inheresIn kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f ;
 	.
 
+kb:Collection-3717f8c6-f7d0-4ec6-bc9c-50fa8c129a55
+	a gufo:FixedCollection ;
+	gufo:isSubCollectionOf kb:Collection-58e31ee2-488a-4d2d-b808-fbf8f8093988 ;
+	.
+
+kb:Collection-58e31ee2-488a-4d2d-b808-fbf8f8093988
+	a gufo:FixedCollection ;
+	.
+
 kb:Collection-e710b93d-b229-43c6-8522-c608d3462d2f
 	a gufo:FixedCollection ;
 	.
