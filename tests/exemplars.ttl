@@ -42,6 +42,11 @@ kb:ConcreteIndividual-52a8f394-74d0-4f3b-b26e-202fdb8bbba9
 	gufo:hasBeginPointInXSDDateTimeStamp "2020-01-02T03:04:56Z"^^xsd:dateTimeStamp ;
 	.
 
+kb:ConcreteIndividual-53666515-6220-4cfc-ab4a-920847cd7c3d
+	a gufo:Object ;
+	gufo:hasEndPoint kb:Instant-2dce59b8-5539-4ed6-abf3-e0fcc3483b69 ;
+	.
+
 kb:ConcreteIndividual-e35fa5a9-538d-4e23-b944-e2d6a6a1d2d0
 	a gufo:Event ;
 	gufo:constitutes kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119 ;
@@ -92,6 +97,10 @@ kb:Event-9efcc624-51c3-48db-a1c2-a1da083e9724
 kb:ExtrinsicMode-01964f52-6337-4703-80d2-5903d7635901
 	a gufo:ExtrinsicMode ;
 	gufo:externallyDependsOn kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af ;
+	.
+
+kb:Instant-2dce59b8-5539-4ed6-abf3-e0fcc3483b69
+	a time:Instant ;
 	.
 
 kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
