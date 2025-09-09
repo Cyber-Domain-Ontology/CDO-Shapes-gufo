@@ -34,6 +34,11 @@ kb:Aspect-1ccbc309-4595-4d75-9e13-f399bf3172a4
 	gufo:isAspectProperPartOf kb:Aspect-1635039c-e6ed-4c79-9f79-301b087b96b3 ;
 	.
 
+kb:Aspect-bc59cd69-923b-47f8-b078-4e18af5b7f18
+	a gufo:ExtrinsicMode ;
+	gufo:manifestedIn kb:Event-c159d623-d76f-4705-b75e-7b0281e679dc ;
+	.
+
 kb:Aspect-c6c0dc61-2ced-498d-821c-443761c87de0
 	a gufo:ExtrinsicMode ;
 	gufo:inheresIn kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f ;
@@ -170,6 +175,10 @@ kb:Event-63e2066b-16a2-4d14-85c1-c38def20f6ff
 	.
 
 kb:Event-9efcc624-51c3-48db-a1c2-a1da083e9724
+	a gufo:Event ;
+	.
+
+kb:Event-c159d623-d76f-4705-b75e-7b0281e679dc
 	a gufo:Event ;
 	.
 
