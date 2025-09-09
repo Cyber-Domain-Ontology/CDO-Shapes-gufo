@@ -37,6 +37,11 @@ kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
 	gufo:hasBeginPoint kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c ;
 	.
 
+kb:ConcreteIndividual-460d44e6-d2b5-4701-af75-f32f62bff341
+	a gufo:Event ;
+	gufo:hasEndPointInXSDDateTimeStamp "2020-01-02T03:04:56Z"^^xsd:dateTimeStamp ;
+	.
+
 kb:ConcreteIndividual-52a8f394-74d0-4f3b-b26e-202fdb8bbba9
 	a gufo:Object ;
 	gufo:hasBeginPointInXSDDateTimeStamp "2020-01-02T03:04:56Z"^^xsd:dateTimeStamp ;
