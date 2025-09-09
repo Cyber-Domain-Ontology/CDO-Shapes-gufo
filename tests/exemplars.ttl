@@ -69,9 +69,18 @@ kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
 	rdfs:subClassOf gufo:Quality ;
 	.
 
+kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8
+	a gufo:QualityValue ;
+	.
+
 kb:QualityValueAttributionSituation-20fec4d2-6e44-49ed-94aa-799845277a8c
 	a gufo:QualityValueAttributionSituation ;
 	gufo:concernsQualityValue "" ;
+	.
+
+kb:QualityValueAttributionSituation-87d3fdff-f584-43f9-9339-974d46cc3187
+	a gufo:QualityValueAttributionSituation ;
+	gufo:concernsReifiedQualityValue kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8 ;
 	.
 
 kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
