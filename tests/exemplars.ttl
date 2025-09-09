@@ -62,6 +62,11 @@ kb:ConcreteIndividual-53666515-6220-4cfc-ab4a-920847cd7c3d
 	gufo:hasEndPoint kb:Instant-2dce59b8-5539-4ed6-abf3-e0fcc3483b69 ;
 	.
 
+kb:ConcreteIndividual-76ed2aad-58df-4c50-87d3-6de022f3bf81
+	a gufo:Object ;
+	gufo:historicallyDependsOn kb:ConcreteIndividual-edbd4dce-2bd2-4790-8974-d07ac48625a4 ;
+	.
+
 kb:ConcreteIndividual-a1f49b38-b33d-4c03-a0a4-e11cd321a3aa
 	a gufo:Event ;
 	gufo:hasEndPointInXSDDate "2000-01-01"^^xsd:date ;
@@ -75,6 +80,10 @@ kb:ConcreteIndividual-e35fa5a9-538d-4e23-b944-e2d6a6a1d2d0
 kb:ConcreteIndividual-ea7de1d6-43b3-420d-90bb-55f0b867643b
 	a gufo:Event ;
 	gufo:hasBeginPointInXSDDate "2000-01-01"^^xsd:date ;
+	.
+
+kb:ConcreteIndividual-edbd4dce-2bd2-4790-8974-d07ac48625a4
+	a gufo:Event ;
 	.
 
 kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119
