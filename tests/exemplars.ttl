@@ -157,6 +157,11 @@ kb:QualityValue-10d2fa1c-8fe6-4e0a-a59f-b6c4b33918ce
 	a gufo:QualityValue ;
 	.
 
+kb:QualityValue-23e9898f-e8df-41fd-bd39-d9e824b28369
+	a gufo:QualityValue ;
+	gufo:hasValueComponent "" ;
+	.
+
 kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8
 	a gufo:QualityValue ;
 	.
