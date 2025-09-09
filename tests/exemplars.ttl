@@ -42,6 +42,11 @@ kb:ConcreteIndividual-e35fa5a9-538d-4e23-b944-e2d6a6a1d2d0
 	gufo:constitutes kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119 ;
 	.
 
+kb:ConcreteIndividual-ea7de1d6-43b3-420d-90bb-55f0b867643b
+	a gufo:Event ;
+	gufo:hasBeginPointInXSDDate "2000-01-01"^^xsd:date ;
+	.
+
 kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119
 	a gufo:Object ;
 	.
