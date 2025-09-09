@@ -134,6 +134,11 @@ kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119
 	a gufo:Object ;
 	.
 
+kb:Endurant-01964f52-6337-4703-80d2-5903d7635901
+	a gufo:Object ;
+	gufo:standsInQualifiedRelationship kb:TemporaryRelationshipSituation-29301400-6b45-4176-b570-f52c28cd2789 ;
+	.
+
 kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28
 	a gufo:Object ;
 	.
@@ -369,6 +374,10 @@ kb:TemporaryParthoodSituation-4292a36e-659c-4644-a197-a0e84dfb2394
 
 kb:TemporaryParthoodSituation-bdfd62c0-4188-4cc2-a823-2664b8478fe1
 	a gufo:TemporaryParthoodSituation ;
+	.
+
+kb:TemporaryRelationshipSituation-29301400-6b45-4176-b570-f52c28cd2789
+	a gufo:TemporaryRelationshipSituation ;
 	.
 
 kb:TemporaryRelationshipSituation-2a64c96d-9629-4c29-9d63-e6f69cdbdabd
