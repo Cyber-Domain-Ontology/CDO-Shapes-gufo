@@ -19,6 +19,7 @@ kb:Individual-fd03b81f-9218-4f9e-9557-540452ff662a
 		kb:Type-652360a4-d15c-4eb7-8d06-8b037a25e133 ,
 		kb:Type-9759ebdc-ccaa-46f9-a947-a3489b36775e
 		;
+	rdfs:label "An inconsistently represented animal (extended gUFO documentation example)"@en ;
 	rdfs:comment "This is expected to trigger a validation error for being a member of two classes that are instances of a partitioning power-class."@en ;
 	rdfs:seeAlso sh-gufo:partitions-subjects-constraint ;
 	.
@@ -68,7 +69,7 @@ kb:Type-652360a4-d15c-4eb7-8d06-8b037a25e133
 		kb:Type-c85c8494-eb03-4834-bb04-4272866c5d8d ,
 		owl:Class
 		;
-	rdfs:subClassOf kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d ;
+	rdfs:subClassOf kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d0 ;
 	rdfs:label "Lion (gUFO documentation example)"@en ;
 	rdfs:seeAlso
 		sh-gufo:partitions-subjects-constraint ,
@@ -81,7 +82,7 @@ kb:Type-9759ebdc-ccaa-46f9-a947-a3489b36775e
 		kb:Type-c85c8494-eb03-4834-bb04-4272866c5d8d ,
 		owl:Class
 		;
-	rdfs:subClassOf kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d ;
+	rdfs:subClassOf kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d0 ;
 	rdfs:label "Hyena (gUFO documentation example)"@en ;
 	rdfs:seeAlso
 		sh-gufo:partitions-subjects-constraint ,
@@ -89,7 +90,7 @@ kb:Type-9759ebdc-ccaa-46f9-a947-a3489b36775e
 		;
 	.
 
-kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d
+kb:Type-9d5c9eec-f764-452b-89b9-5b6a52b478d0
 	a
 		gufo:Type ,
 		owl:Class
