@@ -1505,7 +1505,8 @@ sh-gufo:partitions-objects-shape
 
 sh-gufo:partitions-subjects-constraint
 	a sh:SPARQLConstraint ;
-	sh:message "Focus node is a higher-order class whose instances partition some class into disjoint classes; but, an individual was found that is an instance of multiple instances of the higher-order class.  The individual is {?nIndividual}, member of {?nTypeInstance1} and {?nTypeInstance2}."@en ;
+	rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#partitions> ;
+	sh:message "Inconsistency found with the gufo:partitions relationship.  Focus node is a higher-order class whose instances partition some class into disjoint classes; but, an individual was found that is an instance of multiple instances of the higher-order class.  The individual is {?nIndividual}, member of {?nTypeInstance1} and {?nTypeInstance2}.  See https://nemo-ufes.github.io/gufo/#partitions for further description of the partitions relationship."@en ;
 	sh:select """
 PREFIX gufo: <http://purl.org/nemo/gufo#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
