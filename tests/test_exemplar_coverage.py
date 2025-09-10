@@ -234,3 +234,33 @@ WHERE {
             ns_kb["Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7"],
         ),
     }
+
+
+def test_exemplar_xfail_validation_partitions() -> None:
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+
+    ns_kb = Namespace("http://example.org/kb/")
+
+    n_partitioning_classes: Set[URIRef] = set()
+    for result in validation_graph.query(
+        """\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nPartitioningClass
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceConstraint sh-gufo:partitions-subjects-constraint ;
+    sh:focusNode ?nPartitioningClass ;
+    .
+}
+"""
+    ):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_partitioning_classes.add(result[0])
+
+    assert n_partitioning_classes == {
+        ns_kb["Type-c85c8494-eb03-4834-bb04-4272866c5d8d"],
+    }
