@@ -11,6 +11,26 @@
 	sh:result
 		[
 			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/ComparativeRelationshipType-8ba502a7-273d-4f28-a4d6-82177a5defce> ;
+			sh:resultMessage "gufo:ComparativeRelationshipTypes should be derived from gufo:IntrinsicAspect ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:OrConstraintComponent ;
+			sh:sourceShape sh-gufo:isDerivedFrom-ComparativeRelationshipType-subjects-shape ;
+			sh:value <http://example.org/kb/ComparativeRelationshipType-8ba502a7-273d-4f28-a4d6-82177a5defce> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/EndurantType-587ab474-b031-4150-a4de-8c27a5189c8d> ;
+			sh:resultMessage "'The identified gufo:EndurantType should be a subclass of gufo:Aspect' ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+			sh:resultPath [
+				sh:oneOrMorePath rdfs:subClassOf ;
+			] ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:HasValueConstraintComponent ;
+			sh:sourceShape sh-gufo:isDerivedFrom-objects-subClassOf-shape ;
+		] ,
+		[
+			a sh:ValidationResult ;
 			sh:focusNode <http://example.org/kb/EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663> ;
 			sh:resultMessage "Node kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663 must conform to exactly one shape in ([ rdf:type sh:NodeShape ; sh:class gufo:NonRigidType ] , [ rdf:type sh:NodeShape ; sh:class gufo:RigidType ]) and ([ rdf:type sh:NodeShape ; sh:class gufo:NonSortal ] , [ rdf:type sh:NodeShape ; sh:class gufo:Sortal ])" ;
 			sh:resultSeverity sh:Violation ;
@@ -46,6 +66,24 @@
 			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
 			sh:sourceShape sh-gufo:Kind-shape ;
 			sh:value <http://example.org/kb/Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/MaterialRelationshipType-8bd32b0b-1089-48c0-a209-fe39a54a4df5> ;
+			sh:resultMessage "gufo:MaterialRelationshipTypes should be derived from gufo:ExtrinsicAspect ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:OrConstraintComponent ;
+			sh:sourceShape sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+			sh:value <http://example.org/kb/MaterialRelationshipType-8bd32b0b-1089-48c0-a209-fe39a54a4df5> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/RelationshipType-036f96f7-5633-4e2d-b0d0-faf685ea8711> ;
+			sh:resultMessage "Node kb:RelationshipType-036f96f7-5633-4e2d-b0d0-faf685ea8711 must conform to one or more shapes in [ rdf:type sh:NodeShape ; sh:class gufo:ComparativeRelationshipType ] , [ rdf:type sh:NodeShape ; sh:class gufo:MaterialRelationshipType ]" ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:OrConstraintComponent ;
+			sh:sourceShape sh-gufo:isDerivedFrom-subjects-shape ;
+			sh:value <http://example.org/kb/RelationshipType-036f96f7-5633-4e2d-b0d0-faf685ea8711> ;
 		]
 		;
 	.
