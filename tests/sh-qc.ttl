@@ -1,0 +1,56 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sh-qc: <http://example.org/shapes/sh-gufo/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/shapes/sh-qc>
+	a owl:Ontology ;
+	rdfs:comment "This shapes graph serves in cross-checking exemplar graphs and shape graphs.  Exemplars are checked to include a reference-link to any shape or constraint.  Its typical usage is expected to be against a single graph-file combining an exemplars graph and a shapes graph, both scoped to a single vocabulary (e.g., a shapes and example-individuals graph both scoped to FOAF)."@en ;
+	.
+
+sh-qc:ExemplarLinksSHACLReviewer-shape
+	a sh:NodeShape ;
+	sh:message "Focus node should cross-reference some shape or SPARQL constraint for which it is supporting testing, using rdfs:seeAlso."@en ;
+	sh:or (
+		[
+			sh:or (
+				sh-qc:SHACLReviewer-shape
+				[
+					a sh:NodeShape ;
+					sh:class owl:Ontology ;
+				]
+			) ;
+		]
+		[
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path rdfs:seeAlso ;
+				sh:qualifiedMinCount "1"^^xsd:integer ;
+				sh:qualifiedValueShape sh-qc:SHACLReviewer-shape ;
+			] ;
+		]
+	) ;
+	sh:targetSubjectsOf rdf:type ;
+	.
+
+sh-qc:SHACLReviewer-shape
+	a sh:NodeShape ;
+	rdfs:comment "This node shape is written for modularity, and hence has no targets specified."@en ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:class sh:NodeShape ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class sh:PropertyShape ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class sh:SPARQLConstraint ;
+		]
+	) ;
+	.
+
