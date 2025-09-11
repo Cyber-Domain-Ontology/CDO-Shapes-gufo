@@ -49,13 +49,37 @@ all: \
 	    --log-level=DEBUG
 	touch $@
 
+.qc.done.log: \
+  .qc.ttl \
+  sh-qc.ttl
+	source $(top_srcdir)/venv/bin/activate \
+	  && pyshacl \
+	    --shacl sh-qc.ttl \
+	    .qc.ttl
+	touch $@
+
+.qc.ttl: \
+  $(shape_ttls) \
+  exemplars.ttl \
+  exemplars_XFAIL.ttl
+	source $(top_srcdir)/venv/bin/activate \
+	  && rdfpipe \
+	    --output-format turtle \
+	    $(shape_ttls) \
+	    exemplars.ttl \
+	    exemplars_XFAIL.ttl \
+	    > _$@
+	mv _$@ $@
+
 check: \
+  .qc.done.log \
   .pytest.done.log \
   .pyshacl.done.log
 
 clean:
 	@rm -f \
 	  .*.done.log \
+	  .qc.ttl \
 	  exemplars-entailment.ttl \
 	  exemplars-expanded.ttl \
 	  monolithic.ttl

@@ -96,6 +96,8 @@ sh-gufo:Aspect-disjointWith-Object-shape
 
 sh-gufo:Aspect-shape
 	a sh:NodeShape ;
+	rdfs:comment "rdfs:seeAlso links other shapes that review this class."@en ;
+	rdfs:seeAlso sh-gufo:Aspect-disjointWith-Object-shape ;
 	sh:targetClass gufo:Aspect ;
 	sh:xone (
 		[
@@ -574,6 +576,16 @@ sh-gufo:NonSortal-shape
 		"rdfs:seeAlso links other shapes that review this class."@en
 		;
 	rdfs:seeAlso sh-gufo:NonSortal-disjointWith-Sortal-shape ;
+	.
+
+sh-gufo:Object-shape
+	a sh:NodeShape ;
+	rdfs:comment
+		"This shape is a reference placeholder."@en ,
+		"rdfs:seeAlso links other shapes that review this class."@en
+		;
+	rdfs:seeAlso sh-gufo:Aspect-disjointWith-Object-shape ;
+	sh:targetClass gufo:Object ;
 	.
 
 sh-gufo:Phase-disjointWith-Role-shape

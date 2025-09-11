@@ -6,6 +6,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh-gufo: <http://example.org/shapes/sh-gufo/> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -20,15 +21,18 @@ kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 		owl:ObjectProperty ,
 		gufo:ComparativeRelationshipType
 		;
+	rdfs:seeAlso sh-gufo:ComparativeRelationshipType-shape ;
 	.
 
 kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
 	a gufo:Event ;
 	gufo:hasBeginPoint kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c ;
+	rdfs:seeAlso sh-gufo:hasBeginPoint-subjects-shape ;
 	.
 
 kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
 	a time:Instant ;
+	rdfs:seeAlso sh-gufo:hasBeginPoint-objects-shape ;
 	.
 
 kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
@@ -36,10 +40,12 @@ kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
 		owl:ObjectProperty ,
 		gufo:MaterialRelationshipType
 		;
+	rdfs:seeAlso sh-gufo:MaterialRelationshipType-shape ;
 	.
 
 kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
 	a gufo:Object ;
+	rdfs:seeAlso sh-gufo:Object-shape ;
 	.
 
 kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
@@ -48,10 +54,12 @@ kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
 		owl:Class
 		;
 	rdfs:subClassOf gufo:Quality ;
+	rdfs:seeAlso sh-gufo:concernsQualityType-objects-shape ;
 	.
 
 kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
 	a gufo:QualityValueAttributionSituation ;
 	gufo:concernsQualityType kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551 ;
+	rdfs:seeAlso sh-gufo:QualityValueAttributionSituation-shape ;
 	.
 
