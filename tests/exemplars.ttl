@@ -37,7 +37,7 @@ kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
 
 kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65
 	a
-		gufo:Category ,
+		gufo:Kind ,
 		owl:Class
 		;
 	.
