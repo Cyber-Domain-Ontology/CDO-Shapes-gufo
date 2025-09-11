@@ -15,6 +15,7 @@ sh-qc:ExemplarLinksSHACLReviewer-shape
 	sh:message "Focus node should cross-reference some shape or SPARQL constraint for which it is supporting testing, using rdfs:seeAlso."@en ;
 	sh:or (
 		[
+			a sh:NodeShape ;
 			sh:or (
 				sh-qc:SHACLReviewer-shape
 				[
@@ -24,6 +25,7 @@ sh-qc:ExemplarLinksSHACLReviewer-shape
 			) ;
 		]
 		[
+			a sh:NodeShape ;
 			sh:property [
 				a sh:PropertyShape ;
 				sh:path rdfs:seeAlso ;
