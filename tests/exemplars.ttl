@@ -21,6 +21,7 @@ kb:ComparativeRelationship-20cf44b4-026f-4249-a2c3-408642012c0c
 		owl:ObjectProperty ,
 		gufo:ComparativeRelationshipType
 		;
+	rdfs:seeAlso sh-gufo:ComparativeRelationshipType-shape ;
 	.
 
 kb:ComparativeRelationshipType-e8a29bec-3a1c-4d1d-ae2b-10545a631d8f
@@ -38,6 +39,7 @@ kb:ComparativeRelationshipType-e8a29bec-3a1c-4d1d-ae2b-10545a631d8f
 kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
 	a gufo:Event ;
 	gufo:hasBeginPoint kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c ;
+	rdfs:seeAlso sh-gufo:hasBeginPoint-subjects-shape ;
 	.
 
 kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65
@@ -73,6 +75,7 @@ kb:Individual-7f8779da-b496-46d8-8b71-8a44619fc5ee
 
 kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
 	a time:Instant ;
+	rdfs:seeAlso sh-gufo:hasBeginPoint-objects-shape ;
 	.
 
 kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
@@ -80,6 +83,7 @@ kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
 		owl:ObjectProperty ,
 		gufo:MaterialRelationshipType
 		;
+	rdfs:seeAlso sh-gufo:MaterialRelationshipType-shape ;
 	.
 
 kb:MaterialRelationshipType-2133b940-8a06-4856-bf46-684592243af4
@@ -96,6 +100,7 @@ kb:MaterialRelationshipType-2133b940-8a06-4856-bf46-684592243af4
 
 kb:Object-cd1aeb20-f037-476e-a2ae-45be3c79c64d
 	a gufo:Object ;
+	rdfs:seeAlso sh-gufo:Object-shape ;
 	.
 
 kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
@@ -104,11 +109,13 @@ kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
 		owl:Class
 		;
 	rdfs:subClassOf gufo:Quality ;
+	rdfs:seeAlso sh-gufo:concernsQualityType-objects-shape ;
 	.
 
 kb:QualityValueAttributionSituation-d760ff9f-8b16-4628-9236-fbe77b372e27
 	a gufo:QualityValueAttributionSituation ;
 	gufo:concernsQualityType kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551 ;
+	rdfs:seeAlso sh-gufo:QualityValueAttributionSituation-shape ;
 	.
 
 kb:Type-15690ddc-002a-48e6-8e2f-e0fafaf5bb3a
