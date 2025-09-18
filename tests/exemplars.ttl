@@ -117,12 +117,17 @@ kb:Type-15690ddc-002a-48e6-8e2f-e0fafaf5bb3a
 		owl:Class
 		;
 	gufo:partitions kb:Type-41a60dc5-2768-4706-b52d-d4cc78e4800f ;
+	rdfs:seeAlso sh-gufo:partitions-subjects-shape ;
 	.
 
 kb:Type-41a60dc5-2768-4706-b52d-d4cc78e4800f
 	a
 		gufo:Type ,
 		owl:Class
+		;
+	rdfs:seeAlso
+		sh-gufo:partitions-objects-shape ,
+		sh-gufo:partitions-subjects-constraint
 		;
 	.
 
