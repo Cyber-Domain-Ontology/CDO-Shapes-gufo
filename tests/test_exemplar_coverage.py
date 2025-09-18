@@ -232,3 +232,60 @@ WHERE {
             ns_kb["Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7"],
         ),
     }
+
+
+def test_exemplar_xfail_validation_derived_from() -> None:
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+
+    ns_kb = Namespace("http://example.org/kb/")
+    ns_sh_gufo = Namespace("http://example.org/shapes/sh-gufo/")
+
+    expected = {
+        (
+            ns_sh_gufo["isDerivedFrom-MaterialRelationshipType-subjects-shape"],
+            ns_kb["MaterialRelationshipType-8bd32b0b-1089-48c0-a209-fe39a54a4df5"],
+        ),
+        (
+            ns_sh_gufo["isDerivedFrom-ComparativeRelationshipType-subjects-shape"],
+            ns_kb["ComparativeRelationshipType-8ba502a7-273d-4f28-a4d6-82177a5defce"],
+        ),
+        (
+            ns_sh_gufo["isDerivedFrom-objects-subClassOf-shape"],
+            ns_kb["EndurantType-587ab474-b031-4150-a4de-8c27a5189c8d"],
+        ),
+        (
+            ns_sh_gufo["isDerivedFrom-subjects-shape"],
+            ns_kb["RelationshipType-036f96f7-5633-4e2d-b0d0-faf685ea8711"],
+        ),
+    }
+    computed: Set[Tuple[URIRef, URIRef]] = set()
+    for result in validation_graph.query(
+        """\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSourceShape ?nFocusNode
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape ?nSourceShape ;
+    sh:focusNode ?nFocusNode ;
+    .
+}
+"""
+    ):
+        assert isinstance(result, ResultRow)
+        if not isinstance(result[0], URIRef):
+            continue
+        if not result[0] in {
+            ns_sh_gufo["isDerivedFrom-ComparativeRelationshipType-subjects-shape"],
+            ns_sh_gufo["isDerivedFrom-MaterialRelationshipType-subjects-shape"],
+            ns_sh_gufo["isDerivedFrom-objects-shape"],
+            ns_sh_gufo["isDerivedFrom-objects-subClassOf-shape"],
+            ns_sh_gufo["isDerivedFrom-subjects-shape"],
+        }:
+            continue
+        assert isinstance(result[1], URIRef)
+        computed.add((result[0], result[1]))
+
+    assert expected <= computed

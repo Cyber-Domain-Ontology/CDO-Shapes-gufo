@@ -6,6 +6,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh-gufo: <http://example.org/shapes/sh-gufo/> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -74,6 +75,10 @@ kb:ComparativeRelationshipType-e8a29bec-3a1c-4d1d-ae2b-10545a631d8f
 
 kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f
 	a gufo:Object ;
+	rdfs:seeAlso
+		sh-gufo:isDerivedFrom-ComparativeRelationshipType-subjects-shape ,
+		sh-gufo:isDerivedFrom-subjects-shape
+		;
 	.
 
 kb:ConcreteIndividual-44ed202f-162e-44a6-ac48-c4e6bbbaa0ab
@@ -199,8 +204,22 @@ kb:EndurantType-1e1f2313-7cbb-47ae-bdd0-bc4a4a5a654e
 
 kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65
 	a
-		gufo:Category ,
+		gufo:Kind ,
 		owl:Class
+		;
+	rdfs:subClassOf gufo:Quality ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-ComparativeRelationshipType-subjects-shape ;
+	.
+
+kb:EndurantType-959b6cff-b5a4-4168-be1f-d66d0c8033d6
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:Relator ;
+	rdfs:seeAlso
+		sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ,
+		sh-gufo:isDerivedFrom-objects-shape
 		;
 	.
 
@@ -255,6 +274,16 @@ kb:FunctionalComplex-2fbb1138-4210-4d33-99fa-1ca10cdbab0e
 	a gufo:FunctionalComplex ;
 	.
 
+kb:Individual-52f7eec8-c6a6-40dc-805f-ce5b593401ca
+	a kb:EndurantType-959b6cff-b5a4-4168-be1f-d66d0c8033d6 ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+	.
+
+kb:Individual-7f8779da-b496-46d8-8b71-8a44619fc5ee
+	a kb:EndurantType-20337de1-bb9e-4f06-b3f5-25df52ee6c65 ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-ComparativeRelationshipType-subjects-shape ;
+	.
+
 kb:Instant-2dce59b8-5539-4ed6-abf3-e0fcc3483b69
 	a time:Instant ;
 	.
@@ -267,6 +296,18 @@ kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
 	a
 		owl:ObjectProperty ,
 		gufo:MaterialRelationshipType
+		;
+	.
+
+kb:MaterialRelationshipType-2133b940-8a06-4856-bf46-684592243af4
+	a
+		owl:ObjectProperty ,
+		gufo:MaterialRelationshipType
+		;
+	gufo:isDerivedFrom kb:EndurantType-959b6cff-b5a4-4168-be1f-d66d0c8033d6 ;
+	rdfs:seeAlso
+		sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ,
+		sh-gufo:isDerivedFrom-subjects-shape
 		;
 	.
 
