@@ -1373,11 +1373,99 @@ sh-gufo:isComponentOf-subjects-shape
 	sh:targetSubjectsOf gufo:isComponentOf ;
 	.
 
+sh-gufo:isDerivedFrom-ComparativeRelationshipType-subjects-shape
+	a sh:NodeShape ;
+	rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#isDerivedFrom> ;
+	sh:message "gufo:ComparativeRelationshipTypes should be derived from gufo:IntrinsicAspect ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:not [
+				sh:class gufo:ComparativeRelationshipType ;
+			] ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path gufo:isDerivedFrom ;
+				sh:property [
+					a sh:PropertyShape ;
+					sh:hasValue gufo:IntrinsicAspect ;
+					sh:path [
+						sh:oneOrMorePath rdfs:subClassOf ;
+					] ;
+				] ;
+			] ;
+		]
+	) ;
+	sh:targetSubjectsOf gufo:isDerivedFrom ;
+	.
+
+sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape
+	a sh:NodeShape ;
+	rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#isDerivedFrom> ;
+	sh:message "gufo:MaterialRelationshipTypes should be derived from gufo:ExtrinsicAspect ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:not [
+				a sh:NodeShape ;
+				sh:class gufo:MaterialRelationshipType ;
+			] ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path gufo:isDerivedFrom ;
+				sh:property [
+					a sh:PropertyShape ;
+					sh:hasValue gufo:ExtrinsicAspect ;
+					sh:path [
+						sh:oneOrMorePath rdfs:subClassOf ;
+					] ;
+				] ;
+			] ;
+		]
+	) ;
+	sh:targetSubjectsOf gufo:isDerivedFrom ;
+	.
+
 sh-gufo:isDerivedFrom-objects-shape
 	a sh:NodeShape ;
+	rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#isDerivedFrom> ;
 	sh:class gufo:EndurantType ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:property sh-gufo:isDerivedFrom-objects-subClassOf-shape ;
 	sh:targetObjectsOf gufo:isDerivedFrom ;
+	.
+
+sh-gufo:isDerivedFrom-objects-subClassOf-shape
+	a sh:PropertyShape ;
+	rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#isDerivedFrom> ;
+	sh:hasValue gufo:Aspect ;
+	sh:message "'The identified gufo:EndurantType should be a subclass of gufo:Aspect' ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+	sh:path [
+		sh:oneOrMorePath rdfs:subClassOf ;
+	] ;
+	.
+
+sh-gufo:isDerivedFrom-subjects-shape
+	a sh:NodeShape ;
+	rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#isDerivedFrom> ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:or (
+		[
+			a sh:NodeShape ;
+			sh:class gufo:ComparativeRelationshipType ;
+		]
+		[
+			a sh:NodeShape ;
+			sh:class gufo:MaterialRelationshipType ;
+		]
+	) ;
+	sh:targetSubjectsOf gufo:isDerivedFrom ;
 	.
 
 sh-gufo:isEventProperPartOf-objects-shape

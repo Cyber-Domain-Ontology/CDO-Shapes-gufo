@@ -6,6 +6,47 @@
 @prefix sh-gufo: <http://example.org/shapes/sh-gufo/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+kb:ComparativeRelationshipType-8ba502a7-273d-4f28-a4d6-82177a5defce
+	a
+		owl:ObjectProperty ,
+		gufo:ComparativeRelationshipType
+		;
+	rdfs:comment "This node will generate an error from deriving from a subclass of gufo:ExtrinsicAspect instead of a gufo:IntrinsicAspect."@en ;
+	gufo:isDerivedFrom kb:EndurantType-a9a2dae8-125c-476c-ab5c-481999c9c2f7 ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+	.
+
+kb:EndurantType-587ab474-b031-4150-a4de-8c27a5189c8d
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:Object ;
+	rdfs:comment "This node will generate an error from being the object of a gufo:isDerivedFrom statement, but not being a class that eventually subclasses gufo:Aspect."@en ;
+	rdfs:seeAlso
+		sh-gufo:isDerivedFrom-objects-shape ,
+		sh-gufo:isDerivedFrom-objects-subClassOf-shape
+		;
+	.
+
+kb:EndurantType-92aaa89d-cb71-44d7-8ed8-db830ce58a64
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:IntrinsicAspect ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+	.
+
+kb:EndurantType-a9a2dae8-125c-476c-ab5c-481999c9c2f7
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:subClassOf gufo:ExtrinsicAspect ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+	.
+
 kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663
 	a
 		gufo:EndurantType ,
@@ -54,6 +95,26 @@ kb:Kind-93c29c13-6535-4242-b375-3cdf6a154c43
 		;
 	rdfs:subClassOf kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd ;
 	rdfs:comment "This is expected to trigger a validation error for being an indirect subclass of another Kind."@en ;
+	.
+
+kb:MaterialRelationshipType-8bd32b0b-1089-48c0-a209-fe39a54a4df5
+	a
+		owl:ObjectProperty ,
+		gufo:MaterialRelationshipType
+		;
+	rdfs:comment "This node will generate an error from deriving from a subclass of gufo:IntrinsicAspect instead of gufo:ExtrinsicAspect."@en ;
+	gufo:isDerivedFrom kb:EndurantType-92aaa89d-cb71-44d7-8ed8-db830ce58a64 ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+	.
+
+kb:RelationshipType-036f96f7-5633-4e2d-b0d0-faf685ea8711
+	a
+		owl:ObjectProperty ,
+		gufo:RelationshipType
+		;
+	rdfs:comment "This node will generate an error from being used on an insufficiently specific RelationshipType."@en ;
+	gufo:isDerivedFrom kb:EndurantType-587ab474-b031-4150-a4de-8c27a5189c8d ;
+	rdfs:seeAlso sh-gufo:isDerivedFrom-subjects-shape ;
 	.
 
 kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd
