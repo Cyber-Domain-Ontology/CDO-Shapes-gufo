@@ -53,6 +53,7 @@ kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663
 		owl:Class
 		;
 	rdfs:comment "This is expected to trigger a validation error for not satisfying the disjoint-union, exactly-one clauses in EndurantType review."@en ;
+	rdfs:seeAlso sh-gufo:EndurantType-shape ;
 	.
 
 kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535
@@ -60,6 +61,7 @@ kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535
 		gufo:Kind ,
 		owl:Class
 		;
+	rdfs:seeAlso sh-gufo:Kind-subclassOf-Kind-constraint ;
 	.
 
 kb:Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b
@@ -69,6 +71,7 @@ kb:Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b
 		;
 	rdfs:subClassOf kb:Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535 ;
 	rdfs:comment "This is expected to trigger a validation error for being a direct subclass of another Kind."@en ;
+	rdfs:seeAlso sh-gufo:Kind-subclassOf-Kind-constraint ;
 	.
 
 kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7
@@ -76,6 +79,7 @@ kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7
 		gufo:Kind ,
 		owl:Class
 		;
+	rdfs:seeAlso sh-gufo:Kind-subclassOf-Kind-constraint ;
 	.
 
 kb:Kind-93c29c13-6535-4242-b375-3cdf6a154c43
@@ -85,6 +89,7 @@ kb:Kind-93c29c13-6535-4242-b375-3cdf6a154c43
 		;
 	rdfs:subClassOf kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd ;
 	rdfs:comment "This is expected to trigger a validation error for being an indirect subclass of another Kind."@en ;
+	rdfs:seeAlso sh-gufo:Kind-subclassOf-Kind-constraint ;
 	.
 
 kb:MaterialRelationshipType-8bd32b0b-1089-48c0-a209-fe39a54a4df5
@@ -113,5 +118,6 @@ kb:SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd
 		owl:Class
 		;
 	rdfs:subClassOf kb:Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7 ;
+	rdfs:seeAlso sh-gufo:Kind-subclassOf-Kind-constraint ;
 	.
 
