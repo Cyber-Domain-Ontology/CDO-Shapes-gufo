@@ -76,11 +76,17 @@ def test_exemplar_coverage() -> None:
     result: Optional[bool]
 
     for n_sh_predicate_with_predicate_object in {
+        NS_SH.disjoint,
+        NS_SH.equals,
         NS_SH.inversePath,
+        NS_SH.lessThan,
+        NS_SH.lessThanOrEquals,
+        NS_SH.oneOrMorePath,
         NS_SH.path,
         NS_SH.targetObjectsOf,
         NS_SH.targetSubjectsOf,
         NS_SH.zeroOrMorePath,
+        NS_SH.zeroOrOnePath,
     }:
         for n_object in shapes_graph.objects(
             None, n_sh_predicate_with_predicate_object
