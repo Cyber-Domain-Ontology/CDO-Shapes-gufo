@@ -76,6 +76,10 @@ def test_exemplar_coverage() -> None:
     result: Optional[bool]
 
     for n_sh_predicate_with_predicate_object in {
+        NS_SH.disjoint,
+        NS_SH.equals,
+        NS_SH.lessThan,
+        NS_SH.lessThanOrEquals,
         NS_SH.targetObjectsOf,
         NS_SH.targetSubjectsOf,
     }:
