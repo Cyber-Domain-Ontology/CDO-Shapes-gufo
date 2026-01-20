@@ -165,8 +165,7 @@ def test_exemplar_xfail_validation_enduranttype() -> None:
     ns_kb = Namespace("http://example.org/kb/")
 
     n_focus_nodes: Set[URIRef] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nEndurantType
@@ -177,8 +176,7 @@ WHERE {
     sh:focusNode ?nEndurantType ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         assert isinstance(result[0], URIRef)
         n_focus_nodes.add(result[0])
@@ -195,8 +193,7 @@ def test_exemplar_xfail_validation_kind_subclassof_kind() -> None:
     ns_kb = Namespace("http://example.org/kb/")
 
     pairs: Set[Tuple[URIRef, URIRef]] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nSubClass ?nClass
@@ -208,8 +205,7 @@ WHERE {
     sh:value ?nClass ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         assert isinstance(result[0], URIRef)
         assert isinstance(result[1], URIRef)
@@ -253,8 +249,7 @@ def test_exemplar_xfail_validation_derived_from() -> None:
         ),
     }
     computed: Set[Tuple[URIRef, URIRef]] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nSourceShape ?nFocusNode
@@ -265,8 +260,7 @@ WHERE {
     sh:focusNode ?nFocusNode ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         if not isinstance(result[0], URIRef):
             continue
