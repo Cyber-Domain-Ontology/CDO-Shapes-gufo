@@ -975,23 +975,17 @@ sh-gufo:categorizes-objects-shape
 
 sh-gufo:categorizes-subjects-shape
 	a sh:NodeShape ;
-	sh:and (
-		[
-			a sh:NodeShape ;
-			sh:not [
-				a sh:NodeShape ;
-				sh:class gufo:AbstractIndividualType ;
-			] ;
-		]
-		[
-			a sh:NodeShape ;
-			sh:not [
-				a sh:NodeShape ;
-				sh:class gufo:ConcreteIndividualType ;
-			] ;
-		]
-	) ;
 	sh:class gufo:Type ;
+	sh:not
+		[
+			a sh:NodeShape ;
+			sh:class gufo:AbstractIndividualType ;
+		] ,
+		[
+			a sh:NodeShape ;
+			sh:class gufo:ConcreteIndividualType ;
+		]
+		;
 	sh:targetSubjectsOf gufo:categorizes ;
 	.
 
