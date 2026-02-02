@@ -16,10 +16,11 @@
 
 import logging
 from pathlib import Path
-from typing import Optional, Set, Tuple
+from typing import Generator, Optional, Set, Tuple
 
-from rdflib import SH, Graph, Namespace, URIRef
+from rdflib import SH, BNode, Graph, Namespace, URIRef
 from rdflib.query import ResultRow
+from rdflib.term import IdentifiedNode
 
 NS_SH = SH
 
@@ -76,32 +77,22 @@ def test_exemplar_coverage() -> None:
     result: Optional[bool]
 
     for n_sh_predicate_with_predicate_object in {
-        NS_SH.inversePath,
-        NS_SH.path,
+        NS_SH.disjoint,
+        NS_SH.equals,
+        NS_SH.lessThan,
+        NS_SH.lessThanOrEquals,
         NS_SH.targetObjectsOf,
         NS_SH.targetSubjectsOf,
-        NS_SH.zeroOrMorePath,
     }:
         for n_object in shapes_graph.objects(
             None, n_sh_predicate_with_predicate_object
         ):
             if isinstance(n_object, URIRef):
                 properties_mapped.add(n_object)
-    for alternative_path_result in shapes_graph.query(
-        """\
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX sh: <http://www.w3.org/ns/shacl#>
-SELECT ?nPredicate
-WHERE {
-  ?nShThing sh:alternativePath ?nAlternativePathList .
-  ?nAlternativePathList rdf:rest*/rdf:first ?nPredicate .
-  FILTER isURI(?nPredicate)
-}
-"""
-    ):
-        assert isinstance(alternative_path_result, ResultRow)
-        assert isinstance(alternative_path_result[0], URIRef)
-        properties_mapped.add(alternative_path_result[0])
+    for n_object in shapes_graph.objects(None, NS_SH.path):
+        assert isinstance(n_object, IdentifiedNode)
+        for n_property in properties_in_shacl_property_path(shapes_graph, n_object):
+            properties_mapped.add(n_property)
 
     property_query = """\
 ASK {
@@ -174,8 +165,7 @@ def test_exemplar_xfail_validation_enduranttype() -> None:
     ns_kb = Namespace("http://example.org/kb/")
 
     n_focus_nodes: Set[URIRef] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nEndurantType
@@ -186,8 +176,7 @@ WHERE {
     sh:focusNode ?nEndurantType ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         assert isinstance(result[0], URIRef)
         n_focus_nodes.add(result[0])
@@ -204,8 +193,7 @@ def test_exemplar_xfail_validation_kind_subclassof_kind() -> None:
     ns_kb = Namespace("http://example.org/kb/")
 
     pairs: Set[Tuple[URIRef, URIRef]] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nSubClass ?nClass
@@ -217,8 +205,7 @@ WHERE {
     sh:value ?nClass ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         assert isinstance(result[0], URIRef)
         assert isinstance(result[1], URIRef)
@@ -262,8 +249,7 @@ def test_exemplar_xfail_validation_derived_from() -> None:
         ),
     }
     computed: Set[Tuple[URIRef, URIRef]] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nSourceShape ?nFocusNode
@@ -274,8 +260,7 @@ WHERE {
     sh:focusNode ?nFocusNode ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         if not isinstance(result[0], URIRef):
             continue
@@ -300,8 +285,7 @@ def test_exemplar_xfail_validation_partitions() -> None:
     ns_kb = Namespace("http://example.org/kb/")
 
     n_partitioning_classes: Set[URIRef] = set()
-    for result in validation_graph.query(
-        """\
+    for result in validation_graph.query("""\
 PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
 SELECT ?nPartitioningClass
@@ -312,8 +296,7 @@ WHERE {
     sh:focusNode ?nPartitioningClass ;
     .
 }
-"""
-    ):
+"""):
         assert isinstance(result, ResultRow)
         assert isinstance(result[0], URIRef)
         n_partitioning_classes.add(result[0])
@@ -321,3 +304,91 @@ WHERE {
     assert n_partitioning_classes == {
         ns_kb["Type-c85c8494-eb03-4834-bb04-4272866c5d8d"],
     }
+
+
+def properties_in_shacl_property_path(
+    graph: Graph, n_property_path: IdentifiedNode
+) -> Generator[URIRef, None, None]:
+    """
+    https://www.w3.org/TR/shacl/#property-paths
+    >>> import rdflib
+    >>> graph_text = '''
+    ... # Example graph built from: https://www.w3.org/TR/shacl/#property-paths
+    ... PREFIX ex: <http://example.com/ns#>
+    ... PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    ... PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    ... PREFIX sh: <http://www.w3.org/ns/shacl#>
+    ... []
+    ...     a sh:PropertyShape ;
+    ...     sh:path ex:parent ;
+    ...     .
+    ... []
+    ...     a sh:PropertyShape ;
+    ...     sh:path [ sh:inversePath ex:parent ];
+    ...     .
+    ... []
+    ...     a sh:PropertyShape ;
+    ...     sh:path ( ex:parent ex:firstName );
+    ...     .
+    ... []
+    ...     a sh:PropertyShape ;
+    ...     sh:path ( rdf:type [ sh:zeroOrMorePath rdfs:subClassOf ] );
+    ...     .
+    ... []
+    ...     a sh:PropertyShape ;
+    ...     sh:path [ sh:alternativePath ( ex:father ex:mother ) ];
+    ...     .
+    ... '''
+    >>> graph = rdflib.Graph()
+    >>> _ = graph.parse(data=graph_text, format="turtle")
+    >>> ns_ex = rdflib.Namespace("http://example.com/ns#")
+    >>> n_properties_in_graph: set[rdflib.URIRef] = set()
+    >>> for n_property_path in graph.objects(None, rdflib.SH.path):
+    ...     for n_property in properties_in_shacl_property_path(graph, n_property_path):
+    ...         n_properties_in_graph.add(n_property)
+    >>> assert n_properties_in_graph == {
+    ...     ns_ex["father"],
+    ...     ns_ex["firstName"],
+    ...     ns_ex["mother"],
+    ...     ns_ex["parent"],
+    ...     rdflib.RDF["type"],
+    ...     rdflib.RDFS["subClassOf"],
+    ... }
+    """
+    if isinstance(n_property_path, URIRef):
+        yield n_property_path
+    else:
+        assert isinstance(n_property_path, BNode)
+        for n_object in graph.objects(n_property_path, NS_SH.inversePath):
+            assert isinstance(n_object, IdentifiedNode)
+            yield from properties_in_shacl_property_path(graph, n_object)
+        else:
+            for n_object in graph.objects(n_property_path, NS_SH.zeroOrMorePath):
+                assert isinstance(n_object, IdentifiedNode)
+                yield from properties_in_shacl_property_path(graph, n_object)
+            else:
+                for n_object in graph.objects(n_property_path, NS_SH.oneOrMorePath):
+                    assert isinstance(n_object, IdentifiedNode)
+                    yield from properties_in_shacl_property_path(graph, n_object)
+                else:
+                    for n_object in graph.objects(n_property_path, NS_SH.zeroOrOnePath):
+                        assert isinstance(n_object, IdentifiedNode)
+                        yield from properties_in_shacl_property_path(graph, n_object)
+                    else:
+                        for n_object in graph.objects(
+                            n_property_path, NS_SH.alternativePath
+                        ):
+                            assert isinstance(n_object, IdentifiedNode)
+                            for n_alternative_path_member in graph.items(n_object):
+                                assert isinstance(
+                                    n_alternative_path_member, IdentifiedNode
+                                )
+                                yield from properties_in_shacl_property_path(
+                                    graph, n_alternative_path_member
+                                )
+                        else:
+                            for n_sequence_member in graph.items(n_property_path):
+                                assert isinstance(n_sequence_member, IdentifiedNode)
+                                yield from properties_in_shacl_property_path(
+                                    graph, n_sequence_member
+                                )
