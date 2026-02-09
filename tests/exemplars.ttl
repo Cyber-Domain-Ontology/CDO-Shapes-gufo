@@ -161,12 +161,6 @@ kb:ConcreteIndividual-fff9dfa7-e37a-4c2b-b9ef-9ef7ae584119
 	rdfs:seeAlso sh-gufo:constitutes-objects-shape ;
 	.
 
-kb:Endurant-01964f52-6337-4703-80d2-5903d7635901
-	a gufo:Object ;
-	gufo:standsInQualifiedRelationship kb:TemporaryRelationshipSituation-29301400-6b45-4176-b570-f52c28cd2789 ;
-	rdfs:seeAlso sh-gufo:standsInQualifiedRelationship-subjects-shape ;
-	.
-
 kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28
 	a gufo:Object ;
 	rdfs:seeAlso sh-gufo:concernsConstitutedEndurant-subjects-shape ;
@@ -220,6 +214,12 @@ kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b
 kb:Endurant-a6c542b6-0831-4ff2-a5e3-325c43075417
 	a gufo:Object ;
 	rdfs:seeAlso sh-gufo:mediates-objects-shape ;
+	.
+
+kb:Endurant-c38ea234-5d65-40d2-9ce6-9ca9d070a3e6
+	a gufo:Object ;
+	gufo:standsInQualifiedRelationship kb:TemporaryRelationshipSituation-29301400-6b45-4176-b570-f52c28cd2789 ;
+	rdfs:seeAlso sh-gufo:standsInQualifiedRelationship-subjects-shape ;
 	.
 
 kb:Endurant-de7e6949-a40f-45fa-bdb2-390bbdf0f1a6
