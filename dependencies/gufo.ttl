@@ -384,7 +384,7 @@ Examples include intrinsic physical aspects, such as the Moon's mass, Lassie's f
 
 A gufo:IntrinsicAspect is classified as a gufo:Quality (e.g., an apple's weight, the height of the Statue of Liberty) if it is measurable by a certain value space, or as a gufo:IntrinsicMode (e.g. Bob's belief that the Eiffel Tower is in Paris) otherwise.
 
-Corresponds to \"Instrinsic Moment\" in Guizzardi (2005). Different from Guizzardi (2005), here we consider that aspects can inhere in concrete individuals in general, and not only in endurants."""@en ;
+Corresponds to \"Intrinsic Moment\" in Guizzardi (2005). Different from Guizzardi (2005), here we consider that aspects can inhere in concrete individuals in general, and not only in endurants."""@en ;
 	rdfs:seeAlso gufo:inheresIn ;
 	owl:disjointUnionOf (
 		gufo:IntrinsicMode
@@ -507,7 +507,7 @@ gufo:Phase
 		gufo:Sortal
 		;
 	rdfs:label "Phase"@en ;
-	rdfs:comment '''A gufo:EndurantType that is both sortal and anti-rigid. It is defined by instrinsic but contingent instantiation conditions. Phases are relationally independent types that capturec instrinsic properties shared by instances of a given kind.
+	rdfs:comment '''A gufo:EndurantType that is both sortal and anti-rigid. It is defined by intrinsic but contingent instantiation conditions. Phases are relationally independent types that capturec intrinsic properties shared by instances of a given kind.
 
 For example, "Child" may be considered a gufo:Phase as a subclass of the gufo:Kind "Person", instantiated by persons younger than 12. Another example is the type "IllPerson", which may be considered a gufo:Phase that is instantiated whenever an instance of "Disease" (a gufo:IntrinsicMode) inheres in a person.'''@en ;
 	owl:disjointWith gufo:Role ;
@@ -520,7 +520,7 @@ gufo:PhaseMixin
 		gufo:NonSortal
 		;
 	rdfs:label "PhaseMixin"@en ;
-	rdfs:comment '''A gufo:EndurantType that is both non-sortal and anti-rigid. It is defined by instrinsic but contingent instantiation conditions. Phase mixins are relationally independent types that capture instrinsic properties shared by instances of different kinds.
+	rdfs:comment '''A gufo:EndurantType that is both non-sortal and anti-rigid. It is defined by intrinsic but contingent instantiation conditions. Phase mixins are relationally independent types that capture intrinsic properties shared by instances of different kinds.
 
 For example, "LivingAnimal" may be considered a gufo:PhaseMixin as a superclass of the phases "LivingPerson" (specializing the gufo:Kind "Person") and "LivingDog" (specializing the gufo:Kind "Dog").'''@en ;
 	owl:disjointWith gufo:RoleMixin ;
@@ -665,7 +665,7 @@ gufo:Role
 	rdfs:label "Role"@en ;
 	rdfs:comment '''A gufo:EndurantType that both sortal and anti-rigid. It is defined by relational instantiation conditions. Roles are relationally dependent types, capturing relational properties shared by instances of a given kind.
 
-For example, "Student" may be considered a gufo:Role as a subclass of the gufo:Kind "Person", instantiated by all persons enrolled in a school. "'''@en ;
+For example, "Student" may be considered a gufo:Role as a subclass of the gufo:Kind "Person", instantiated by all persons enrolled in a school.'''@en ;
 	.
 
 gufo:RoleMixin
