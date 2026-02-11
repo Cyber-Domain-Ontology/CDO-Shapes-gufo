@@ -84,6 +84,16 @@
 			sh:sourceConstraintComponent sh:OrConstraintComponent ;
 			sh:sourceShape sh-gufo:isDerivedFrom-subjects-shape ;
 			sh:value <http://example.org/kb/RelationshipType-036f96f7-5633-4e2d-b0d0-faf685ea8711> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
+			sh:resultMessage "Inconsistency found with the gufo:partitions relationship.  Focus node is a higher-order class whose instances partition some class into disjoint classes; but, an individual was found that is an instance of multiple instances of the higher-order class.  The individual is http://example.org/kb/Individual-fd03b81f-9218-4f9e-9557-540452ff662a, member of http://example.org/kb/Type-652360a4-d15c-4eb7-8d06-8b037a25e133 and http://example.org/kb/Type-9759ebdc-ccaa-46f9-a947-a3489b36775e.  See https://nemo-ufes.github.io/gufo/#partitions for further description of the partitions relationship." ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraint sh-gufo:partitions-subjects-constraint ;
+			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+			sh:sourceShape sh-gufo:partitions-subjects-shape ;
+			sh:value <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
 		]
 		;
 	.

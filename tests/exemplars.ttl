@@ -573,6 +573,9 @@ kb:Type-41a60dc5-2768-4706-b52d-d4cc78e4800f
 		gufo:Type ,
 		owl:Class
 		;
-	rdfs:seeAlso sh-gufo:partitions-objects-shape ;
+	rdfs:seeAlso
+		sh-gufo:partitions-objects-shape ,
+		sh-gufo:partitions-subjects-constraint
+		;
 	.
 
