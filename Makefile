@@ -32,11 +32,11 @@ all: \
   check-mypy \
   check-ontology \
   check-shapes \
-  check-tests \
   check-supply-chain \
   check-supply-chain-cdo-shapes \
   check-supply-chain-pre-commit \
   check-supply-chain-submodules \
+  check-tests \
   clean-dependencies \
   clean-ontology \
   clean-shapes \
