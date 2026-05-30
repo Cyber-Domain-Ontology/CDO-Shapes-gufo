@@ -27,37 +27,39 @@ srcdir = Path(__file__).parent
 top_srcdir = srcdir.parent
 
 
-def test_exemplar_coverage() -> None:
+def test_exemplar_shapes_coverage() -> None:
     """
     This test confirms that for each review-subject class C and property
     P in this repository's shapes graph C (/P) is used in the exemplars
     graph.
+
+    The transitive import closure of the ontology graph is brought in
+    for subclass and subproperty entailment.  But, only shapes locally
+    defined in this repository are checked for review-subjects.  (Else,
+    each dependent shapes graphs would also incur review-subject needs.)
     """
     exemplar_graph = Graph()
     shapes_graph = Graph()
     tbox_graph = Graph()
     combined_graph = Graph()
 
+    exemplar_filepath = srcdir / "exemplars.ttl"
     ontology_filepath = top_srcdir / "ontology" / "generated-ontology.ttl"
     local_shapes_filepath = top_srcdir / "shapes" / "generated-local.ttl"
 
-    shapes_graph.parse(local_shapes_filepath)
-    logging.debug("len(shapes_graph) = %d.", len(shapes_graph))
-
-    # The transitive import closure of the ontology graph is brought in
-    # for subclass and subproperty entailment.  But, only shapes locally
-    # defined in this repository are checked for review-subjects.
-    # (Else, each dependent shapes graphs would also incur review-
-    # subject needs.)
-    tbox_graph.parse(ontology_filepath)
-    tbox_graph.parse(local_shapes_filepath)
-
-    exemplar_filepath = srcdir / "exemplars.ttl"
     logging.debug("Loading exemplars graph %r.", exemplar_filepath)
     exemplar_graph.parse(exemplar_filepath)
     logging.debug("len(exemplar_graph) = %d.", len(exemplar_graph))
 
-    combined_graph = exemplar_graph + tbox_graph
+    logging.debug("Loading TBox graph %r.", ontology_filepath)
+    tbox_graph.parse(ontology_filepath)
+    logging.debug("len(tbox_graph) = %d.", len(tbox_graph))
+
+    logging.debug("Loading shapes graph %r.", local_shapes_filepath)
+    shapes_graph.parse(local_shapes_filepath)
+    logging.debug("len(shapes_graph) = %d.", len(shapes_graph))
+
+    combined_graph = exemplar_graph + shapes_graph + tbox_graph
 
     concepts_excused: Set[URIRef] = set()
     concepts_excused_filepath = srcdir / "concepts_excused.txt"
