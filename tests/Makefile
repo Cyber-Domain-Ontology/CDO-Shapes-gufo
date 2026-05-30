@@ -86,8 +86,8 @@ clean:
 
 exemplars_XFAIL_validation.ttl: \
   $(RDF_TOOLKIT_JAR) \
+  $(top_srcdir)/ontology/generated-ontology.ttl \
   $(top_srcdir)/shapes/generated-shapes.ttl \
-  generated-exemplars-expanded.ttl \
   exemplars_XFAIL.ttl
 	source $(top_srcdir)/venv/bin/activate \
 	  && pyshacl \
