@@ -6,3 +6,7 @@
 	path = dependencies/gufo
 	url = https://github.com/nemo-ufes/gufo.git
 	branch = master
+[submodule "dependencies/gufoshapes"]
+	path = dependencies/gufoshapes
+	url = https://github.com/nemo-ufes/gufoshapes.git
+	branch = main

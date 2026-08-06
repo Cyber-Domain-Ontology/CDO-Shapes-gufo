@@ -1,2 +1,3 @@
 http://example.org/shapes/sh-gufo	${top_srcdir}/shapes/sh-gufo.ttl
 http://purl.org/nemo/gufo#	${top_srcdir}/dependencies/formatted-gufo.ttl
+https://w3id.org/nemo/gufoshapes#	${top_srcdir}/dependencies/formatted-gufoshapes.ttl

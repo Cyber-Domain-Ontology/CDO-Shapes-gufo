@@ -61,13 +61,13 @@ all: \
 	touch $@
 
 .qc.ttl: \
-  $(top_srcdir)/shapes/generated-local.ttl \
+  $(top_srcdir)/shapes/generated-shapes.ttl \
   exemplars.ttl \
   exemplars_XFAIL.ttl
 	source $(top_srcdir)/venv/bin/activate \
 	  && rdfpipe \
 	    --output-format turtle \
-	    $(top_srcdir)/shapes/generated-local.ttl \
+	    $(top_srcdir)/shapes/generated-shapes.ttl \
 	    exemplars.ttl \
 	    exemplars_XFAIL.ttl \
 	    > _$@

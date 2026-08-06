@@ -26,6 +26,7 @@ uco_srcdir := $(top_srcdir)/dependencies/UCO
 # shapes or removing the dependency.  Non-shapes graphs are delegated to
 # ../ontology/generated-dependencies.ttl.
 generated_dependencies_ttls := \
+  $(top_srcdir)/dependencies/formatted-gufoshapes.ttl \
   $(uco_srcdir)/ontology/owl/owl.ttl
 
 ttl_basenames := $(wildcard sh-*.ttl)

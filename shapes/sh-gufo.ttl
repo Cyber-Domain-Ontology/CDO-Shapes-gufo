@@ -1,4 +1,5 @@
 # imports: http://purl.org/nemo/gufo#/1.0.0
+# imports: https://w3id.org/nemo/gufoshapes#
 
 @prefix gufo: <http://purl.org/nemo/gufo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -11,7 +12,10 @@
 
 <http://example.org/shapes/sh-gufo>
 	a owl:Ontology ;
-	owl:imports <http://purl.org/nemo/gufo#/1.0.0> ;
+	owl:imports
+		<http://purl.org/nemo/gufo#/1.0.0> ,
+		<https://w3id.org/nemo/gufoshapes#>
+		;
 	.
 
 sh-gufo:AbstractIndividual-disjointWith-ConcreteIndividual-shape

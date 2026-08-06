@@ -28,7 +28,8 @@ RDF_TOOLKIT_JAR := $(uco_srcdir)/lib/rdf-toolkit.jar
 # Note that to support the catalog-v001.xml preconditions, this list
 # must only be files in this directory.
 normalized_ttls := \
-  formatted-gufo.ttl
+  formatted-gufo.ttl \
+  formatted-gufoshapes.ttl
 
 all: \
   catalog-v001.xml
@@ -64,6 +65,22 @@ clean:
 
 formatted-gufo.ttl: \
   gufo/gufo.ttl \
+  $(RDF_TOOLKIT_JAR) \
+  $(top_srcdir)/.venv.done.log
+	source $(top_srcdir)/venv/bin/activate \
+	  && pyshacl \
+	    --shacl UCO/ontology/owl/owl.ttl \
+	    $<
+	java -jar $(RDF_TOOLKIT_JAR) \
+	  --inline-blank-nodes \
+	  --source $< \
+	  --source-format turtle \
+	  --target _$@ \
+	  --target-format turtle
+	mv _$@ $@
+
+formatted-gufoshapes.ttl: \
+  gufoshapes/gufoshapes.ttl \
   $(RDF_TOOLKIT_JAR) \
   $(top_srcdir)/.venv.done.log
 	source $(top_srcdir)/venv/bin/activate \
