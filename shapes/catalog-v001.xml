@@ -2,5 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
     <uri id="User Entered Import Resolution" uri="../dependencies/UCO/ontology/owl/owl.ttl" name="https://ontology.unifiedcyberontology.org/owl"/>
     <uri id="User Entered Import Resolution" uri="../dependencies/formatted-gufo.ttl" name="http://purl.org/nemo/gufo#/1.0.0"/>
+    <uri id="User Entered Import Resolution" uri="../dependencies/formatted-gufoshapes.ttl" name="https://w3id.org/nemo/gufoshapes#"/>
     <uri id="User Entered Import Resolution" uri="sh-gufo.ttl" name="http://example.org/shapes/sh-gufo"/>
 </catalog>

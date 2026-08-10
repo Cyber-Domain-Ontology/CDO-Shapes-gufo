@@ -2,6 +2,7 @@
 
 @prefix drafting: <http://example.org/ontology/drafting/> .
 @prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix gufoshapes: <https://w3id.org/nemo/gufoshapes#> .
 @prefix kb: <http://example.org/kb/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -342,6 +343,14 @@ kb:Instant-c0f8bb25-7fd6-4328-b8d7-617a887c5f3c
 	rdfs:seeAlso sh-gufo:hasBeginPoint-objects-shape ;
 	.
 
+kb:Kind-7e52ce03-a1ce-4dd5-bb4a-987973db8f62
+	a
+		gufo:Kind ,
+		owl:Class
+		;
+	rdfs:seeAlso gufoshapes:BaseSortalShape ;
+	.
+
 kb:MaterialRelationship-95952b20-2c19-47e6-b567-b3998e7b3553
 	a
 		owl:ObjectProperty ,
@@ -367,6 +376,7 @@ kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308
 		gufo:Phase ,
 		owl:Class
 		;
+	rdfs:subClassOf kb:Kind-7e52ce03-a1ce-4dd5-bb4a-987973db8f62 ;
 	rdfs:seeAlso
 		sh-gufo:NonRigidType-shape ,
 		sh-gufo:concernsNonRigidType-objects-shape

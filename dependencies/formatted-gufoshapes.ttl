@@ -1,0 +1,277 @@
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix gufoshapes: <https://w3id.org/nemo/gufoshapes#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+gufo:NonSortalShape
+	a sh:NodeShape ;
+	sh:property [
+		sh:message "Non-Sortal types can't specialize Sortal types." ;
+		sh:name "Forbidden sortal specialization" ;
+		sh:not [
+			sh:or (
+				[
+					sh:class gufo:Sortal ;
+				]
+				[
+					sh:class gufo:Kind ;
+				]
+				[
+					sh:class gufo:SubKind ;
+				]
+				[
+					sh:class gufo:Phase ;
+				]
+				[
+					sh:class gufo:Role ;
+				]
+			) ;
+		] ;
+		sh:path rdfs:subClassOf ;
+	] ;
+	sh:targetClass
+		gufo:Category ,
+		gufo:Mixin ,
+		gufo:NonSortal ,
+		gufo:PhaseMixin ,
+		gufo:RoleMixin
+		;
+	.
+
+gufoshapes:BaseSortalShape
+	a sh:NodeShape ;
+	sh:property [
+		sh:message "Sortal types must specialize a kind or some other sortal." ;
+		sh:name "Missing identity provider" ;
+		sh:path rdfs:subClassOf ;
+		sh:qualifiedMinCount "1"^^xsd:integer ;
+		sh:qualifiedValueShape [
+			sh:or (
+				[
+					sh:class gufo:Kind ;
+				]
+				[
+					sh:class gufo:SubKind ;
+				]
+				[
+					sh:class gufo:Phase ;
+				]
+				[
+					sh:class gufo:Role ;
+				]
+			) ;
+		] ;
+	] ;
+	sh:targetClass
+		gufo:Phase ,
+		gufo:Role ,
+		gufo:SubKind
+		;
+	.
+
+gufoshapes:CategorizationShape
+	a sh:NodeShape ;
+	sh:sparql [
+		a sh:SPARQLConstraint ;
+		sh:message "Instances of a categorizing higher-order type (focus node) must be subclasses of the categorized base type." ;
+		sh:prefixes [
+			sh:declare
+				[
+					sh:namespace "http://purl.org/nemo/gufo#"^^xsd:anyURI ;
+					sh:prefix "gufo" ;
+				] ,
+				[
+					sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+					sh:prefix "rdf" ;
+				] ,
+				[
+					sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+					sh:prefix "rdfs" ;
+				] ,
+				[
+					sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+					sh:prefix "owl" ;
+				]
+				;
+		] ;
+		sh:select """
+            SELECT $this ?instance
+            WHERE {
+                $this gufo:categorizes ?baseType .
+                ?instance rdf:type $this .
+                FILTER NOT EXISTS { ?instance rdfs:subClassOf ?baseType }
+            }
+        """ ;
+	] ;
+	sh:targetSubjectsOf gufo:categorizes ;
+	.
+
+gufoshapes:EndurantTypeShape
+	a sh:NodeShape ;
+	sh:property [
+		sh:message "Endurant types cannot specialize classes disjoint from Endurant." ;
+		sh:name "Powertype pattern violation" ;
+		sh:not [
+			sh:in (
+				gufo:AbstractIndividual
+				gufo:QualityValue
+				time:Instant
+				gufo:Event
+				gufo:Participation
+				gufo:Situation
+				gufo:QualityValueAttributionSituation
+				gufo:TemporaryConstitutionSituation
+				gufo:TemporaryInstantiationSituation
+				gufo:TemporaryParthoodSituation
+				gufo:TemporaryRelationshipSituation
+			) ;
+		] ;
+		sh:path rdfs:subClassOf ;
+	] ;
+	sh:targetClass
+		gufo:AntiRigidType ,
+		gufo:Category ,
+		gufo:EndurantType ,
+		gufo:Kind ,
+		gufo:Mixin ,
+		gufo:NonRigidType ,
+		gufo:NonSortal ,
+		gufo:Phase ,
+		gufo:PhaseMixin ,
+		gufo:RigidType ,
+		gufo:Role ,
+		gufo:RoleMixin ,
+		gufo:SemiRigidType ,
+		gufo:Sortal ,
+		gufo:SubKind
+		;
+	.
+
+gufoshapes:KindShape
+	a sh:NodeShape ;
+	sh:property [
+		sh:message "Kinds cannot specialize sortal types (i.e., types that already set or inherit an identity principle)." ;
+		sh:name "Forbidden sortal specialization" ;
+		sh:not [
+			sh:or (
+				[
+					sh:class gufo:SubKind ;
+				]
+				[
+					sh:class gufo:Phase ;
+				]
+				[
+					sh:class gufo:Role ;
+				]
+				[
+					sh:class gufo:Kind ;
+				]
+			) ;
+		] ;
+		sh:path rdfs:subClassOf ;
+	] ;
+	sh:targetClass gufo:Kind ;
+	.
+
+gufoshapes:PartitionPairwiseDisjointnessShape
+	a sh:NodeShape ;
+	sh:sparql [
+		a sh:SPARQLConstraint ;
+		sh:message "Instances {?type1} and {?type2} of the partitioning type {$this} are not declared disjoint." ;
+		sh:prefixes [
+			sh:declare
+				[
+					sh:namespace "http://purl.org/nemo/gufo#"^^xsd:anyURI ;
+					sh:prefix "gufo" ;
+				] ,
+				[
+					sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+					sh:prefix "rdf" ;
+				] ,
+				[
+					sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+					sh:prefix "rdfs" ;
+				] ,
+				[
+					sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+					sh:prefix "owl" ;
+				]
+				;
+		] ;
+		sh:select """
+            SELECT $this ?type1 ?type2
+            WHERE {
+                $this gufo:partitions ?baseType .                
+                # Select two instances of the HoT
+                ?type1 rdf:type $this .
+                ?type2 rdf:type $this .
+                FILTER (?type1 != ?type2)
+                # Filter out classes that are semantically equivalent
+                FILTER NOT EXISTS { ?type1 owl:equivalentClass ?type2 }
+                FILTER NOT EXISTS { ?type1 owl:sameAs ?type2 }
+
+                # Filter out pairs that ARE declared disjoint
+                FILTER NOT EXISTS {
+                    { ?type1 owl:disjointWith ?type2 }
+                    UNION
+                    # members of the same owl:AllDisjointClasses list
+                    {
+                        ?adc rdf:type owl:AllDisjointClasses ;
+                             owl:members ?members .
+                        ?members rdf:rest*/rdf:first ?type1 .
+                        ?members rdf:rest*/rdf:first ?type2 .
+                    }
+                    UNION
+                    # members of the same owl:disjointUnionOf list
+                    {
+                        ?cls owl:disjointUnionOf ?unionList .
+                        ?unionList rdf:rest*/rdf:first ?type1 .
+                        ?unionList rdf:rest*/rdf:first ?type2 .
+                    }
+                }
+            }
+        """ ;
+	] ;
+	sh:targetSubjectsOf gufo:partitions ;
+	.
+
+gufoshapes:RigidOrSemiRigidShape
+	a sh:NodeShape ;
+	sh:property [
+		sh:message "Rigid and semi-rigid types can't specialize anti-rigid types." ;
+		sh:name "Forbidden anti-rigid type specialization" ;
+		sh:not [
+			sh:or (
+				[
+					sh:class gufo:AntiRigidType ;
+				]
+				[
+					sh:class gufo:Phase ;
+				]
+				[
+					sh:class gufo:PhaseMixin ;
+				]
+				[
+					sh:class gufo:Role ;
+				]
+				[
+					sh:class gufo:RoleMixin ;
+				]
+			) ;
+		] ;
+		sh:path rdfs:subClassOf ;
+	] ;
+	sh:targetClass
+		gufo:Category ,
+		gufo:Kind ,
+		gufo:Mixin ,
+		gufo:RigidType ,
+		gufo:SemiRigidType ,
+		gufo:SubKind
+		;
+	.
+

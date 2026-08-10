@@ -1,3 +1,5 @@
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix gufoshapes: <https://w3id.org/nemo/gufoshapes#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -59,6 +61,36 @@
 		] ,
 		[
 			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Kind-14caf9d8-940b-47dc-a27d-6a65ea22224b> ;
+			sh:resultMessage "Kinds cannot specialize sortal types (i.e., types that already set or inherit an identity principle)." ;
+			sh:resultPath rdfs:subClassOf ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:NotConstraintComponent ;
+			sh:sourceShape [
+				sh:message "Kinds cannot specialize sortal types (i.e., types that already set or inherit an identity principle)." ;
+				sh:name "Forbidden sortal specialization" ;
+				sh:not [
+					sh:or (
+						[
+							sh:class gufo:SubKind ;
+						]
+						[
+							sh:class gufo:Phase ;
+						]
+						[
+							sh:class gufo:Role ;
+						]
+						[
+							sh:class gufo:Kind ;
+						]
+					) ;
+				] ;
+				sh:path rdfs:subClassOf ;
+			] ;
+			sh:value <http://example.org/kb/Kind-09ee8285-3c47-43a5-a850-5dcd15dfd535> ;
+		] ,
+		[
+			a sh:ValidationResult ;
 			sh:focusNode <http://example.org/kb/Kind-93c29c13-6535-4242-b375-3cdf6a154c43> ;
 			sh:resultMessage "A gufo:Kind may not subclass another gufo:Kind." ;
 			sh:resultSeverity sh:Violation ;
@@ -66,6 +98,36 @@
 			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
 			sh:sourceShape sh-gufo:Kind-shape ;
 			sh:value <http://example.org/kb/Kind-5ef69346-4ca2-4303-93f7-c6b172db1fe7> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Kind-93c29c13-6535-4242-b375-3cdf6a154c43> ;
+			sh:resultMessage "Kinds cannot specialize sortal types (i.e., types that already set or inherit an identity principle)." ;
+			sh:resultPath rdfs:subClassOf ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraintComponent sh:NotConstraintComponent ;
+			sh:sourceShape [
+				sh:message "Kinds cannot specialize sortal types (i.e., types that already set or inherit an identity principle)." ;
+				sh:name "Forbidden sortal specialization" ;
+				sh:not [
+					sh:or (
+						[
+							sh:class gufo:SubKind ;
+						]
+						[
+							sh:class gufo:Phase ;
+						]
+						[
+							sh:class gufo:Role ;
+						]
+						[
+							sh:class gufo:Kind ;
+						]
+					) ;
+				] ;
+				sh:path rdfs:subClassOf ;
+			] ;
+			sh:value <http://example.org/kb/SubKind-e5c100e5-5603-48bd-987c-d5d7535ff7cd> ;
 		] ,
 		[
 			a sh:ValidationResult ;
@@ -93,6 +155,138 @@
 			sh:sourceConstraint sh-gufo:partitions-subjects-constraint ;
 			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
 			sh:sourceShape sh-gufo:partitions-subjects-shape ;
+			sh:value <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
+			sh:resultMessage "Instances http://example.org/kb/Type-652360a4-d15c-4eb7-8d06-8b037a25e133 and http://example.org/kb/Type-9759ebdc-ccaa-46f9-a947-a3489b36775e of the partitioning type http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d are not declared disjoint." ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraint [
+				a sh:SPARQLConstraint ;
+				sh:message "Instances {?type1} and {?type2} of the partitioning type {$this} are not declared disjoint." ;
+				sh:prefixes [
+					sh:declare
+						[
+							sh:namespace "http://purl.org/nemo/gufo#"^^xsd:anyURI ;
+							sh:prefix "gufo" ;
+						] ,
+						[
+							sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+							sh:prefix "rdf" ;
+						] ,
+						[
+							sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+							sh:prefix "rdfs" ;
+						] ,
+						[
+							sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+							sh:prefix "owl" ;
+						]
+						;
+				] ;
+				sh:select """
+            SELECT $this ?type1 ?type2
+            WHERE {
+                $this gufo:partitions ?baseType .                
+                # Select two instances of the HoT
+                ?type1 rdf:type $this .
+                ?type2 rdf:type $this .
+                FILTER (?type1 != ?type2)
+                # Filter out classes that are semantically equivalent
+                FILTER NOT EXISTS { ?type1 owl:equivalentClass ?type2 }
+                FILTER NOT EXISTS { ?type1 owl:sameAs ?type2 }
+
+                # Filter out pairs that ARE declared disjoint
+                FILTER NOT EXISTS {
+                    { ?type1 owl:disjointWith ?type2 }
+                    UNION
+                    # members of the same owl:AllDisjointClasses list
+                    {
+                        ?adc rdf:type owl:AllDisjointClasses ;
+                             owl:members ?members .
+                        ?members rdf:rest*/rdf:first ?type1 .
+                        ?members rdf:rest*/rdf:first ?type2 .
+                    }
+                    UNION
+                    # members of the same owl:disjointUnionOf list
+                    {
+                        ?cls owl:disjointUnionOf ?unionList .
+                        ?unionList rdf:rest*/rdf:first ?type1 .
+                        ?unionList rdf:rest*/rdf:first ?type2 .
+                    }
+                }
+            }
+        """ ;
+			] ;
+			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+			sh:sourceShape gufoshapes:PartitionPairwiseDisjointnessShape ;
+			sh:value <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
+		] ,
+		[
+			a sh:ValidationResult ;
+			sh:focusNode <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
+			sh:resultMessage "Instances http://example.org/kb/Type-9759ebdc-ccaa-46f9-a947-a3489b36775e and http://example.org/kb/Type-652360a4-d15c-4eb7-8d06-8b037a25e133 of the partitioning type http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d are not declared disjoint." ;
+			sh:resultSeverity sh:Violation ;
+			sh:sourceConstraint [
+				a sh:SPARQLConstraint ;
+				sh:message "Instances {?type1} and {?type2} of the partitioning type {$this} are not declared disjoint." ;
+				sh:prefixes [
+					sh:declare
+						[
+							sh:namespace "http://purl.org/nemo/gufo#"^^xsd:anyURI ;
+							sh:prefix "gufo" ;
+						] ,
+						[
+							sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+							sh:prefix "rdf" ;
+						] ,
+						[
+							sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+							sh:prefix "rdfs" ;
+						] ,
+						[
+							sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+							sh:prefix "owl" ;
+						]
+						;
+				] ;
+				sh:select """
+            SELECT $this ?type1 ?type2
+            WHERE {
+                $this gufo:partitions ?baseType .                
+                # Select two instances of the HoT
+                ?type1 rdf:type $this .
+                ?type2 rdf:type $this .
+                FILTER (?type1 != ?type2)
+                # Filter out classes that are semantically equivalent
+                FILTER NOT EXISTS { ?type1 owl:equivalentClass ?type2 }
+                FILTER NOT EXISTS { ?type1 owl:sameAs ?type2 }
+
+                # Filter out pairs that ARE declared disjoint
+                FILTER NOT EXISTS {
+                    { ?type1 owl:disjointWith ?type2 }
+                    UNION
+                    # members of the same owl:AllDisjointClasses list
+                    {
+                        ?adc rdf:type owl:AllDisjointClasses ;
+                             owl:members ?members .
+                        ?members rdf:rest*/rdf:first ?type1 .
+                        ?members rdf:rest*/rdf:first ?type2 .
+                    }
+                    UNION
+                    # members of the same owl:disjointUnionOf list
+                    {
+                        ?cls owl:disjointUnionOf ?unionList .
+                        ?unionList rdf:rest*/rdf:first ?type1 .
+                        ?unionList rdf:rest*/rdf:first ?type2 .
+                    }
+                }
+            }
+        """ ;
+			] ;
+			sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+			sh:sourceShape gufoshapes:PartitionPairwiseDisjointnessShape ;
 			sh:value <http://example.org/kb/Type-c85c8494-eb03-4834-bb04-4272866c5d8d> ;
 		]
 		;
