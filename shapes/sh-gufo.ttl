@@ -525,6 +525,7 @@ sh-gufo:Kind-subclassOf-Kind-constraint
 			?value
 				a gufo:Kind ;
 				.
+			FILTER ($this != ?value)
 		}
 	""" ;
 	.
