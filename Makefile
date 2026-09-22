@@ -34,6 +34,7 @@ all: \
   check-shapes \
   check-supply-chain \
   check-supply-chain-cdo-shapes \
+  check-supply-chain-dependencies \
   check-supply-chain-pre-commit \
   check-supply-chain-submodules \
   check-tests \
@@ -156,6 +157,8 @@ check-shapes: \
 
 # This target's dependencies potentially modify the working directory's
 # Git state, so it is intentionally not a dependency of check.
+# To recurse this recipe, include check-supply-chain-dependencies as a
+# target in the Make call.
 check-supply-chain: \
   check-supply-chain-cdo-shapes \
   check-mypy \
@@ -178,6 +181,18 @@ check-supply-chain-cdo-shapes:
 	  == \
 	  "x$$(git rev-parse _CHECK_SUPPLY_CHAIN_upstream/base)" \
 	  || (echo "ERROR:Makefile:The current branch is behind the upstream 'base' branch.  Please merge the upstream 'base' commit into the current branch." >&2 ; exit 1)
+
+# This recursive Make recipe intentionally deactivates parallel job
+# execution due to interactions with $(top_srcdir)/.git/ while reviewing
+# submodules.
+# This target is intentionally not a dependency of check-supply-chain,
+# considering recursive review an opt-in action.
+check-supply-chain-dependencies: \
+  check-supply-chain-submodules
+	$(MAKE) \
+	  --directory dependencies \
+	  --jobs 1 \
+	  check-supply-chain
 
 # Update pre-commit configuration and use the updated config file to
 # review code.  Only have Make exit if 'pre-commit run' modifies files.

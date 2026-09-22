@@ -33,6 +33,9 @@ normalized_ttls := \
 all: \
   catalog-v001.xml
 
+.PHONY: \
+  check-supply-chain
+
 $(RDF_TOOLKIT_JAR):
 	@echo "DEBUG:dependencies/Makefile:top_srcdir=$(top_srcdir)" >&2
 	@echo "ERROR:dependencies/Makefile:rdf-toolkit.jar not found.  Did you run `make` from the top source directory?" >&2
@@ -56,6 +59,12 @@ catalog-v001.xml: \
 
 check: \
   all
+
+# TODO: The check-supply-chain recipes should be written to descend into
+# each submodule tracking a CDO (/UCO, etc.) repository and run its
+# supply chain rule.  This recursive check is expected to be called most
+# typically by the top_srcdir recipe check-supply-chain-dependencies.
+check-supply-chain:
 
 clean:
 	@rm -f \
