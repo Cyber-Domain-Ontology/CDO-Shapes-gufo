@@ -1,0 +1,2253 @@
+\documentclass[12pt,a4paper]{article}
+
+%% ── Encoding & language ──────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+%% ── Page geometry ────────────────────────────────────────────────────────────
+\usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}
+
+%% ── Typography ───────────────────────────────────────────────────────────────
+\usepackage[protrusion=false,expansion=false]{microtype}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+
+%% ── Math ─────────────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%% ── Tables ───────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+%% ── Colours ──────────────────────────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{kwcolor}{RGB}{0,0,180}
+\definecolor{strcolor}{RGB}{163,21,21}
+\definecolor{cmtcolor}{RGB}{0,128,0}
+\definecolor{iricolor}{RGB}{0,100,160}
+\definecolor{ruleblue}{RGB}{30,80,160}
+
+%% ── Code listings ────────────────────────────────────────────────────────────
+\usepackage{listings}
+
+\lstdefinelanguage{turtle}{
+  alsoletter={:,-,@},
+  keywords={a, @prefix, @base, true, false},
+  keywordstyle=\color{kwcolor}\bfseries,
+  sensitive=true,
+  comment=[l]{\#},
+  commentstyle=\color{cmtcolor}\itshape,
+  morestring=[b]",
+  stringstyle=\color{strcolor},
+  morestring=[s]{<}{>},
+}
+
+\lstdefinestyle{turtlestyle}{
+  language=turtle,
+  basicstyle=\ttfamily\scriptsize,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!50},
+  numbers=none,
+  columns=flexible,
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=12pt,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  showstringspaces=false,
+  tabsize=2,
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  aboveskip=6pt,
+  belowskip=6pt,
+}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  backgroundcolor=\color{codebg},
+  keywordstyle=\color{kwcolor}\bfseries,
+  stringstyle=\color{strcolor},
+  commentstyle=\color{cmtcolor}\itshape,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!50},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  columns=flexible,
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=12pt,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=18pt,
+  xrightmargin=6pt,
+  aboveskip=6pt,
+  belowskip=6pt,
+}
+
+\lstdefinestyle{sparqlstyle}{
+  basicstyle=\ttfamily\scriptsize,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!50},
+  numbers=none,
+  columns=flexible,
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=12pt,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  showstringspaces=false,
+  tabsize=2,
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  aboveskip=6pt,
+  belowskip=6pt,
+}
+
+%% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ruleblue,
+  urlcolor=ruleblue,
+  citecolor=ruleblue,
+  pdftitle={gUFO SHACL Validation -- Reference Documentation},
+  pdfauthor={CDO-Shapes-gufo project},
+  pdfsubject={gUFO SHACL validation shapes},
+}
+
+%% ── Headers and footers ──────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{gUFO SHACL Validation Reference}}
+\fancyhead[R]{\small\textit{CDO-Shapes-gufo}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%% ── Section formatting ───────────────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{ruleblue}}{{\thesection}}{1em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{ruleblue}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+%% ── Custom commands ──────────────────────────────────────────────────────────
+%% Using \nolinkurl (from hyperref) allows typewriter text to break at
+%% special characters (:, ., -, _) preventing overfull hboxes in body text.
+\newcommand{\ruleid}[1]{\textbf{\textsf{#1}}}
+\newcommand{\shapename}[1]{\nolinkurl{#1}}
+\newcommand{\gufoclass}[1]{\nolinkurl{gufo:#1}}
+\newcommand{\gufoprop}[1]{\nolinkurl{gufo:#1}}
+\newcommand{\shprop}[1]{\nolinkurl{sh:#1}}
+
+%% ── Bibliography ─────────────────────────────────────────────────────────────
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+%% ── Overflow prevention ──────────────────────────────────────────────────────
+%% Allow extra inter-word stretch as last resort before declaring overfull hbox.
+\setlength{\emergencystretch}{3em}
+%% Allow url package to break long URLs/paths at more characters.
+\PassOptionsToPackage{hyphens}{url}
+
+%% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+  {\Huge\bfseries\color{ruleblue} gUFO SHACL Validation\\[0.4em]
+   Reference Documentation}\\[2em]
+  {\large CDO-Shapes-gufo project}\\[1em]
+  {\large\url{https://github.com/Cyber-Domain-Ontology/CDO-Shapes-gufo}}\\[3em]
+  \hrule height 0.4pt
+  \vspace{1em}
+  {\normalsize
+    Based on the gentle Unified Foundational Ontology (gUFO)\\
+    Validation using SHACL via \texttt{pyshacl}
+  }
+  \vfill
+  {\small\today}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Purpose and Scope}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+This document is the authoritative reference for the SHACL validation shapes
+defined in the \texttt{CDO-Shapes-gufo} repository for ontologies based on the
+\textbf{gentle Unified Foundational Ontology (gUFO)} \citep{gufo2022}.
+It covers:
+
+\begin{itemize}
+  \item Which gUFO rules are enforced and how each rule is decomposed into
+        independently verifiable constraints.
+  \item The formal Description Logic (DL) specification of every constraint,
+        making the mathematical meaning of each test unambiguous.
+  \item The SHACL shapes, test exemplars, and \texttt{pytest} functions that
+        realise each constraint.
+\end{itemize}
+
+The validation shapes are defined in \texttt{shapes/sh-gufo.ttl} and applied
+using \texttt{pyshacl} \citep{pyshacl}. The test suite resides in the
+\texttt{tests/} directory. This document covers the twelve gUFO rules whose
+SHACL coverage required correction or extension; fully covered rules are
+documented separately.
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Repository Structure}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\begin{lstlisting}[style=sparqlstyle]
+CDO-Shapes-gufo/
+  shapes/
+    sh-gufo.ttl                  % SHACL shape definitions
+  tests/
+    exemplars.ttl                % Valid individuals exercising each shape
+    exemplars_XFAIL.ttl          % Deliberately invalid individuals
+    exemplars_XFAIL_validation.ttl  % Expected SHACL violation reports
+    test_exemplar_coverage.py    % pytest test suite
+    sh-qc.ttl                    % Quality-check shapes for test data
+  dependencies/
+    formatted-gufo.ttl           % gUFO ontology (OWL 2 DL)
+\end{lstlisting}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Validation Pipeline}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Validation proceeds in four sequential stages:
+
+\begin{enumerate}
+  \item \textbf{Entailment.} \texttt{src/entail.py} adds RDFS entailments to
+    \texttt{exemplars.ttl} (subclass, subproperty, domain, range) so that
+    \texttt{pyshacl} sees inherited types. This step applies only to
+    \texttt{exemplars.ttl}, not to \texttt{exemplars\_XFAIL.ttl}. Failure test
+    data must therefore declare all types explicitly.
+
+  \item \textbf{Success validation.} \texttt{pyshacl} validates the expanded
+    exemplars against \texttt{sh-gufo.ttl} and expects \nolinkurl{sh:conforms
+    true}. Any violation indicates a regression in the shapes.
+
+  \item \textbf{Failure validation.} \texttt{pyshacl} validates
+    \texttt{exemplars\_XFAIL.ttl} and expects \nolinkurl{sh:conforms false}. The
+    resulting violation report is saved as
+    \texttt{exemplars\_XFAIL\_validation.ttl}.
+
+  \item \textbf{pytest.} \texttt{test\_exemplar\_coverage.py} verifies two
+    things:
+    \begin{itemize}
+      \item \texttt{test\_exemplar\_coverage()} confirms that every shape
+        target class and property path has at least one exemplar individual
+        in \texttt{exemplars.ttl}.
+      \item Per-rule functions read \texttt{exemplars\_XFAIL\_validation.ttl}
+        and assert that exactly the expected violations are present,
+        identified by focus node, source shape, and constraint component.
+    \end{itemize}
+\end{enumerate}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Literature and gUFO Rule Sources}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+The rules documented here are derived from the following sources, listed in
+order of authority:
+
+\begin{longtable}{L{6cm} L{8cm}}
+  \toprule
+  \textbf{Reference} & \textbf{Scope} \\
+  \midrule
+  \endhead
+  \texttt{formatted-gufo.ttl} --- the gUFO OWL~2 DL ontology
+    & Authoritative axiomatisation \\[4pt]
+  \citet{gufo2022} --- \textit{UFO: Unified Foundational Ontology},
+    Applied Ontology 17(1)
+    & Complete formal specification of all micro-theories \\[4pt]
+  \citet{guizzardi2005} --- \textit{Ontological Foundations for Structural
+    Conceptual Models}, PhD thesis, University of Twente
+    & Original axiomatisation of UFO-A (endurants, aspects, relations) \\[4pt]
+  \citet{guizzardi2018} --- \textit{Endurant Types in Ontology-Driven
+    Conceptual Modeling: Towards OntoUML~2.0}, ER~2018
+    & Endurant type taxonomy and constraints \\[4pt]
+  \citet{fonseca2019} --- \textit{Relations in Ontology-Driven Conceptual
+    Modeling}, ER~2019
+    & Material, comparative, relator, and extrinsic mode constraints \\[4pt]
+  \citet{carvalho2017} --- \textit{Multi-level ontology-based conceptual
+    modeling}, DKE~109
+    & \texttt{partitions} and \texttt{categorizes} powertype patterns \\[4pt]
+  \citet{sales2015} --- \textit{Empirically Uncovered Anti-Patterns}, DKE~99
+    & RelRig, FreeRole, MultDep anti-patterns \\[4pt]
+  \citet{sales2019} --- \textit{Taxonomic Structures}, CEUR Vol-2519
+    & MixIden, MixRig, GSRig anti-patterns \\
+  \bottomrule
+\end{longtable}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Rule Documentation}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Each rule is documented in the following four-part structure:
+
+\begin{description}
+  \item[(i) Rule description] Natural language statement of the rule, its
+    ontological rationale, and its source in the gUFO literature.
+  \item[(ii) Test aspects] Decomposition into independently verifiable
+    aspects, each with a unique identifier and description.
+  \item[(iii) DL expressions] Formal Description Logic specification of each
+    aspect, using standard DL notation: $\sqsubseteq$ for subsumption,
+    $\sqcap$/$\sqcup$ for conjunction/disjunction, $\exists R.C$ and
+    $\forall R.C$ for existential and universal restrictions, $\leq n\,R.C$
+    and $\geq n\,R.C$ for qualified cardinality restrictions, and $\top$ for
+    the universal concept. Inverse properties are written $R^-$.
+  \item[(iv) Implementation] The SHACL shape(s), test exemplars (both valid
+    and deliberately invalid), and \texttt{pytest} function(s).
+\end{description}
+
+\bigskip
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule A1 --- Every Aspect Inheres in Exactly One ConcreteIndividual}
+\label{sec:rule-a1}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+In gUFO a \gufoclass{Aspect} is an endurant that is existentially dependent on
+another concrete individual---its \emph{bearer}---through the relation of
+\emph{inherence}, expressed by \gufoprop{inheresIn}. The property is declared
+functional, asymmetric, and irreflexive with domain \gufoclass{Aspect} and range
+\gufoclass{ConcreteIndividual}. Both \gufoclass{IntrinsicAspect} and
+\gufoclass{ExtrinsicMode} carry an \nolinkurl{owl:qualifiedCardinality "1"}
+restriction on \texttt{inheresIn}, expressing that every aspect inheres in
+\emph{exactly one} concrete individual---neither zero nor more than one.
+
+\textbf{Sources:} \citet{guizzardi2005} ch.~4; \texttt{formatted-gufo.ttl}
+\nolinkurl{owl:qualifiedCardinality "1"} on \texttt{IntrinsicAspect} and
+\texttt{ExtrinsicMode}.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{10cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  A1.1 & Upper bound: an \gufoclass{Aspect} may not inhere in more than one
+         \gufoclass{ConcreteIndividual} \\
+  A1.2 & Lower bound: every \gufoclass{Aspect} must inhere in at least one
+         \gufoclass{ConcreteIndividual} \\
+  A1.3 & Range: the object of \gufoprop{inheresIn} must be a
+         \gufoclass{ConcreteIndividual} \\
+  A1.4 & Domain: only an \gufoclass{Aspect} may be the subject of
+         \gufoprop{inheresIn} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{A1.1 --- Upper bound:}
+\begin{equation*}
+  \mathsf{Aspect} \sqsubseteq {\leq}1\;\mathsf{inheresIn}.\mathsf{ConcreteIndividual}
+\end{equation*}
+
+\textbf{A1.2 --- Lower bound:}
+\begin{equation*}
+  \mathsf{Aspect} \sqsubseteq {\geq}1\;\mathsf{inheresIn}.\mathsf{ConcreteIndividual}
+\end{equation*}
+
+\textbf{Combined (full gUFO axiom):}
+\begin{equation*}
+  \mathsf{Aspect} \sqsubseteq {=}1\;\mathsf{inheresIn}.\mathsf{ConcreteIndividual}
+\end{equation*}
+
+\textbf{A1.3 --- Range:}
+\begin{equation*}
+  \top \sqsubseteq \forall\,\mathsf{inheresIn}.\mathsf{ConcreteIndividual}
+\end{equation*}
+
+\textbf{A1.4 --- Domain:}
+\begin{equation*}
+  \exists\,\mathsf{inheresIn}.\top \sqsubseteq \mathsf{Aspect}
+\end{equation*}
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+\shapename{sh-gufo:Aspect-shape} enforces the lower bound (A1.2).
+The upper bound (A1.1) is enforced by \shapename{sh-gufo:ExtrinsicMode-shape}
+and \shapename{sh-gufo:IntrinsicAspect-shape} through
+\shprop{qualifiedMaxCount~1}.
+
+\begin{lstlisting}[style=turtlestyle,caption={sh-gufo:Aspect-shape with minCount~1}]
+sh-gufo:Aspect-shape
+    a sh:NodeShape ;
+    rdfs:comment "rdfs:seeAlso links other shapes that review this class."@en ;
+    rdfs:seeAlso sh-gufo:Aspect-disjointWith-Object-shape ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:message "Every gufo:Aspect must inhere in exactly one ConcreteIndividual
+            ( https://nemo-ufes.github.io/gufo/#inheresIn )."@en ;
+        sh:minCount 1 ;
+        sh:path gufo:inheresIn ;
+    ] ;
+    sh:targetClass gufo:Aspect ;
+    sh:xone (
+        [ a sh:NodeShape ; sh:class gufo:ExtrinsicAspect ; ]
+        [ a sh:NodeShape ; sh:class gufo:IntrinsicAspect ; ]
+    ) ;
+    .
+
+sh-gufo:inheresIn-objects-shape
+    a sh:NodeShape ;
+    sh:class gufo:ConcreteIndividual ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:targetObjectsOf gufo:inheresIn ;
+    .
+
+sh-gufo:inheresIn-subjects-shape
+    a sh:NodeShape ;
+    sh:class gufo:Aspect ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:maxCount "1"^^xsd:integer ;
+        sh:path gufo:inheresIn ;
+    ] ;
+    sh:targetSubjectsOf gufo:inheresIn ;
+    .
+\end{lstlisting}
+
+\paragraph{Success test (\texttt{tests/exemplars.ttl}).}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:Aspect-c6c0dc61-2ced-498d-821c-443761c87de0
+    a gufo:ExtrinsicMode ;
+    gufo:inheresIn kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f ;
+    rdfs:seeAlso
+        sh-gufo:ExtrinsicMode-shape ,
+        sh-gufo:inheresIn-subjects-shape ;
+    .
+
+kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f
+    a gufo:Object ;
+    rdfs:seeAlso sh-gufo:inheresIn-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test (\texttt{tests/exemplars\_XFAIL.ttl}) --- A1.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:ExtrinsicMode-8f4c2a1d-3b7e-4f9a-bc12-5d6e7f8a9b0c
+    a gufo:ExtrinsicMode ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being a gufo:Aspect without any gufo:inheresIn triple."@en ;
+    rdfs:seeAlso sh-gufo:Aspect-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest (\texttt{tests/test\_exemplar\_coverage.py}).}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_aspect_inheres_in() -> None:
+    """
+    Verifies A1.2: every gufo:Aspect must inhere in at least one
+    ConcreteIndividual (sh:minCount 1 on gufo:inheresIn in Aspect-shape).
+    An ExtrinsicMode without any inheresIn triple must trigger a
+    MinCountConstraintComponent violation on Aspect-shape.
+    """
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nAspect
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:Aspect-shape ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:focusNode ?nAspect ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["ExtrinsicMode-8f4c2a1d-3b7e-4f9a-bc12-5d6e7f8a9b0c"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule A2 --- Every ExtrinsicMode Must Externally Depend on At Least One Endurant}
+\label{sec:rule-a2}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{ExtrinsicMode} is an extrinsic aspect that inheres in one concrete
+individual (its bearer) but also \emph{externally depends} on at least one other
+endurant mereologically disjoint from the bearer, expressed via
+\gufoprop{externallyDependsOn}. The gUFO OWL implementation restricts
+\gufoclass{ExtrinsicMode} with \nolinkurl{owl:someValuesFrom gufo:ConcreteIndividual}
+on \texttt{externallyDependsOn}. The property is also declared
+\nolinkurl{owl:IrreflexiveProperty}.
+
+\textbf{Sources:} \citet{guizzardi2005}; \texttt{formatted-gufo.ttl};
+gUFO documentation \S2.7.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{10cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  A2.1 & Existential obligation: every \gufoclass{ExtrinsicMode} must have at
+         least one \gufoprop{externallyDependsOn} triple \\
+  A2.2 & Domain: only an \gufoclass{ExtrinsicMode} may be the subject of
+         \gufoprop{externallyDependsOn} \\
+  A2.3 & Range: the object of \gufoprop{externallyDependsOn} must be an
+         \gufoclass{Endurant} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{A2.1 --- Existential obligation:}
+\begin{equation*}
+  \mathsf{ExtrinsicMode} \sqsubseteq {\geq}1\;\mathsf{externallyDependsOn}.\mathsf{Endurant}
+\end{equation*}
+
+\textbf{A2.2 --- Domain:}
+\begin{equation*}
+  \exists\,\mathsf{externallyDependsOn}.\top \sqsubseteq \mathsf{ExtrinsicMode}
+\end{equation*}
+
+\textbf{A2.3 --- Range:}
+\begin{equation*}
+  \top \sqsubseteq \forall\,\mathsf{externallyDependsOn}.\mathsf{Endurant}
+\end{equation*}
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:ExtrinsicMode-shape
+    a sh:NodeShape ;
+    sh:property
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:ExtrinsicMode must externally depend on at
+                least one Endurant ( https://nemo-ufes.github.io/gufo/#externallyDependsOn )."@en ;
+            sh:minCount 1 ;
+            sh:path gufo:externallyDependsOn ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:inheresIn ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [
+                a sh:NodeShape ;
+                sh:class gufo:ConcreteIndividual ;
+            ] ;
+        ] ;
+    sh:targetClass gufo:ExtrinsicMode ;
+    .
+
+sh-gufo:externallyDependsOn-subjects-shape
+    a sh:NodeShape ;
+    sh:class gufo:ExtrinsicMode ;
+    sh:targetSubjectsOf gufo:externallyDependsOn ;
+    .
+
+sh-gufo:externallyDependsOn-objects-shape
+    a sh:NodeShape ;
+    sh:class gufo:Endurant ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:targetObjectsOf gufo:externallyDependsOn ;
+    .
+\end{lstlisting}
+
+\paragraph{Success test.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:ExtrinsicMode-01964f52-6337-4703-80d2-5903d7635901
+    a gufo:ExtrinsicMode ;
+    gufo:externallyDependsOn kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af ;
+    rdfs:seeAlso sh-gufo:externallyDependsOn-subjects-shape ;
+    .
+
+kb:Endurant-2617295a-5922-4d06-90ce-83845c2914af
+    a gufo:Object ;
+    rdfs:seeAlso sh-gufo:externallyDependsOn-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- A2.1.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:ExtrinsicMode-3c7d1e2f-5a6b-4c8d-9e0f-1a2b3c4d5e6f
+    a gufo:ExtrinsicMode ;
+    gufo:inheresIn kb:ConcreteIndividual-1c404c3c-ecf3-4946-8130-e40548bef69f ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being a gufo:ExtrinsicMode without any gufo:externallyDependsOn triple."@en ;
+    rdfs:seeAlso sh-gufo:ExtrinsicMode-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_extrinsicmode_externally_depends_on() -> None:
+    """
+    Verifies A2.1: every gufo:ExtrinsicMode must externally depend on at
+    least one Endurant (sh:minCount 1 on gufo:externallyDependsOn).
+    """
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nExtrinsicMode
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:ExtrinsicMode-shape ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:focusNode ?nExtrinsicMode ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["ExtrinsicMode-3c7d1e2f-5a6b-4c8d-9e0f-1a2b3c4d5e6f"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule A3 --- TemporaryConstitutionSituation Has Exactly One concernsConstitutedEndurant}
+\label{sec:rule-a3}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{TemporaryConstitutionSituation} represents a situation in which one
+endurant temporarily constitutes another. It must be associated with exactly one
+constituted endurant via \gufoprop{concernsConstitutedEndurant}, and must be
+referenced by exactly one constituting endurant via the inverse of
+\gufoprop{standsInQualifiedConstitution}. The gUFO OWL implementation declares
+\nolinkurl{owl:qualifiedCardinality "1"} on both paths.
+
+\textbf{Sources:} \texttt{formatted-gufo.ttl}; gUFO documentation \S2.1.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  A3.1 & Upper bound: at most one \gufoprop{concernsConstitutedEndurant} \\
+  A3.2 & Lower bound: at least one \gufoprop{concernsConstitutedEndurant} \\
+  A3.3 & Range: object must be an \gufoclass{Endurant} \\
+  A3.4 & Domain: subject must be a \gufoclass{TemporaryConstitutionSituation} \\
+  A3.5 & Upper bound on inverse: at most one \gufoclass{Endurant} via
+         \gufoprop{standsInQualifiedConstitution} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{A3.1 --- Upper bound:}
+\begin{equation*}
+  \mathsf{TCS} \sqsubseteq {\leq}1\;\mathsf{concernsConstitutedEndurant}.\mathsf{Object}
+\end{equation*}
+
+\textbf{A3.2 --- Lower bound:}
+\begin{equation*}
+  \mathsf{TCS} \sqsubseteq {\geq}1\;\mathsf{concernsConstitutedEndurant}.\top
+\end{equation*}
+
+\textbf{Combined:}
+\begin{equation*}
+  \mathsf{TCS} \sqsubseteq {=}1\;\mathsf{concernsConstitutedEndurant}.\mathsf{Object}
+\end{equation*}
+
+where $\mathsf{TCS}$ abbreviates $\mathsf{TemporaryConstitutionSituation}$.
+
+\textbf{A3.3 --- Range:}
+\begin{equation*}
+  \top \sqsubseteq \forall\,\mathsf{concernsConstitutedEndurant}.\mathsf{Endurant}
+\end{equation*}
+
+\textbf{A3.4 --- Domain:}
+\begin{equation*}
+  \exists\,\mathsf{concernsConstitutedEndurant}.\top \sqsubseteq \mathsf{TCS}
+\end{equation*}
+
+\textbf{A3.5 --- Upper bound on inverse:}
+\begin{equation*}
+  \mathsf{TCS} \sqsubseteq {\leq}1\;\mathsf{standsInQualifiedConstitution}^{-}.\mathsf{Object}
+\end{equation*}
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:TemporaryConstitutionSituation-shape
+    a sh:NodeShape ;
+    sh:property
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:TemporaryConstitutionSituation must concern
+                exactly one constituted Endurant."@en ;
+            sh:minCount 1 ;
+            sh:path gufo:concernsConstitutedEndurant ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:concernsConstitutedEndurant ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Object ; ] ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path [ sh:inversePath gufo:standsInQualifiedConstitution ] ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Object ; ] ;
+        ] ;
+    sh:targetClass gufo:TemporaryConstitutionSituation ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryConstitutionSituation-490fa048-fc2a-4434-8376-80579af09d88
+    a gufo:TemporaryConstitutionSituation ;
+    gufo:concernsConstitutedEndurant kb:Endurant-11b7d0cf-3a5e-40da-a79c-a6b9c243ee28 ;
+    rdfs:seeAlso
+        sh-gufo:TemporaryConstitutionSituation-shape ,
+        sh-gufo:concernsConstitutedEndurant-subjects-shape ;
+    .
+
+kb:TemporaryConstitutionSituation-932e7a34-1d58-4e8b-8265-9f8f62bb0c34
+    a gufo:TemporaryConstitutionSituation ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedConstitution-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- A3.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryConstitutionSituation-4d8e2f3a-6b7c-4d9e-0f1a-2b3c4d5e6f7a
+    a gufo:TemporaryConstitutionSituation ;
+    rdfs:comment "This node is expected to trigger a validation error for being
+        a gufo:TemporaryConstitutionSituation without any
+        gufo:concernsConstitutedEndurant triple."@en ;
+    rdfs:seeAlso sh-gufo:TemporaryConstitutionSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_temporary_constitution_situation() -> None:
+    """Verifies A3.2: minCount 1 on concernsConstitutedEndurant."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:TemporaryConstitutionSituation-shape ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["TemporaryConstitutionSituation-4d8e2f3a-6b7c-4d9e-0f1a-2b3c4d5e6f7a"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule A4 --- TemporaryInstantiationSituation Has Exactly One concernsNonRigidType}
+\label{sec:rule-a4}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{TemporaryInstantiationSituation} captures a situation in which an
+endurant temporarily instantiates a \gufoclass{NonRigidType}. It must be
+associated with exactly one \gufoclass{NonRigidType} via
+\gufoprop{concernsNonRigidType}, and must be referenced by exactly one endurant
+via the inverse of \gufoprop{standsInQualifiedInstantiation}. The gUFO OWL
+implementation declares \nolinkurl{owl:qualifiedCardinality "1"} on both paths.
+
+\textbf{Sources:} \texttt{formatted-gufo.ttl}; gUFO documentation \S2.9.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  A4.1 & Upper bound: at most one \gufoprop{concernsNonRigidType} \\
+  A4.2 & Lower bound: at least one \gufoprop{concernsNonRigidType} \\
+  A4.3 & Range: object must be a \gufoclass{NonRigidType} \\
+  A4.4 & Domain: subject must be a \gufoclass{TemporaryInstantiationSituation} \\
+  A4.5 & Upper bound on inverse: at most one \gufoclass{Endurant} via
+         \gufoprop{standsInQualifiedInstantiation} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+Let $\mathsf{TIS}$ abbreviate $\mathsf{TemporaryInstantiationSituation}$.
+
+\textbf{A4.1:}
+$\mathsf{TIS} \sqsubseteq {\leq}1\;\mathsf{concernsNonRigidType}.\mathsf{NonRigidType}$
+
+\textbf{A4.2:}
+$\mathsf{TIS} \sqsubseteq {\geq}1\;\mathsf{concernsNonRigidType}.\top$
+
+\textbf{Combined:}
+$\mathsf{TIS} \sqsubseteq {=}1\;\mathsf{concernsNonRigidType}.\mathsf{NonRigidType}$
+
+\textbf{A4.3:}
+$\top \sqsubseteq \forall\,\mathsf{concernsNonRigidType}.\mathsf{NonRigidType}$
+
+\textbf{A4.4:}
+$\exists\,\mathsf{concernsNonRigidType}.\top \sqsubseteq \mathsf{TIS}$
+
+\textbf{A4.5:}
+$\mathsf{TIS} \sqsubseteq {\leq}1\;\mathsf{standsInQualifiedInstantiation}^{-}.\mathsf{Endurant}$
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:TemporaryInstantiationSituation-shape
+    a sh:NodeShape ;
+    sh:property
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:TemporaryInstantiationSituation must concern
+                at least one NonRigidType."@en ;
+            sh:minCount 1 ;
+            sh:path gufo:concernsNonRigidType ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:concernsNonRigidType ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:NonRigidType ; ] ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path [ sh:inversePath gufo:standsInQualifiedInstantiation ] ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ;
+    sh:targetClass gufo:TemporaryInstantiationSituation ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryInstantiationSituation-41702321-9550-458b-9438-f48d28d7e0c8
+    a gufo:TemporaryInstantiationSituation ;
+    gufo:concernsNonRigidType kb:NonRigidType-0a7a7dc6-842e-4542-a360-56c4f2f13308 ;
+    rdfs:seeAlso
+        sh-gufo:TemporaryInstantiationSituation-shape ,
+        sh-gufo:concernsNonRigidType-subjects-shape ;
+    .
+
+kb:TemporaryInstantiationSituation-d50f30d2-d042-4003-9b81-5878e348bbc6
+    a gufo:TemporaryInstantiationSituation ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedInstantiation-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- A4.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryInstantiationSituation-5e9f3a4b-7c8d-4e0f-1a2b-3c4d5e6f7a8b
+    a gufo:TemporaryInstantiationSituation ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being a gufo:TemporaryInstantiationSituation without any
+        gufo:concernsNonRigidType triple."@en ;
+    rdfs:seeAlso sh-gufo:TemporaryInstantiationSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_temporary_instantiation_situation() -> None:
+    """Verifies A4.2: minCount 1 on concernsNonRigidType."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:TemporaryInstantiationSituation-shape ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["TemporaryInstantiationSituation-5e9f3a4b-7c8d-4e0f-1a2b-3c4d5e6f7a8b"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule A5 --- TemporaryParthoodSituation Has Exactly One concernsTemporaryWhole}
+\label{sec:rule-a5}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{TemporaryParthoodSituation} captures a situation in which an
+endurant is temporarily part of another. It must be associated with exactly one
+whole via \gufoprop{concernsTemporaryWhole}, and must be referenced by exactly
+one endurant via the inverse of \gufoprop{standsInQualifiedParthood}. The gUFO
+OWL implementation declares \nolinkurl{owl:qualifiedCardinality "1"} on both paths.
+
+\textbf{Sources:} \texttt{formatted-gufo.ttl}; gUFO documentation \S2.2.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  A5.1 & Upper bound: at most one \gufoprop{concernsTemporaryWhole} \\
+  A5.2 & Lower bound: at least one \gufoprop{concernsTemporaryWhole} \\
+  A5.3 & Range: object must be an \gufoclass{Endurant} \\
+  A5.4 & Domain: subject must be a \gufoclass{TemporaryParthoodSituation} \\
+  A5.5 & Upper bound on inverse: at most one \gufoclass{Endurant} via
+         \gufoprop{standsInQualifiedParthood} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+Let $\mathsf{TPS}$ abbreviate $\mathsf{TemporaryParthoodSituation}$.
+
+\textbf{A5.1:}
+$\mathsf{TPS} \sqsubseteq {\leq}1\;\mathsf{concernsTemporaryWhole}.\mathsf{Endurant}$
+
+\textbf{A5.2:}
+$\mathsf{TPS} \sqsubseteq {\geq}1\;\mathsf{concernsTemporaryWhole}.\top$
+
+\textbf{Combined:}
+$\mathsf{TPS} \sqsubseteq {=}1\;\mathsf{concernsTemporaryWhole}.\mathsf{Endurant}$
+
+\textbf{A5.3:}
+$\top \sqsubseteq \forall\,\mathsf{concernsTemporaryWhole}.\mathsf{Endurant}$
+
+\textbf{A5.4:}
+$\exists\,\mathsf{concernsTemporaryWhole}.\top \sqsubseteq \mathsf{TPS}$
+
+\textbf{A5.5:}
+$\mathsf{TPS} \sqsubseteq {\leq}1\;\mathsf{standsInQualifiedParthood}^{-}.\mathsf{Endurant}$
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:TemporaryParthoodSituation-shape
+    a sh:NodeShape ;
+    sh:property
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:TemporaryParthoodSituation must concern at
+                least one temporary whole."@en ;
+            sh:minCount 1 ;
+            sh:path gufo:concernsTemporaryWhole ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:concernsTemporaryWhole ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path [ sh:inversePath gufo:standsInQualifiedParthood ] ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ;
+    sh:targetClass gufo:TemporaryParthoodSituation ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryParthoodSituation-4292a36e-659c-4644-a197-a0e84dfb2394
+    a gufo:TemporaryParthoodSituation ;
+    gufo:concernsTemporaryWhole kb:Endurant-4053ed7d-05c9-44ce-869f-2745d84a40ce ;
+    rdfs:seeAlso
+        sh-gufo:TemporaryParthoodSituation-shape ,
+        sh-gufo:concernsTemporaryWhole-subjects-shape ;
+    .
+
+kb:TemporaryParthoodSituation-bdfd62c0-4188-4cc2-a823-2664b8478fe1
+    a gufo:TemporaryParthoodSituation ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedParthood-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- A5.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryParthoodSituation-6f0a4b5c-8d9e-4f1a-2b3c-4d5e6f7a8b9c
+    a gufo:TemporaryParthoodSituation ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being a gufo:TemporaryParthoodSituation without any
+        gufo:concernsTemporaryWhole triple."@en ;
+    rdfs:seeAlso sh-gufo:TemporaryParthoodSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_temporary_parthood_situation() -> None:
+    """Verifies A5.2: minCount 1 on concernsTemporaryWhole."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:TemporaryParthoodSituation-shape ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["TemporaryParthoodSituation-6f0a4b5c-8d9e-4f1a-2b3c-4d5e6f7a8b9c"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule A6 --- TemporaryRelationshipSituation Has One RelationshipType and At Least One Related Endurant}
+\label{sec:rule-a6}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{TemporaryRelationshipSituation} reifies a temporary relationship
+between endurants. It must be associated with exactly one
+\gufoclass{RelationshipType} via \gufoprop{concernsRelationshipType}
+(\nolinkurl{owl:qualifiedCardinality "1"}) and with at least one related endurant
+via \gufoprop{concernsRelatedEndurant} (\nolinkurl{owl:someValuesFrom
+gufo:Endurant}). It must also be referenced by exactly one endurant via the
+inverse of \gufoprop{standsInQualifiedRelationship}.
+
+\textbf{Sources:} \texttt{formatted-gufo.ttl}; gUFO documentation \S2.9.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  A6.1 & Upper bound on \gufoprop{concernsRelationshipType}: at most one \\
+  A6.2 & Lower bound on \gufoprop{concernsRelationshipType}: at least one \\
+  A6.3 & Lower bound on \gufoprop{concernsRelatedEndurant}: at least one \\
+  A6.4 & Upper bound on \gufoprop{concernsRelatedEndurant}: at most one \\
+  A6.5 & Range of \gufoprop{concernsRelationshipType}: must be a \gufoclass{RelationshipType} \\
+  A6.6 & Range of \gufoprop{concernsRelatedEndurant}: must be an \gufoclass{Endurant} \\
+  A6.7 & Domain of \gufoprop{concernsRelationshipType}: must be a
+         \gufoclass{TemporaryRelationshipSituation} \\
+  A6.8 & Domain of \gufoprop{concernsRelatedEndurant}: must be a
+         \gufoclass{TemporaryRelationshipSituation} \\
+  A6.9 & Upper bound on inverse: at most one \gufoclass{Endurant} via
+         \gufoprop{standsInQualifiedRelationship} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+Let $\mathsf{TRS}$ abbreviate $\mathsf{TemporaryRelationshipSituation}$.
+
+\begin{align*}
+  \text{A6.1:}&\quad \mathsf{TRS} \sqsubseteq {\leq}1\;\mathsf{concernsRelationshipType}.\mathsf{RelationshipType} \\
+  \text{A6.2:}&\quad \mathsf{TRS} \sqsubseteq {\geq}1\;\mathsf{concernsRelationshipType}.\top \\
+  \text{A6.3:}&\quad \mathsf{TRS} \sqsubseteq {\geq}1\;\mathsf{concernsRelatedEndurant}.\mathsf{Endurant} \\
+  \text{A6.4:}&\quad \mathsf{TRS} \sqsubseteq {\leq}1\;\mathsf{concernsRelatedEndurant}.\mathsf{Endurant} \\
+  \text{A6.5:}&\quad \top \sqsubseteq \forall\,\mathsf{concernsRelationshipType}.\mathsf{RelationshipType} \\
+  \text{A6.6:}&\quad \top \sqsubseteq \forall\,\mathsf{concernsRelatedEndurant}.\mathsf{Endurant} \\
+  \text{A6.7:}&\quad \exists\,\mathsf{concernsRelationshipType}.\top \sqsubseteq \mathsf{TRS} \\
+  \text{A6.8:}&\quad \exists\,\mathsf{concernsRelatedEndurant}.\top \sqsubseteq \mathsf{TRS} \\
+  \text{A6.9:}&\quad \mathsf{TRS} \sqsubseteq {\leq}1\;\mathsf{standsInQualifiedRelationship}^{-}.\mathsf{Endurant}
+\end{align*}
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:TemporaryRelationshipSituation-shape
+    a sh:NodeShape ;
+    sh:property
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:TemporaryRelationshipSituation must concern
+                at least one RelationshipType."@en ;
+            sh:minCount 1 ;
+            sh:path gufo:concernsRelationshipType ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:concernsRelationshipType ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:RelationshipType ; ] ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:TemporaryRelationshipSituation must concern
+                at least one related Endurant."@en ;
+            sh:minCount 1 ;
+            sh:path gufo:concernsRelatedEndurant ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:concernsRelatedEndurant ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path [ sh:inversePath gufo:standsInQualifiedRelationship ] ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ;
+    sh:targetClass gufo:TemporaryRelationshipSituation ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryRelationshipSituation-f874b7a3-5add-49f4-895c-9fbe42b40095
+    a gufo:TemporaryRelationshipSituation ;
+    gufo:concernsRelationshipType kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31 ;
+    rdfs:seeAlso sh-gufo:concernsRelationshipType-subjects-shape ;
+    .
+
+kb:TemporaryRelationshipSituation-2a64c96d-9629-4c29-9d63-e6f69cdbdabd
+    a gufo:TemporaryRelationshipSituation ;
+    gufo:concernsRelatedEndurant kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b ;
+    rdfs:seeAlso sh-gufo:concernsRelatedEndurant-subjects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure tests --- A6.2 and A6.3.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryRelationshipSituation-7a1b5c6d-9e0f-4a1b-3c4d-5e6f7a8b9c0d
+    a gufo:TemporaryRelationshipSituation ;
+    gufo:concernsRelatedEndurant kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        having no gufo:concernsRelationshipType triple."@en ;
+    rdfs:seeAlso sh-gufo:TemporaryRelationshipSituation-shape ;
+    .
+
+kb:TemporaryRelationshipSituation-8b2c6d7e-0f1a-4b2c-4d5e-6f7a8b9c0d1e
+    a gufo:TemporaryRelationshipSituation ;
+    gufo:concernsRelationshipType kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31 ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        having no gufo:concernsRelatedEndurant triple."@en ;
+    rdfs:seeAlso sh-gufo:TemporaryRelationshipSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_temporary_relationship_situation() -> None:
+    """
+    Verifies A6.2 and A6.3: minCount 1 on both concernsRelationshipType and
+    concernsRelatedEndurant. Two focus nodes expected, one per missing property.
+    """
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    ns_gufo = Namespace("http://purl.org/nemo/gufo#")
+    pairs: Set[Tuple[URIRef, URIRef]] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation ?nPath
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:TemporaryRelationshipSituation-shape ;
+    sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    sh:resultPath ?nPath ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        pairs.add((result[0], result[1]))
+    assert pairs == {
+        (ns_kb["TemporaryRelationshipSituation-7a1b5c6d-9e0f-4a1b-3c4d-5e6f7a8b9c0d"],
+         ns_gufo["concernsRelationshipType"]),
+        (ns_kb["TemporaryRelationshipSituation-8b2c6d7e-0f1a-4b2c-4d5e-6f7a8b9c0d1e"],
+         ns_gufo["concernsRelatedEndurant"]),
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule B1 --- QualityValueAttributionSituation Uses Exactly One Quality Value Pattern}
+\label{sec:rule-b1}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{QualityValueAttributionSituation} (abbreviated QVAS) must be
+associated with a quality value using \emph{exactly one} of two mutually
+exclusive patterns: either a reified quality value via
+\gufoprop{concernsReifiedQualityValue}, or a literal value via
+\gufoprop{concernsQualityValue}. The two patterns are alternatives---using both
+simultaneously is semantically inconsistent, and using neither makes the
+situation meaningless. The gUFO OWL implementation expresses this as
+\nolinkurl{owl:unionOf} of two cardinality restrictions, one per pattern. The
+correct SHACL operator is \shprop{xone}.
+
+\textbf{Sources:} \texttt{formatted-gufo.ttl}; gUFO documentation \S2.5.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  B1.1 & Completeness: a QVAS with neither property is invalid \\
+  B1.2 & Mutual exclusion: a QVAS with both properties simultaneously is invalid \\
+  B1.3 & Upper bound on \gufoprop{concernsReifiedQualityValue}: at most one \\
+  B1.4 & Upper bound on \gufoprop{concernsQualityValue}: at most one \\
+  B1.5 & Range of \gufoprop{concernsReifiedQualityValue}: must be a \gufoclass{QualityValue} \\
+  B1.6 & Domain of \gufoprop{concernsReifiedQualityValue}: must be a QVAS \\
+  B1.7 & Domain of \gufoprop{concernsQualityValue}: must be a QVAS \\
+  B1.8 & Range of \gufoprop{concernsQualityValue}: must be a \texttt{Literal} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{B1.1 + B1.2 --- Exclusive disjunction (\texttt{xone} semantics):}
+\begin{multline*}
+  \mathsf{QVAS} \sqsubseteq
+  \bigoplus\bigl\{
+    (\exists\,\mathsf{concernsReifiedQualityValue}.\mathsf{QualityValue}),\\
+    \hspace{6em}(\exists\,\mathsf{concernsQualityValue}.\top)
+  \bigr\}
+\end{multline*}
+where $\bigoplus$ denotes exclusive disjunction (exactly one disjunct holds).
+
+\textbf{B1.3:}
+\begin{equation*}
+  \mathsf{QVAS} \sqsubseteq {\leq}1\;\mathsf{concernsReifiedQualityValue}.\mathsf{QualityValue}
+\end{equation*}
+
+\textbf{B1.4:}
+\begin{equation*}
+  \mathsf{QVAS} \sqsubseteq {\leq}1\;\mathsf{concernsQualityValue}.\top
+\end{equation*}
+
+\textbf{B1.5:}
+$\top \sqsubseteq \forall\,\mathsf{concernsReifiedQualityValue}.\mathsf{QualityValue}$
+
+\textbf{B1.6:}
+$\exists\,\mathsf{concernsReifiedQualityValue}.\top \sqsubseteq \mathsf{QVAS}$
+
+\textbf{B1.7:}
+$\exists\,\mathsf{concernsQualityValue}.\top \sqsubseteq \mathsf{QVAS}$
+
+\textbf{B1.8:}
+$\top \sqsubseteq \forall\,\mathsf{concernsQualityValue}.\mathsf{Literal}$
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:QualityValueAttributionSituation-shape
+    a sh:NodeShape ;
+    sh:xone (
+        [
+            a sh:NodeShape ;
+            sh:property [
+                a sh:PropertyShape ;
+                sh:path gufo:concernsReifiedQualityValue ;
+                sh:qualifiedMaxCount "1"^^xsd:integer ;
+                sh:qualifiedMinCount "1"^^xsd:integer ;
+                sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:QualityValue ; ] ;
+            ] ;
+        ]
+        [
+            a sh:NodeShape ;
+            sh:property [
+                a sh:PropertyShape ;
+                sh:maxCount "1"^^xsd:integer ;
+                sh:minCount 1 ;
+                sh:path gufo:concernsQualityValue ;
+            ] ;
+        ]
+    ) ;
+    sh:property
+        [
+            a sh:PropertyShape ;
+            sh:path gufo:concernsQualityType ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:EndurantType ; ] ;
+        ] ,
+        [
+            a sh:PropertyShape ;
+            sh:path [ sh:inversePath gufo:standsInQualifiedAttribution ] ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ;
+    sh:targetClass gufo:QualityValueAttributionSituation ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:QualityValueAttributionSituation-20fec4d2-6e44-49ed-94aa-799845277a8c
+    a gufo:QualityValueAttributionSituation ;
+    gufo:concernsQualityValue "" ;
+    rdfs:seeAlso
+        sh-gufo:QualityValueAttributionSituation-shape ,
+        sh-gufo:concernsQualityValue-subjects-shape ;
+    .
+
+kb:QualityValueAttributionSituation-87d3fdff-f584-43f9-9339-974d46cc3187
+    a gufo:QualityValueAttributionSituation ;
+    gufo:concernsReifiedQualityValue kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8 ;
+    rdfs:seeAlso sh-gufo:concernsReifiedQualityValue-subjects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure tests --- B1.1 and B1.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+# B1.2: both patterns simultaneously
+kb:QualityValueAttributionSituation-9c3d7e8f-1a2b-4c3d-5e6f-7a8b9c0d1e2f
+    a gufo:QualityValueAttributionSituation ;
+    gufo:concernsReifiedQualityValue kb:QualityValue-bbbc153a-8979-4ca8-a1cc-89a53194c5c8 ;
+    gufo:concernsQualityValue "" ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        having both gufo:concernsReifiedQualityValue and gufo:concernsQualityValue
+        simultaneously."@en ;
+    rdfs:seeAlso sh-gufo:QualityValueAttributionSituation-shape ;
+    .
+
+# B1.1: neither pattern present
+kb:QualityValueAttributionSituation-0d4e8f9a-2b3c-4d4e-6f7a-8b9c0d1e2f3a
+    a gufo:QualityValueAttributionSituation ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        having neither gufo:concernsReifiedQualityValue nor
+        gufo:concernsQualityValue."@en ;
+    rdfs:seeAlso sh-gufo:QualityValueAttributionSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_quality_value_attribution_xone() -> None:
+    """
+    Verifies B1.1 and B1.2: sh:xone on QualityValueAttributionSituation-shape.
+    Both the all-absent and the both-present cases must produce an
+    XoneConstraintComponent violation.
+    """
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:QualityValueAttributionSituation-shape ;
+    sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["QualityValueAttributionSituation-9c3d7e8f-1a2b-4c3d-5e6f-7a8b9c0d1e2f"],
+        ns_kb["QualityValueAttributionSituation-0d4e8f9a-2b3c-4d4e-6f7a-8b9c0d1e2f3a"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule B2 --- concernsQualityType Range Must Be a Subclass of gufo:Quality}
+\label{sec:rule-b2}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+The property \gufoprop{concernsQualityType} identifies the quality type whose
+value is attributed in a QVAS. gUFO specifies that the range must be a subclass
+of \gufoclass{Quality}---not merely any \gufoclass{EndurantType}. Without this
+tighter constraint, a \gufoclass{Kind} subclassing \gufoclass{Object} would
+incorrectly pass validation as a quality type.
+
+\textbf{Sources:} gUFO documentation for \texttt{concernsQualityType};
+\texttt{formatted-gufo.ttl}.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  B2.1 & Range is an \gufoclass{EndurantType} \\
+  B2.2 & Range is specifically a subclass of \gufoclass{Quality} \\
+  B2.3 & Domain: subject must be a QVAS \\
+  B2.4 & Upper bound: at most one \gufoprop{concernsQualityType} per QVAS \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{B2.1:}
+$\top \sqsubseteq \forall\,\mathsf{concernsQualityType}.\mathsf{EndurantType}$
+
+\textbf{B2.2:}
+\begin{equation*}
+  \top \sqsubseteq \forall\,\mathsf{concernsQualityType}.
+  \bigl(\mathsf{EndurantType} \sqcap \exists\,\mathsf{rdfs{:}subClassOf}^{+}.\mathsf{Quality}\bigr)
+\end{equation*}
+
+\textbf{B2.3:}
+$\exists\,\mathsf{concernsQualityType}.\top \sqsubseteq \mathsf{QVAS}$
+
+\textbf{B2.4:}
+$\mathsf{QVAS} \sqsubseteq {\leq}1\;\mathsf{concernsQualityType}.\mathsf{EndurantType}$
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:concernsQualityType-objects-shape
+    a sh:NodeShape ;
+    sh:message "The object of gufo:concernsQualityType must be an
+        EndurantType that subclasses gufo:Quality."@en ;
+    sh:class gufo:EndurantType ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:hasValue gufo:Quality ;
+        sh:message "The object of gufo:concernsQualityType must be a
+            subclass of gufo:Quality."@en ;
+        sh:path [ sh:oneOrMorePath rdfs:subClassOf ] ;
+    ] ;
+    sh:targetObjectsOf gufo:concernsQualityType ;
+    .
+
+sh-gufo:concernsQualityType-subjects-shape
+    a sh:NodeShape ;
+    sh:class gufo:QualityValueAttributionSituation ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:maxCount "1"^^xsd:integer ;
+        sh:path gufo:concernsQualityType ;
+    ] ;
+    sh:targetSubjectsOf gufo:concernsQualityType ;
+    .
+\end{lstlisting}
+
+\paragraph{Success test.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:QualityType-3a0ff32d-9743-46e4-bdcd-e86777f98551
+    a gufo:Kind , owl:Class ;
+    rdfs:subClassOf gufo:Quality ;
+    rdfs:seeAlso sh-gufo:concernsQualityType-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- B2.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:Kind-1e2f9a0b-3c4d-4e1f-7a8b-9c0d1e2f3a4b
+    a gufo:Kind , owl:Class ;
+    rdfs:subClassOf gufo:Object ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being used as gufo:concernsQualityType while not subclassing
+        gufo:Quality."@en ;
+    rdfs:seeAlso sh-gufo:concernsQualityType-objects-shape ;
+    .
+
+kb:QualityValueAttributionSituation-1e2f0a1b-4d5e-4f2a-8b9c-0d1e2f3a4b5c
+    a gufo:QualityValueAttributionSituation ;
+    gufo:concernsQualityValue "" ;
+    gufo:concernsQualityType kb:Kind-1e2f9a0b-3c4d-4e1f-7a8b-9c0d1e2f3a4b ;
+    rdfs:comment "This node uses a non-Quality EndurantType as
+        gufo:concernsQualityType."@en ;
+    rdfs:seeAlso sh-gufo:concernsQualityType-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_concerns_quality_type_range() -> None:
+    """Verifies B2.2: object of concernsQualityType must subclass gufo:Quality."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nType
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:concernsQualityType-objects-shape ;
+    sh:sourceConstraintComponent sh:HasValueConstraintComponent ;
+    sh:focusNode ?nType ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["Kind-1e2f9a0b-3c4d-4e1f-7a8b-9c0d1e2f3a4b"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule B3 --- MaterialRelationshipType Must Derive From a Subclass of gufo:Relator}
+\label{sec:rule-b3}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{MaterialRelationshipType} represents a relationship type whose
+instances are derived from a relator. According to \citet{fonseca2019}, a
+material relationship type must be derived (via \gufoprop{isDerivedFrom}) from a
+subclass of \gufoclass{Relator}---not merely any subclass of
+\gufoclass{ExtrinsicAspect}. Using an \gufoclass{ExtrinsicMode} subclass as the
+derivation basis is the \emph{RelRig} anti-pattern \citep{sales2015}, which
+incorrectly treats a mode-mediated relation as a relator-mediated one.
+
+\textbf{Sources:} \citet{fonseca2019}; \citet{sales2015}; \texttt{formatted-gufo.ttl}.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  B3.1 & Domain: subjects of \gufoprop{isDerivedFrom} must be a
+         \gufoclass{MaterialRelationshipType} or \gufoclass{ComparativeRelationshipType} \\
+  B3.2 & Objects of \gufoprop{isDerivedFrom} must be an \gufoclass{EndurantType}
+         subclassing \gufoclass{Aspect} \\
+  B3.3 & \gufoclass{ComparativeRelationshipType} derives from a subclass of
+         \gufoclass{IntrinsicAspect} \\
+  B3.4 & \gufoclass{MaterialRelationshipType} derives from a subclass of
+         \gufoclass{Relator} specifically \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{B3.1 --- Domain:}
+\begin{equation*}
+  \exists\,\mathsf{isDerivedFrom}.\top
+  \sqsubseteq \mathsf{MaterialRelationshipType} \sqcup \mathsf{ComparativeRelationshipType}
+\end{equation*}
+
+\textbf{B3.2 --- Object subclasses Aspect:}
+\begin{equation*}
+  \top \sqsubseteq \forall\,\mathsf{isDerivedFrom}.
+  \bigl(\mathsf{EndurantType} \sqcap \exists\,\mathsf{rdfs{:}subClassOf}^{+}.\mathsf{Aspect}\bigr)
+\end{equation*}
+
+\textbf{B3.3 --- ComparativeRelationshipType derives from IntrinsicAspect:}
+\begin{multline*}
+  \mathsf{ComparativeRelationshipType} \sqsubseteq \forall\,\mathsf{isDerivedFrom}.\\
+  \bigl(\mathsf{EndurantType} \sqcap \exists\,\mathsf{rdfs{:}subClassOf}^{+}.\mathsf{IntrinsicAspect}\bigr)
+\end{multline*}
+
+\textbf{B3.4 --- MaterialRelationshipType derives from Relator:}
+\begin{multline*}
+  \mathsf{MaterialRelationshipType} \sqsubseteq \forall\,\mathsf{isDerivedFrom}.\\
+  \bigl(\mathsf{EndurantType} \sqcap \exists\,\mathsf{rdfs{:}subClassOf}^{+}.\mathsf{Relator}\bigr)
+\end{multline*}
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape
+    a sh:NodeShape ;
+    rdfs:seeAlso <https://nemo-ufes.github.io/gufo/#isDerivedFrom> ;
+    sh:message "gufo:MaterialRelationshipTypes should be derived from a subclass
+        of gufo:Relator ( https://nemo-ufes.github.io/gufo/#isDerivedFrom )."@en ;
+    sh:or (
+        [
+            a sh:NodeShape ;
+            sh:not [
+                a sh:NodeShape ;
+                sh:class gufo:MaterialRelationshipType ;
+            ] ;
+        ]
+        [
+            a sh:NodeShape ;
+            sh:property [
+                a sh:PropertyShape ;
+                sh:path gufo:isDerivedFrom ;
+                sh:property [
+                    a sh:PropertyShape ;
+                    sh:hasValue gufo:Relator ;
+                    sh:path [ sh:oneOrMorePath rdfs:subClassOf ] ;
+                ] ;
+            ] ;
+        ]
+    ) ;
+    sh:targetSubjectsOf gufo:isDerivedFrom ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:MaterialRelationshipType-2133b940-8a06-4856-bf46-684592243af4
+    a owl:ObjectProperty , gufo:MaterialRelationshipType ;
+    gufo:isDerivedFrom kb:EndurantType-959b6cff-b5a4-4168-be1f-d66d0c8033d6 ;
+    rdfs:seeAlso
+        sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ,
+        sh-gufo:isDerivedFrom-subjects-shape ;
+    .
+
+kb:EndurantType-959b6cff-b5a4-4168-be1f-d66d0c8033d6
+    a gufo:Kind , owl:Class ;
+    rdfs:subClassOf gufo:Relator ;  # subclasses Relator, not just ExtrinsicAspect
+    rdfs:seeAlso
+        sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ,
+        sh-gufo:isDerivedFrom-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- B3.4.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:EndurantType-2f3a0b1c-5e6f-4a2b-8c9d-0e1f2a3b4c5d
+    a gufo:Kind , owl:Class ;
+    rdfs:subClassOf gufo:ExtrinsicMode ;
+    rdfs:comment "This node subclasses gufo:ExtrinsicMode (not gufo:Relator)
+        and triggers an invalid isDerivedFrom for a MaterialRelationshipType."@en ;
+    rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+    .
+
+kb:MaterialRelationshipType-3a4b1c2d-6f7a-4b3c-9d0e-1f2a3b4c5d6e
+    a owl:ObjectProperty , gufo:MaterialRelationshipType ;
+    gufo:isDerivedFrom kb:EndurantType-2f3a0b1c-5e6f-4a2b-8c9d-0e1f2a3b4c5d ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        deriving from a subclass of gufo:ExtrinsicMode rather than
+        gufo:Relator."@en ;
+    rdfs:seeAlso sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_material_relationship_type_relator() -> None:
+    """Verifies B3.4: MaterialRelationshipType must derive from a Relator subclass."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nRelType
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:isDerivedFrom-MaterialRelationshipType-subjects-shape ;
+    sh:sourceConstraintComponent sh:OrConstraintComponent ;
+    sh:focusNode ?nRelType ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["MaterialRelationshipType-3a4b1c2d-6f7a-4b3c-9d0e-1f2a3b4c5d6e"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule C1 --- EndurantType Satisfies Two Independent Exclusivity Constraints}
+\label{sec:rule-c1}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+Every \gufoclass{EndurantType} must satisfy two \emph{independent} exclusive
+disjunctions simultaneously: it must be exactly one of \gufoclass{NonRigidType}
+or \gufoclass{RigidType} (the rigidity partition), and exactly one of
+\gufoclass{NonSortal} or \gufoclass{Sortal} (the sortality partition). In SHACL
+these are expressed as two separate \shprop{xone} constraints on the same shape
+node. Because SHACL conjoins multiple property values on a node shape, both
+constraints must be satisfied independently---this is \emph{not} a single
+disjunction but a conjunction of two exclusive disjunctions.
+
+\textbf{Sources:} \citet{guizzardi2018}; \texttt{formatted-gufo.ttl}
+\nolinkurl{owl:disjointUnionOf} on \texttt{EndurantType}.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  C1.1 & Every \gufoclass{EndurantType} is exactly one of
+         \gufoclass{NonRigidType} or \gufoclass{RigidType} \\
+  C1.2 & Every \gufoclass{EndurantType} is exactly one of
+         \gufoclass{NonSortal} or \gufoclass{Sortal} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{C1.1 --- Rigidity partition:}
+\begin{equation*}
+  \mathsf{EndurantType} \sqsubseteq
+  \bigoplus\{\mathsf{NonRigidType},\;\mathsf{RigidType}\}
+\end{equation*}
+
+\textbf{C1.2 --- Sortality partition:}
+\begin{equation*}
+  \mathsf{EndurantType} \sqsubseteq
+  \bigoplus\{\mathsf{NonSortal},\;\mathsf{Sortal}\}
+\end{equation*}
+
+\textbf{Combined --- both must hold:}
+\begin{equation*}
+  \mathsf{EndurantType} \sqsubseteq
+  \bigoplus\{\mathsf{NonRigidType},\;\mathsf{RigidType}\}
+  \;\sqcap\;
+  \bigoplus\{\mathsf{NonSortal},\;\mathsf{Sortal}\}
+\end{equation*}
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shape.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:EndurantType-shape
+    a sh:NodeShape ;
+    rdfs:comment "This shape applies two independent sh:xone constraints.
+        The first requires every EndurantType to be exactly one of
+        (NonRigidType, RigidType). The second requires every EndurantType to
+        be exactly one of (NonSortal, Sortal). Both constraints must hold
+        simultaneously and independently -- this is a conjunction of two
+        exclusive disjunctions, not a single disjunction."@en ;
+    sh:targetClass gufo:EndurantType ;
+    sh:xone
+        (
+            [ a sh:NodeShape ; sh:class gufo:NonRigidType ; ]
+            [ a sh:NodeShape ; sh:class gufo:RigidType ; ]
+        ) ,
+        (
+            [ a sh:NodeShape ; sh:class gufo:NonSortal ; ]
+            [ a sh:NodeShape ; sh:class gufo:Sortal ; ]
+        )
+        ;
+    .
+\end{lstlisting}
+
+\paragraph{Success test.}
+Any \gufoclass{EndurantType} exemplar satisfies this shape; for example,
+\gufoclass{Category} is a \gufoclass{RigidType} and a \gufoclass{NonSortal},
+satisfying both \shprop{xone} constraints.
+
+\begin{lstlisting}[style=turtlestyle]
+kb:EndurantType-1e1f2313-7cbb-47ae-bdd0-bc4a4a5a654e
+    a gufo:Category , owl:Class ;
+    gufo:hasAssociatedQualityValueType
+        kb:AbstractIndividualType-73fdd434-b356-4b08-8ad6-e112a8727e61 ;
+    rdfs:seeAlso sh-gufo:hasAssociatedQualityValueType-subjects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663
+    a gufo:EndurantType , owl:Class ;
+    rdfs:comment "This is expected to trigger a validation error for not
+        satisfying the disjoint-union, exactly-one clauses in
+        EndurantType review."@en ;
+    rdfs:seeAlso sh-gufo:EndurantType-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_enduranttype() -> None:
+    """
+    Verifies C1.1 and C1.2: bare EndurantType without rigidity/sortality subtype
+    must trigger XoneConstraintComponent on EndurantType-shape.
+    """
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nEndurantType
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:EndurantType-shape ;
+    sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+    sh:focusNode ?nEndurantType ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["EndurantType-f6898a59-a3ec-4ed9-9b1d-0cd9a19d2663"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule D1 --- QualityValueAttributionSituation Must Be Used by Exactly One Endurant}
+\label{sec:rule-d1}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A QVAS must be linked to exactly one \gufoclass{Endurant} via the inverse of
+\gufoprop{standsInQualifiedAttribution}. The gUFO OWL implementation declares
+\nolinkurl{owl:qualifiedCardinality "1"} on this inverse path, expressing that the
+situation must be referenced by exactly one endurant---neither zero nor more
+than one.
+
+\textbf{Sources:} \texttt{formatted-gufo.ttl} \nolinkurl{owl:qualifiedCardinality "1"}
+on inverse of \texttt{standsInQualifiedAttribution}.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  D1.1 & Upper bound: at most one \gufoclass{Endurant} uses this situation via
+         \gufoprop{standsInQualifiedAttribution} \\
+  D1.2 & Lower bound: at least one \gufoclass{Endurant} must use this situation \\
+  D1.3 & Domain of \gufoprop{standsInQualifiedAttribution}: subject must be
+         an \gufoclass{Endurant} \\
+  D1.4 & Range of \gufoprop{standsInQualifiedAttribution}: object must be a QVAS \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{D1.1:}
+$\mathsf{QVAS} \sqsubseteq {\leq}1\;\mathsf{standsInQualifiedAttribution}^{-}.\mathsf{Endurant}$
+
+\textbf{D1.2:}
+$\mathsf{QVAS} \sqsubseteq {\geq}1\;\mathsf{standsInQualifiedAttribution}^{-}.\top$
+
+\textbf{D1.3:}
+$\exists\,\mathsf{standsInQualifiedAttribution}.\top \sqsubseteq \mathsf{Endurant}$
+
+\textbf{D1.4:}
+$\top \sqsubseteq \forall\,\mathsf{standsInQualifiedAttribution}.\mathsf{QVAS}$
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:QualityValueAttributionSituation-shape
+    a sh:NodeShape ;
+    ...
+    sh:property
+        ...
+        [
+            a sh:PropertyShape ;
+            sh:message "Every gufo:QualityValueAttributionSituation must be
+                used by at least one Endurant via
+                gufo:standsInQualifiedAttribution."@en ;
+            sh:path [ sh:inversePath gufo:standsInQualifiedAttribution ] ;
+            sh:qualifiedMaxCount "1"^^xsd:integer ;
+            sh:qualifiedMinCount "1"^^xsd:integer ;
+            sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+        ] ;
+    sh:targetClass gufo:QualityValueAttributionSituation ;
+    .
+
+sh-gufo:standsInQualifiedAttribution-subjects-shape
+    a sh:NodeShape ;
+    sh:class gufo:Endurant ;
+    sh:targetSubjectsOf gufo:standsInQualifiedAttribution ;
+    .
+
+sh-gufo:standsInQualifiedAttribution-objects-shape
+    a sh:NodeShape ;
+    sh:class gufo:QualityValueAttributionSituation ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:targetObjectsOf gufo:standsInQualifiedAttribution ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:Endurant-30842dd2-146e-4720-81eb-ff8f655058a5
+    a gufo:Object ;
+    gufo:standsInQualifiedAttribution
+        kb:QualityValueAttributionSituation-71781915-ac36-4264-83f4-3a89df7de700 ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedAttribution-subjects-shape ;
+    .
+
+kb:QualityValueAttributionSituation-71781915-ac36-4264-83f4-3a89df7de700
+    a gufo:QualityValueAttributionSituation ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedAttribution-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- D1.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:QualityValueAttributionSituation-2f3a1b2c-5d6e-4f3a-9b0c-1d2e3f4a5b6c
+    a gufo:QualityValueAttributionSituation ;
+    gufo:concernsQualityValue "" ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being a QVAS not referenced by any Endurant via
+        gufo:standsInQualifiedAttribution."@en ;
+    rdfs:seeAlso sh-gufo:QualityValueAttributionSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_quality_value_attribution_stands_in() -> None:
+    """Verifies D1.2: qualifiedMinCount 1 on inverse standsInQualifiedAttribution."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:QualityValueAttributionSituation-shape ;
+    sh:sourceConstraintComponent sh:QualifiedMinCountConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["QualityValueAttributionSituation-2f3a1b2c-5d6e-4f3a-9b0c-1d2e3f4a5b6c"],
+    }
+\end{lstlisting}
+
+%% ───────────────────────────────────────────────────────────────────────────
+\subsection{Rule D2 --- TemporaryRelationshipSituation Must Be Used by Exactly One Endurant}
+\label{sec:rule-d2}
+%% ───────────────────────────────────────────────────────────────────────────
+
+\subsubsection*{(i) Rule Description}
+
+A \gufoclass{TemporaryRelationshipSituation} must be linked to exactly one
+\gufoclass{Endurant} via the inverse of \gufoprop{standsInQualifiedRelationship}.
+The gUFO OWL implementation declares \nolinkurl{owl:qualifiedCardinality "1"} on
+this inverse path.
+
+\textbf{Sources:} \nolinkurl{formatted-gufo.ttl} \nolinkurl{owl:qualifiedCardinality "1"} on inverse of \texttt{standsInQualifiedRelationship}.
+
+\subsubsection*{(ii) Test Aspects}
+
+\begin{tabular}{lL{9.5cm}}
+  \toprule
+  \textbf{ID} & \textbf{Aspect} \\
+  \midrule
+  D2.1 & Upper bound: at most one \gufoclass{Endurant} uses this situation via
+         \gufoprop{standsInQualifiedRelationship} \\
+  D2.2 & Lower bound: at least one \gufoclass{Endurant} must use this situation \\
+  D2.3 & Domain of \gufoprop{standsInQualifiedRelationship}: subject must be
+         an \gufoclass{Endurant} \\
+  D2.4 & Range of \gufoprop{standsInQualifiedRelationship}: object must be a
+         \gufoclass{TemporaryRelationshipSituation} \\
+  \bottomrule
+\end{tabular}
+
+\subsubsection*{(iii) DL Expressions}
+
+\textbf{D2.1:}
+$\mathsf{TRS} \sqsubseteq {\leq}1\;\mathsf{standsInQualifiedRelationship}^{-}.\mathsf{Endurant}$
+
+\textbf{D2.2:}
+$\mathsf{TRS} \sqsubseteq {\geq}1\;\mathsf{standsInQualifiedRelationship}^{-}.\top$
+
+\textbf{D2.3:}
+$\exists\,\mathsf{standsInQualifiedRelationship}.\top \sqsubseteq \mathsf{Endurant}$
+
+\textbf{D2.4:}
+$\top \sqsubseteq \forall\,\mathsf{standsInQualifiedRelationship}.\mathsf{TRS}$
+
+\subsubsection*{(iv) Implementation}
+
+\paragraph{SHACL shapes.}
+
+\begin{lstlisting}[style=turtlestyle]
+sh-gufo:TemporaryRelationshipSituation-shape
+    a sh:NodeShape ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:message "Every gufo:TemporaryRelationshipSituation must be
+            referenced by at least one Endurant via
+            gufo:standsInQualifiedRelationship."@en ;
+        sh:path [ sh:inversePath gufo:standsInQualifiedRelationship ] ;
+        sh:qualifiedMaxCount "1"^^xsd:integer ;
+        sh:qualifiedMinCount "1"^^xsd:integer ;
+        sh:qualifiedValueShape [ a sh:NodeShape ; sh:class gufo:Endurant ; ] ;
+    ] ;
+    sh:targetClass gufo:TemporaryRelationshipSituation ;
+    .
+
+sh-gufo:standsInQualifiedRelationship-subjects-shape
+    a sh:NodeShape ;
+    sh:class gufo:Endurant ;
+    sh:targetSubjectsOf gufo:standsInQualifiedRelationship ;
+    .
+
+sh-gufo:standsInQualifiedRelationship-objects-shape
+    a sh:NodeShape ;
+    sh:class gufo:TemporaryRelationshipSituation ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:targetObjectsOf gufo:standsInQualifiedRelationship ;
+    .
+\end{lstlisting}
+
+\paragraph{Success tests.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:Endurant-c38ea234-5d65-40d2-9ce6-9ca9d070a3e6
+    a gufo:Object ;
+    gufo:standsInQualifiedRelationship
+        kb:TemporaryRelationshipSituation-29301400-6b45-4176-b570-f52c28cd2789 ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedRelationship-subjects-shape ;
+    .
+
+kb:TemporaryRelationshipSituation-29301400-6b45-4176-b570-f52c28cd2789
+    a gufo:TemporaryRelationshipSituation ;
+    rdfs:seeAlso sh-gufo:standsInQualifiedRelationship-objects-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{Failure test --- D2.2.}
+
+\begin{lstlisting}[style=turtlestyle]
+kb:TemporaryRelationshipSituation-4b5c2d3e-7f8a-4c4b-0d1e-2f3a4b5c6d7e
+    a gufo:TemporaryRelationshipSituation ;
+    gufo:concernsRelationshipType kb:RelationshipType-0813ed87-2f47-4a1b-a063-834b467c3d31 ;
+    gufo:concernsRelatedEndurant kb:Endurant-7ac20c26-1f62-40c1-a6e0-0e96fb088e9b ;
+    rdfs:comment "This node is expected to trigger a validation error for
+        being a TRS not referenced by any Endurant via
+        gufo:standsInQualifiedRelationship."@en ;
+    rdfs:seeAlso sh-gufo:TemporaryRelationshipSituation-shape ;
+    .
+\end{lstlisting}
+
+\paragraph{pytest.}
+
+\begin{lstlisting}[style=pythonstyle]
+def test_exemplar_xfail_validation_temporary_relationship_situation_stands_in() -> None:
+    """Verifies D2.2: qualifiedMinCount 1 on inverse standsInQualifiedRelationship."""
+    validation_graph = Graph()
+    validation_graph.parse("exemplars_XFAIL_validation.ttl")
+    ns_kb = Namespace("http://example.org/kb/")
+    n_focus_nodes: Set[URIRef] = set()
+    for result in validation_graph.query("""\
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX sh-gufo: <http://example.org/shapes/sh-gufo/>
+SELECT ?nSituation
+WHERE {
+  ?nValidationResult
+    a sh:ValidationResult ;
+    sh:sourceShape sh-gufo:TemporaryRelationshipSituation-shape ;
+    sh:sourceConstraintComponent sh:QualifiedMinCountConstraintComponent ;
+    sh:focusNode ?nSituation ;
+    .
+}
+"""):
+        assert isinstance(result, ResultRow)
+        assert isinstance(result[0], URIRef)
+        n_focus_nodes.add(result[0])
+    assert n_focus_nodes == {
+        ns_kb["TemporaryRelationshipSituation-4b5c2d3e-7f8a-4c4b-0d1e-2f3a4b5c6d7e"],
+    }
+\end{lstlisting}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Summary of Rules and Test Aspects}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\begin{longtable}{L{1.5cm}L{10cm}c}
+  \toprule
+  \textbf{Rule} & \textbf{Description} & \textbf{Aspects} \\
+  \midrule
+  \endhead
+  A1 & Every Aspect inheres in exactly one ConcreteIndividual & 4 \\
+  A2 & Every ExtrinsicMode has at least one externallyDependsOn & 3 \\
+  A3 & TemporaryConstitutionSituation has exactly one concernsConstitutedEndurant & 5 \\
+  A4 & TemporaryInstantiationSituation has exactly one concernsNonRigidType & 5 \\
+  A5 & TemporaryParthoodSituation has exactly one concernsTemporaryWhole & 5 \\
+  A6 & TemporaryRelationshipSituation has one RelationshipType and at least one Endurant & 9 \\
+  B1 & QualityValueAttributionSituation uses exactly one quality value pattern & 8 \\
+  B2 & concernsQualityType range is a subclass of gufo:Quality & 4 \\
+  B3 & MaterialRelationshipType derives from a subclass of gufo:Relator & 4 \\
+  C1 & EndurantType satisfies two independent rigidity and sortality partitions & 2 \\
+  D1 & QualityValueAttributionSituation is used by exactly one Endurant & 4 \\
+  D2 & TemporaryRelationshipSituation is used by exactly one Endurant & 4 \\
+  \midrule
+  \textbf{Total} & & \textbf{57} \\
+  \bottomrule
+\end{longtable}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\begin{thebibliography}{10}
+
+\bibitem[Carvalho et al.(2017)]{carvalho2017}
+Carvalho, V.~A., Almeida, J.~P.~A., Fonseca, C.~M., and Guizzardi, G. (2017).
+\newblock Multi-level ontology-based conceptual modeling.
+\newblock \emph{Data \& Knowledge Engineering}, 109:3--24.
+
+\bibitem[Fonseca et al.(2019)]{fonseca2019}
+Fonseca, C.~M., Porello, D., Guizzardi, G., Almeida, J.~P.~A., and
+  Guarino, N. (2019).
+\newblock Relations in ontology-driven conceptual modeling.
+\newblock In \emph{Conceptual Modeling -- ER~2019}, Lecture Notes in Computer
+  Science, vol.~11788, pp.~1--15. Springer.
+
+\bibitem[Guizzardi(2005)]{guizzardi2005}
+Guizzardi, G. (2005).
+\newblock \emph{Ontological Foundations for Structural Conceptual Models}.
+\newblock PhD thesis, University of Twente, Enschede, The Netherlands.
+
+\bibitem[Guizzardi et al.(2018)]{guizzardi2018}
+Guizzardi, G., Fonseca, C.~M., Benevides, A.~B., Almeida, J.~P.~A., Porello,
+  D., and Sales, T.~P. (2018).
+\newblock Endurant types in ontology-driven conceptual modeling: Towards
+  OntoUML~2.0.
+\newblock In \emph{Conceptual Modeling -- ER~2018}, Lecture Notes in Computer
+  Science, vol.~11157, pp.~136--150. Springer.
+
+\bibitem[Guizzardi et al.(2022)]{guizzardi2022}
+Guizzardi, G., Almeida, J.~P.~A., Fonseca, C.~M., Sales, T.~P., and
+  Porello, D. (2022).
+\newblock {UFO}: Unified Foundational Ontology.
+\newblock \emph{Applied Ontology}, 17(1):167--210.
+
+\bibitem[pyshacl]{pyshacl}
+RDFLib/pySHACL (2023).
+\newblock \emph{pySHACL: A Python validator for SHACL}.
+\newblock \url{https://github.com/RDFLib/pySHACL}.
+
+\bibitem[Sales and Guizzardi(2015)]{sales2015}
+Sales, T.~P. and Guizzardi, G. (2015).
+\newblock Ontological anti-patterns: Empirically uncovered error-prone
+  structures in ontology-driven conceptual models.
+\newblock \emph{Data \& Knowledge Engineering}, 99:72--104.
+
+\bibitem[Sales and Guizzardi(2019)]{sales2019}
+Sales, T.~P. and Guizzardi, G. (2019).
+\newblock Anti-patterns for taxonomic structures in ontology-driven conceptual
+  models.
+\newblock In \emph{CEUR Workshop Proceedings}, vol.~2519.
+
+\end{thebibliography}
+
+\end{document}
