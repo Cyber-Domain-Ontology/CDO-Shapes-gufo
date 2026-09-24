@@ -16,8 +16,8 @@ To create a new shapes repository for the ontology with short name `Foo`, we sug
 
 1. Clone the upstream example repository: `git clone https://github.com/Cyber-Domain-Ontology/CDO-Shapes-Example.git CDO-Shapes-Foo`.
 1. Substitute all references to the "example" ontology with the desired ontology.  Generally, this is handled by:
-   1. Update the [README](README.md) to change the name of the repository.  (Minimally, the title line should be revised.)
-   1. Addressing the "TODOs" in [`dependencies/Makefile`](dependencies/Makefile)
+   1. Updating the [README](README.md) to change the name of the repository.  (Minimally, the title line should be revised.)
+   1. Addressing the "TODOs" in [`dependencies/Makefile`](dependencies/Makefile).  Note the `check-supply-chain` recipes will typically apply to repositories that have a similarly named recipe and are linked as submodules.
    1. Updating the TSV files under [`etc/`](etc/).  This is to support local-file editing with some ontology tooling (developed for [UCO Issue 449](https://github.com/ucoProject/UCO/issues/449)).  [These lines](https://github.com/ucoProject/UCO/blob/1.2.0/src/create-catalog-v001.xml.py#L68-L77) describe the file formats.
    1. Adding any supplementary ontology information under [`ontology/cdo-example.ttl`], renaming as appropriate.
    1. Updating the dependency lists in the `normalized_ttls` variable near the top of [`dependencies/Makefile`], and the `generated_dependencies_ttls` variables near the tops of [`ontology/Makefile`] and [`shapes/Makefile`].
